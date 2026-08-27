@@ -1,0 +1,2701 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2c6e6b">
+<title>Morfologia de Grec II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#f2efe7; --surface:#fdfcf9; --raise:#eae6db;
+  --ink:#1e252b; --dim:#69747d; --line:#d9d3c6;
+  --acc:#2c6e6b; --acc-s:#3c8e8a; --acc-w:#e2ecea;
+  --ok:#2c6a46; --ok-bg:#e4f0e8; --ko:#a33a2e; --ko-bg:#f8e8e4;
+  --bronze:#8f6428; --gr:#17303a;
+  --sh:0 1px 2px rgba(30,37,43,.05);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#14181b; --surface:#1c2227; --raise:#242c32;
+  --ink:#e7ebe9; --dim:#98a3a9; --line:#2f393f;
+  --acc:#6fb9b2; --acc-s:#8fd0c9; --acc-w:#1d3634;
+  --ok:#79cfa0; --ok-bg:#16301f; --ko:#f0968a; --ko-bg:#361c19;
+  --bronze:#d3a866; --gr:#dfe9ea;
+  --sh:0 1px 2px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --paper:#14181b; --surface:#1c2227; --raise:#242c32;
+  --ink:#e7ebe9; --dim:#98a3a9; --line:#2f393f;
+  --acc:#6fb9b2; --acc-s:#8fd0c9; --acc-w:#1d3634;
+  --ok:#79cfa0; --ok-bg:#16301f; --ko:#f0968a; --ko-bg:#361c19;
+  --bronze:#d3a866; --gr:#dfe9ea;
+  --sh:0 1px 2px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+ font:16px/1.55 "IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+ -webkit-text-size-adjust:100%;}
+.gr,.gform,.lemma,.kbk,table.par td,#inp,.sn em{font-family:"Gentium Plus","Gentium Book Plus",
+ "GFS Didot","Palatino Linotype",Palatino,"Times New Roman",serif;}
+:focus-visible{outline:2px solid var(--acc-s);outline-offset:2px}
+header{background:var(--acc);color:#fff;padding:11px 14px;display:flex;align-items:center;
+ gap:8px;position:sticky;top:0;z-index:30;padding-top:max(11px,env(safe-area-inset-top))}
+header h1{font-size:16.5px;margin:0;font-weight:600;flex:1;letter-spacing:.15px;white-space:nowrap}
+.h2s{font-weight:400;opacity:.72;font-size:13.5px;margin-left:6px;letter-spacing:.4px}
+header button{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);
+ border-radius:8px;padding:6px 11px;font:inherit;font-size:13.5px;cursor:pointer}
+header button:hover{background:rgba(255,255,255,.26)}
+@media(max-width:400px){header h1{font-size:15px}.h2s{display:none}header button{padding:6px 9px;font-size:13px}}
+main{max-width:780px;margin:0 auto;padding:16px 12px 40px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;
+ margin-bottom:14px;box-shadow:var(--sh)}
+h2{font-size:11.5px;text-transform:uppercase;letter-spacing:1.1px;color:var(--dim);
+ margin:0 0 10px;font-weight:600}
+h3{font-size:13px;color:var(--acc);margin:18px 0 6px;letter-spacing:.3px;
+ text-transform:uppercase;font-weight:600}
+.grp{border:1px solid var(--line);border-radius:11px;margin-bottom:10px;overflow:hidden;
+ background:var(--surface)}
+.grp-h{display:flex;align-items:center;justify-content:space-between;gap:8px;
+ background:var(--raise);padding:9px 12px;font-weight:600;font-size:13.5px;letter-spacing:.2px}
+.grp-b{display:flex;align-items:center;gap:6px}
+.cnt{color:var(--dim);font-weight:400;font-size:12px;min-width:34px;text-align:right;
+ font-variant-numeric:tabular-nums}
+.mini{background:transparent;border:1px solid var(--line);color:var(--acc);border-radius:7px;
+ padding:3px 9px;font:inherit;font-size:12px;cursor:pointer}
+.mini:hover{background:var(--acc-w)}
+.secs{padding:4px;display:flex;flex-direction:column}
+.sec{display:flex;gap:11px;align-items:flex-start;padding:9px 10px;border-radius:9px;cursor:pointer}
+.sec:hover{background:var(--acc-w)}
+.sec.on{background:var(--acc-w)}
+.sec input{margin:3px 0 0;width:18px;height:18px;accent-color:var(--acc);flex:none}
+.sn{font-size:14.5px;line-height:1.35}
+.sn em{display:block;font-style:normal;color:var(--dim);font-size:14px;margin-top:1px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pill{border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:999px;
+ padding:6px 14px;font:inherit;font-size:13.5px;cursor:pointer}
+.pill:hover{border-color:var(--acc);color:var(--acc)}
+.pill.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.sub{color:var(--dim);font-size:13.5px;margin:2px 0 12px}
+button.primary{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:12px 22px;
+ font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+button.primary:hover{background:var(--acc-s)}
+button.primary:disabled{opacity:.4;cursor:default;background:var(--acc)}
+button.ghost{background:transparent;color:var(--dim);border:1px solid var(--line);
+ border-radius:10px;padding:12px 16px;font:inherit;font-size:15px;cursor:pointer}
+button.ghost:hover{border-color:var(--acc);color:var(--acc)}
+.acts{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center}
+#count{color:var(--dim);font-size:13.5px;margin-top:12px;font-variant-numeric:tabular-nums}
+#bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+#bar span{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--raise);
+ color:var(--dim);font-variant-numeric:tabular-nums}
+#bar .ok{color:var(--ok);background:var(--ok-bg);font-weight:600}
+#bar .ko{color:var(--ko);background:var(--ko-bg);font-weight:600}
+.qlabel{font-size:11.5px;text-transform:uppercase;letter-spacing:1.1px;color:var(--dim);
+ margin-bottom:10px;font-weight:600}
+.gform{font-size:42px;line-height:1.22;text-align:center;color:var(--gr);margin:10px 0 22px;
+ word-break:break-word;letter-spacing:.5px}
+.lemma{font-size:24px;text-align:center;color:var(--gr);margin:6px 0 2px;word-break:break-word;
+ line-height:1.35}
+.lemma em{display:block;font-style:italic;font-size:14.5px;color:var(--dim);
+ font-family:"IBM Plex Sans",sans-serif;margin-top:5px}
+.ask{text-align:center;font-size:16.5px;font-weight:600;margin:16px 0 14px;color:var(--acc)}
+.row{margin-bottom:12px}
+.rn{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:6px;
+ font-weight:600}
+.rb{display:flex;flex-wrap:wrap;gap:6px}
+.opt{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:9px;
+ padding:9px 13px;font:inherit;font-size:14.5px;cursor:pointer;flex:1 1 auto;min-width:86px}
+.opt:hover{border-color:var(--acc);color:var(--acc)}
+.opt.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.inwrap{display:flex;gap:8px;align-items:center}
+#inp{flex:1;font-size:28px;padding:11px 14px;border:2px solid var(--line);border-radius:11px;
+ background:var(--paper);color:var(--gr);text-align:center;min-width:0}
+#inp::placeholder{color:var(--dim);opacity:.6;font-size:19px}
+#inp:focus{outline:none;border-color:var(--acc)}
+.kbt{background:var(--raise);border:1px solid var(--line);color:var(--acc);border-radius:10px;
+ padding:11px 13px;font-size:19px;cursor:pointer;flex:none;line-height:1}
+.hint{font-size:12.5px;color:var(--dim);margin-top:8px;text-align:center}
+.fb{font-weight:600;font-size:15.5px;padding:10px 14px;border-radius:10px;margin-top:18px;
+ letter-spacing:.2px}
+.fb.good{background:var(--ok-bg);color:var(--ok)}
+.fb.bad{background:var(--ko-bg);color:var(--ko)}
+.line{margin-top:10px;font-size:15px}
+.line .gr{font-size:19px;color:var(--gr)}
+.note{color:var(--dim);font-size:13.5px}
+.warn{color:var(--bronze);font-size:14px;margin-top:12px}
+.tblwrap{overflow-x:auto;margin-top:12px}
+table.par{border-collapse:collapse;font-size:16px;width:100%}
+table.par td,table.par th{border:1px solid var(--line);padding:6px 10px;text-align:left;
+ white-space:nowrap;color:var(--gr)}
+table.par th{background:var(--raise);font-size:11px;color:var(--dim);font-weight:600;
+ font-family:"IBM Plex Sans",sans-serif;text-transform:uppercase;letter-spacing:.7px}
+table.par td.hi{background:var(--ok-bg);font-weight:700}
+button.link{background:none;border:0;color:var(--acc);font:inherit;font-size:13.5px;cursor:pointer;
+ padding:6px 0;text-decoration:underline;text-underline-offset:3px}
+#kb{position:fixed;left:0;right:0;bottom:0;background:var(--surface);
+ border-top:1px solid var(--line);
+ padding:7px 6px calc(7px + env(safe-area-inset-bottom));transform:translateY(105%);
+ transition:transform .18s ease;z-index:50;box-shadow:0 -6px 22px rgba(0,0,0,.14)}
+#kb.open{transform:translateY(0)}
+body.kbon main{padding-bottom:240px}
+.kbr{display:flex;gap:5px;margin-bottom:5px}
+.kbk{flex:1;min-width:0;padding:13px 2px;font-size:22px;border:1px solid var(--line);
+ background:var(--paper);color:var(--gr);border-radius:8px;cursor:pointer;line-height:1.1}
+.kbk:active{background:var(--acc-w)}
+.kbk.wide{flex:1.7;font-size:16px}
+.kbk.iota{font-size:19px;letter-spacing:2px}
+.kbk.del{color:var(--ko)}
+.kbk.close{color:var(--dim)}
+.stt{width:100%;border-collapse:collapse;font-size:14px}
+.stt td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:middle}
+.num{text-align:right;color:var(--dim);white-space:nowrap;font-size:13px;
+ font-variant-numeric:tabular-nums}
+.barc{width:92px}
+.barc span{display:block;height:7px;border-radius:4px;background:var(--acc)}
+.barc .g{background:var(--ok)}.barc .y{background:var(--bronze)}.barc .r{background:var(--ko)}
+.tot{font-size:14.5px;background:var(--raise);padding:11px 13px;border-radius:10px;line-height:1.6}
+footer{color:var(--dim);font-size:12.5px;text-align:center;padding:6px 12px 22px;max-width:780px;
+ margin:0 auto;line-height:1.6}
+@media(min-width:620px){ .gform{font-size:52px} .opt{flex:0 0 auto} }
+@media (prefers-reduced-motion: reduce){ #kb{transition:none} *{scroll-behavior:auto} }
+</style>
+
+</head>
+<body>
+<header>
+  <h1>Morfologia grega <span class="h2s">Grec II</span></h1>
+  <button id="navhome">Continguts</button>
+  <button id="navstats">Progrés</button>
+</header>
+
+<main>
+  <section id="home">
+    <div class="card">
+      <h2>Tipus d'exercici</h2>
+      <div class="pills">
+        <button class="pill" data-exmode="analyze">Analitzar formes</button>
+        <button class="pill" data-exmode="write">Escriure formes</button>
+        <button class="pill" data-exmode="mix">Els dos, barrejats</button>
+      </div>
+      <h2 style="margin-top:16px">Modes verbals</h2>
+      <div class="pills">
+        <button class="pill" id="fm_ind">Indicatiu</button>
+        <button class="pill" id="fm_subj">Subjuntiu</button>
+        <button class="pill" id="fm_opt">Optatiu</button>
+        <button class="pill" id="fm_imper">Imperatiu</button>
+        <button class="pill" id="fm_inf">Infinitiu</button>
+        <button class="pill" id="fm_ptc">Participi</button>
+      </div>
+      <h2 style="margin-top:16px">Veus</h2>
+      <div class="pills">
+        <button class="pill" id="fv_act">Activa</button>
+        <button class="pill" id="fv_mid">Mitjana</button>
+        <button class="pill" id="fv_pass">Passiva</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Què vols practicar</h2>
+      <p class="sub">Tria tots els apartats que vulgues: les preguntes es reparteixen entre ells.</p>
+      <div id="seclist"></div>
+      <div id="count"></div>
+      <div class="acts"><button id="start" class="primary">Comença</button></div>
+    </div>
+  </section>
+
+  <section id="quiz" style="display:none">
+    <div id="bar"></div>
+    <div class="card" id="card"></div>
+    <div class="acts"><button id="stop" class="ghost">Acabar</button></div>
+  </section>
+
+  <section id="stats" style="display:none">
+    <div class="card">
+      <h2>El teu progrés</h2>
+      <div id="statsbody"></div>
+      <div class="acts"><button id="reset" class="ghost">Esborrar el progrés</button></div>
+    </div>
+  </section>
+</main>
+
+<div id="kb"></div>
+
+<footer>Els exercicis no s'acaben mai: pots parar quan vulgues.<br>
+El progrés es guarda només en aquest navegador.</footer>
+
+<script>
+/* ==== 00_accent.js ==== */
+/* ============================================================
+   00_accent.js  —  Sil·labació, quantitats i accentuació grega
+   ============================================================ */
+var ACUTE='́', GRAVE='̀', CIRC='͂', SMOOTH='̓',
+    ROUGH='̔', DIAER='̈', IOTA='ͅ';
+var COMB = /[̀-ͯͅ]/;
+var VOW = 'αεηιουω';
+function lc(c){ return c.toLowerCase(); }
+var DIPHS = {'αι':1,'αυ':1,'ει':1,'ευ':1,'ηυ':1,
+             'οι':1,'ου':1,'ωυ':1};
+
+function nfd(s){ return s.normalize('NFD'); }
+function nfc(s){ return s.normalize('NFC'); }
+
+function letters(s){
+  var out=[], i;
+  for (i=0;i<s.length;i++){
+    var ch=s[i];
+    if (COMB.test(ch) && out.length) out[out.length-1]+=ch;
+    else out.push(ch);
+  }
+  return out;
+}
+function baseOf(L){ return lc(L[0]); }
+function isVowel(L){ return VOW.indexOf(baseOf(L))>=0; }
+function hasIota(L){ return L.indexOf(IOTA)>=0; }
+function hasBreath(L){ return L.indexOf(SMOOTH)>=0 || L.indexOf(ROUGH)>=0; }
+function hasAcc(L){ return L.indexOf(ACUTE)>=0||L.indexOf(GRAVE)>=0||L.indexOf(CIRC)>=0; }
+
+function nuclei(L){
+  var res=[], i;
+  for(i=0;i<L.length;i++){
+    if(!isVowel(L[i])) continue;
+    if(i+1<L.length && isVowel(L[i+1])){
+      var pair = baseOf(L[i])+baseOf(L[i+1]);
+      if(DIPHS[pair] && !hasIota(L[i]) && !hasBreath(L[i]) && !hasAcc(L[i])
+         && L[i+1].indexOf(DIAER)<0){
+        res.push({a:i,b:i+1,txt:pair}); i++; continue;
+      }
+    }
+    res.push({a:i,b:i,txt:baseOf(L[i]), iota:hasIota(L[i])});
+  }
+  return res;
+}
+
+function natQ(n){
+  if(n.iota) return 'L';
+  if(n.txt.length===2) return 'L';
+  if('ηω'.indexOf(n.txt)>=0) return 'L';
+  if('εο'.indexOf(n.txt)>=0) return 'S';
+  return '?';
+}
+
+function stripAccent(s){
+  return nfc(nfd(s).replace(/[́̀͂]/g,''));
+}
+/* Normalitza per a comparar amb el que escriu l'alumne:
+   lleva accents i esperits, conserva la iota subscrita, unifica sigma */
+function bare(s){
+  var d = nfd(s).replace(/[̀-̈́͆-ͯ]/g,'');
+  d = nfc(d).replace(/ς/g,'σ');
+  return d.toLowerCase();
+}
+
+function putAccent(word, pos, mark){
+  var L = letters(nfd(word));
+  var ns = nuclei(L);
+  if(!ns.length) return nfc(L.join(''));
+  var idx = ns.length - pos;
+  if(idx<0) idx=0;
+  var n = ns[idx];
+  var target = n.b;
+  if(hasIota(L[target]) && n.a!==n.b) target = n.a;
+  var ch = L[target];
+  var b = ch[0], m = ch.slice(1);
+  var iota = m.indexOf(IOTA)>=0 ? IOTA : '';
+  m = m.replace(new RegExp('['+ACUTE+GRAVE+CIRC+IOTA+']','g'),'');
+  L[target] = b + m + (mark==='C'?CIRC:ACUTE) + iota;
+  return nfc(L.join(''));
+}
+
+function resolveAccent(sylls, s, m, uq, pq){
+  if(s===0) return {pos:1, mark:m||'A'};
+  var pos = sylls - s + 1;
+  if(pos<1) pos=1;
+  if(pos>3) pos=3;
+  if(pos===3){
+    if(uq==='L') pos=2;
+    else return {pos:3, mark:'A'};
+  }
+  if(pos===2){
+    if(uq==='L') return {pos:2, mark:'A'};
+    return {pos:2, mark:(pq==='L'?'C':'A')};
+  }
+  return {pos:1, mark:m||'A'};
+}
+
+function recessive(sylls, uq, pq){
+  if(sylls>=3 && uq==='S') return {pos:3, mark:'A'};
+  if(sylls>=2){
+    if(uq==='L') return {pos:2, mark:'A'};
+    return {pos:2, mark:(pq==='L'?'C':'A')};
+  }
+  return {pos:1, mark:(uq==='L'?'C':'A')};
+}
+
+function readAccent(word){
+  var L = letters(nfd(word)), ns = nuclei(L), i;
+  for(i=0;i<ns.length;i++){
+    var a=ns[i].a, b=ns[i].b;
+    var chunk = L[a]+(b!==a?L[b]:'');
+    if(chunk.indexOf(CIRC)>=0) return {s:i+1, m:'C', pos:ns.length-i};
+    if(chunk.indexOf(ACUTE)>=0||chunk.indexOf(GRAVE)>=0) return {s:i+1, m:'A', pos:ns.length-i};
+  }
+  return {s:1, m:'A', pos:ns.length};
+}
+function nSyl(word){ return nuclei(letters(nfd(word))).length; }
+/* quantitat natural de la síl·laba i-èsima des del final (1 = última) */
+function qOf(word, fromEnd){
+  var L=letters(nfd(word)), ns=nuclei(L);
+  var i = ns.length-fromEnd;
+  if(i<0||i>=ns.length) return 'S';
+  return natQ(ns[i]);
+}
+
+/* ==== 10_nominal.js ==== */
+/* ============================================================
+   10_nominal.js — Declinació de substantius i adjectius
+   ============================================================ */
+var CASES = ['nom','voc','ac','gen','dat'];
+var NUMS  = ['sg','pl'];
+var CASE_CA = {nom:'nominatiu', voc:'vocatiu', ac:'acusatiu', gen:'genitiu', dat:'datiu'};
+var NUM_CA  = {sg:'singular', pl:'plural'};
+var GEN_CA  = {m:'masculí', f:'femení', n:'neutre'};
+
+/* Desinència: [text, quantitat última, flags]
+   flags: C1 = circumflex forçat a l'última
+          A1 = agut forçat a l'última
+          oxy = si la paraula és oxítona -> circumflex (gen/dat 1a-2a)
+          mono = si el tema és monosíl·lab -> accent a la desinència
+          gpl = genitiu plural de 1a declinació (circumflex sempre)
+          sh  = compta com a breu per a l'accent encara que siga llarga (-εως, -εων) */
+function E(t,q,f){ return {t:t, q:q||'S', f:f||''}; }
+
+var ENDINGS = {};
+
+/* ---------- 1a declinació ---------- */
+ENDINGS.a_pura = { nom_sg:E('α','L'), voc_sg:E('α','L'), ac_sg:E('αν','L'),
+  gen_sg:E('ας','L','oxy'), dat_sg:E('ᾳ','L','oxy'),
+  nom_pl:E('αι','S'), voc_pl:E('αι','S'), ac_pl:E('ας','L'),
+  gen_pl:E('ων','L','gpl oxy'), dat_pl:E('αις','L','oxy') };
+ENDINGS.a_impura = { nom_sg:E('α','S'), voc_sg:E('α','S'), ac_sg:E('αν','S'),
+  gen_sg:E('ης','L','oxy'), dat_sg:E('ῃ','L','oxy'),
+  nom_pl:E('αι','S'), voc_pl:E('αι','S'), ac_pl:E('ας','L'),
+  gen_pl:E('ων','L','gpl oxy'), dat_pl:E('αις','L','oxy') };
+ENDINGS.eta = { nom_sg:E('η','L'), voc_sg:E('η','L'), ac_sg:E('ην','L'),
+  gen_sg:E('ης','L','oxy'), dat_sg:E('ῃ','L','oxy'),
+  nom_pl:E('αι','S'), voc_pl:E('αι','S'), ac_pl:E('ας','L'),
+  gen_pl:E('ων','L','gpl oxy'), dat_pl:E('αις','L','oxy') };
+ENDINGS.hs = { nom_sg:E('ης','L'), voc_sg:E('α','S'), ac_sg:E('ην','L'),
+  gen_sg:E('ου','L','oxy'), dat_sg:E('ῃ','L','oxy'),
+  nom_pl:E('αι','S'), voc_pl:E('αι','S'), ac_pl:E('ας','L'),
+  gen_pl:E('ων','L','gpl oxy'), dat_pl:E('αις','L','oxy') };
+ENDINGS.as = { nom_sg:E('ας','L'), voc_sg:E('α','L'), ac_sg:E('αν','L'),
+  gen_sg:E('ου','L','oxy'), dat_sg:E('ᾳ','L','oxy'),
+  nom_pl:E('αι','S'), voc_pl:E('αι','S'), ac_pl:E('ας','L'),
+  gen_pl:E('ων','L','gpl oxy'), dat_pl:E('αις','L','oxy') };
+
+/* ---------- 2a declinació ---------- */
+ENDINGS.o = { nom_sg:E('ος','S'), voc_sg:E('ε','S'), ac_sg:E('ον','S'),
+  gen_sg:E('ου','L','oxy'), dat_sg:E('ῳ','L','oxy'),
+  nom_pl:E('οι','S'), voc_pl:E('οι','S'), ac_pl:E('ους','L'),
+  gen_pl:E('ων','L','oxy'), dat_pl:E('οις','L','oxy') };
+ENDINGS.on = { nom_sg:E('ον','S'), voc_sg:E('ον','S'), ac_sg:E('ον','S'),
+  gen_sg:E('ου','L','oxy'), dat_sg:E('ῳ','L','oxy'),
+  nom_pl:E('α','S'), voc_pl:E('α','S'), ac_pl:E('α','S'),
+  gen_pl:E('ων','L','oxy'), dat_pl:E('οις','L','oxy') };
+
+/* ---------- 3a declinació: desinències comunes ---------- */
+var E3 = { ac_sg:E('α','S'), gen_sg:E('ος','S','mono'), dat_sg:E('ι','S','mono'),
+  nom_pl:E('ες','S'), voc_pl:E('ες','S'), ac_pl:E('ας','S'),
+  gen_pl:E('ων','L','mono'), dat_pl:E('σι','S','mono') };
+var E3n = { gen_sg:E('ος','S','mono'), dat_sg:E('ι','S','mono'),
+  nom_pl:E('α','S'), voc_pl:E('α','S'), ac_pl:E('α','S'),
+  gen_pl:E('ων','L','mono'), dat_pl:E('σι','S','mono') };
+
+/* ---------------- Utillatge ---------------- */
+function unacc(s){ return stripAccent(s); }
+
+/* Quantitat de la penúltima síl·laba d'una forma composta stem+ending */
+function penultQ(w, stem, endSyls){
+  /* si la desinència té més d'una síl·laba, la penúltima ix de la desinència */
+  var ns = nuclei(letters(nfd(stem)));
+  if(endSyls>=2) return null; /* el cridant ho resol */
+  var last = ns.length-1;
+  if(last<0) return 'S';
+  if(w && w.qs && w.qs[last]) return w.qs[last];
+  var q = natQ(ns[last]);
+  if(q==='?'){
+    if(w && w.q && w.q[last]) return w.q[last];
+    return 'S';
+  }
+  return q;
+}
+
+/* Construeix la forma stem+ending amb accent */
+function build(w, stem, end){
+  var txt = stem + end.t;
+  var ns  = nuclei(letters(nfd(txt)));
+  var endN = nuclei(letters(nfd(end.t))).length;
+  var uq = end.q;
+  if(end.f.indexOf('sh')>=0) uq='S';
+  var pq;
+  if(endN>=2){
+    var i = ns.length-2;
+    pq = i>=0 ? natQ(ns[i]) : 'S';
+    if(pq==='?') pq='S';
+  } else {
+    pq = penultQ(w, stem, 1);
+  }
+  var r;
+  if(end.f.indexOf('C1')>=0) r={pos:1,mark:'C'};
+  else if(end.f.indexOf('A1')>=0) r={pos:1,mark:'A'};
+  else if(end.f.indexOf('gpl')>=0 && !w.adjFem) r={pos:1,mark:'C'};
+  else if(end.f.indexOf('oxy')>=0 && w.acc.s===0) r={pos:1,mark:'C'};
+  else if(end.f.indexOf('mono')>=0 && w.mono) r={pos:1,mark:(end.q==='L'?'C':'A')};
+  else if(w.acc.s===0) r={pos:1,mark:'A'};
+  else if(w.rec) r=recessive(ns.length, uq, pq);
+  else r=resolveAccent(ns.length, w.acc.s, w.acc.m, uq, pq);
+  return putAccent(txt, r.pos, r.mark);
+}
+
+/* Datiu plural de la 3a: sandhi del tema amb -σι */
+function datPl3(stem, kind){
+  var s = stem;
+  if(kind==='vel') return s.replace(/[κγχ]$/,'ξ')+'ι';
+  if(kind==='lab') return s.replace(/[πβφ]$/,'ψ')+'ι';
+  if(kind==='dent'||kind==='dentN') return s.replace(/[τδθ]$/,'')+'σι';
+  if(kind==='nt'){
+    var b = s.replace(/ντ$/,'');
+    b = b.replace(/ο$/,'ου').replace(/α$/,'α').replace(/ε$/,'ει');
+    return b+'σι';
+  }
+  if(kind==='n') return s.replace(/ν$/,'')+'σι';
+  if(kind==='r') return s+'σι';
+  return s+'σι';
+}
+
+/* ---------------- Constructor de substantius ---------------- */
+var GEN_STRIP = {a_pura:2,a_impura:2,eta:2,hs:2,as:2,o:2,on:2,
+  vel:2,lab:2,dent:2,dentN:2,nt:2,n:2,r:2,us:2,uN:3,i:3,u:3,eus:3,sN:0,sM:0};
+
+function mkNoun(sp){
+  var w = {kind:'noun', l:sp.l, gl:sp.g, art:sp.a, tr:sp.t, type:sp.d,
+           gender:sp.gn||(sp.a==='ὁ'?'m':(sp.a==='ἡ'?'f':(sp.a==='τό'?'n':'m'))),
+           tags:sp.tg||[], q:{}, mono:!!sp.mono, forms:sp.forms||null};
+  if(sp.a==='ὁ, ἡ') w.gender='mf';
+  var a = readAccent(sp.l);
+  var D12 = ['a_pura','a_impura','eta','hs','as','o','on'];
+  var isOxy = (a.pos===1) && D12.indexOf(sp.d)>=0;
+  w.acc = {s: isOxy?0:a.s, m:a.m};
+  /* quantitats inferides del lema */
+  var ns = nuclei(letters(nfd(sp.l)));
+  if(a.m==='C') w.q[a.s-1]='L';
+  else if(a.pos===2){
+    var uq = natQ(ns[ns.length-1]);
+    if(uq==='S') w.q[a.s-1]='S';
+  }
+  if(sp.q) for(var k in sp.q) w.q[k-0]=sp.q[k];
+  /* tema */
+  var g = unacc(sp.g||'');
+  var strip = GEN_STRIP[sp.d];
+  if(sp.stem!=null) w.stem = sp.stem;
+  else if(sp.d==='sN'||sp.d==='sM') w.stem = g.replace(/ους$/,'');
+  else if(strip) w.stem = g.slice(0, g.length-strip);
+  else w.stem = g;
+  if(sp.d==='eus') w.stem = w.stem+'ε';
+  w.nomsg = sp.l;
+  w.spec = sp;
+  return w;
+}
+
+/* declina: torna {nom_sg:'...', ...} */
+function declineNoun(w){
+  var sp = w.spec, out = {};
+  if(w.forms) return w.forms;
+  var d = w.type, st = w.stem;
+  function set(k,v){ out[k]=v; }
+  function fromEnd(tbl,keys){
+    keys.forEach(function(k){ if(tbl[k]) set(k, build(w, st, tbl[k])); });
+  }
+  if(['a_pura','a_impura','eta','hs','as','o','on'].indexOf(d)>=0){
+    fromEnd(ENDINGS[d], Object.keys(ENDINGS[d]));
+    out.nom_sg = w.nomsg;
+  } else {
+    /* 3a declinació */
+    var neut = (w.gender==='n');
+    var tbl = neut?E3n:E3;
+    fromEnd(tbl, Object.keys(tbl));
+    out.nom_sg = w.nomsg;
+    if(neut){ out.voc_sg = w.nomsg; out.ac_sg = w.nomsg; }
+    else { out.voc_sg = sp.v || w.nomsg; }
+    /* datiu plural amb sandhi */
+    var dp = datPl3(st, d);
+    out.dat_pl = build(w, dp.slice(0,dp.length-2), E(dp.slice(-2),'S','mono'));
+    if(d==='nt'&&!neut){ /* ok */ }
+    if(d==='dentN'){ /* σῶμα: nom = tema sense τ */ }
+    if(d==='us'){ out.ac_sg = build(w, st, E('ν','S')); }
+    if(d==='i'){
+      out.ac_sg  = build(w, st, E('ιν','S'));
+      out.voc_sg = build(w, st, E('ι','S'));
+      out.gen_sg = build(w, st, E('εως','L','sh'));
+      out.dat_sg = build(w, st, E('ει','L'));
+      out.nom_pl = out.voc_pl = out.ac_pl = build(w, st, E('εις','L'));
+      out.gen_pl = build(w, st, E('εων','L','sh'));
+      out.dat_pl = build(w, st, E('εσι','S'));
+    }
+    if(d==='u'||d==='uN'){
+      out.gen_sg = build(w, st, E('εως','L','sh'));
+      out.dat_sg = build(w, st, E('ει','L'));
+      out.gen_pl = build(w, st, E('εων','L','sh'));
+      out.dat_pl = build(w, st, E('εσι','S'));
+      if(d==='u'){ out.nom_pl=out.voc_pl=out.ac_pl=build(w,st,E('εις','L'));
+        out.voc_sg=w.nomsg.replace(/ς$/,''); out.ac_sg=build(w,st,E('υν','S')); }
+      else { out.nom_pl=out.voc_pl=out.ac_pl=build(w,st,E('η','L')); }
+    }
+    if(d==='sN'){
+      out.gen_sg = build(w, st, E('ους','L'));
+      out.dat_sg = build(w, st, E('ει','L'));
+      out.nom_pl = out.voc_pl = out.ac_pl = build(w, st, E('η','L'));
+      out.gen_pl = build(w, st, E('ων','L','C1'));
+      out.dat_pl = build(w, st, E('εσι','S'));
+    }
+    if(d==='sM'){
+      out.ac_sg  = build(w, st, E('η','L'));
+      out.gen_sg = build(w, st, E('ους','L'));
+      out.dat_sg = build(w, st, E('ει','L'));
+      out.voc_sg = build(w, st, E('ες','S'));
+      delete out.nom_pl; delete out.voc_pl; delete out.ac_pl;
+      delete out.gen_pl; delete out.dat_pl;
+    }
+    if(d==='eus'){
+      var b = st.slice(0, st.length-1); /* sense la ε final */
+      out.nom_sg = w.nomsg;
+      out.voc_sg = putAccent(b+'ευ', 1, 'C');
+      out.ac_sg  = build(w, st, E('α','S'));
+      out.gen_sg = build(w, st, E('ως','L'));
+      out.dat_sg = putAccent(b+'ει',1,'C');
+      out.nom_pl = out.voc_pl = putAccent(b+'εις',1,'C');
+      out.ac_pl  = build(w, st, E('ας','S'));
+      out.gen_pl = build(w, st, E('ων','L'));
+      out.dat_pl = putAccent(b+'ευσι',2,'C');
+    }
+  }
+  if(sp.ex) for(var k2 in sp.ex) out[k2]=sp.ex[k2];
+  return out;
+}
+
+/* ==== 11_adj.js ==== */
+/* ============================================================
+   11_adj.js — Adjectius, article i pronoms
+   ============================================================ */
+/* Parseja "n v a g d | n v a g d" -> {nom_sg:..., ...}   ('-' = no existeix) */
+function T(str){
+  var o={}, parts=str.trim().split('|');
+  parts.forEach(function(p,pi){
+    var n = pi===0?'sg':'pl';
+    p.trim().split(/\s+/).forEach(function(x,i){ if(x!=='-') o[CASES[i]+'_'+n]=nfc(x); });
+  });
+  return o;
+}
+/* Aplica una taula de sufixos accentuats a una base sense accent */
+function SUF(base, str){
+  var o=T(str), r={};
+  for(var k in o) r[k]= (o[k]==='' ? '' : nfc(base+o[k]));
+  return r;
+}
+
+/* ---------------- ARTICLE ---------------- */
+var ARTICLE = {
+  m: T('ὁ - τόν τοῦ τῷ | οἱ - τούς τῶν τοῖς'),
+  f: T('ἡ - τήν τῆς τῇ | αἱ - τάς τῶν ταῖς'),
+  n: T('τό - τό τοῦ τῷ | τά - τά τῶν τοῖς')
+};
+
+/* ---------------- Tipus d'adjectius ---------------- */
+/* 1a-2a de 3 terminacions: es genera amb la maquinària de substantius */
+function femType(stem){
+  var last = stem.slice(-1);
+  return ('ειρ'.indexOf(bare(last))>=0) ? 'a_pura' : 'eta';
+}
+
+function mkAdj(sp){
+  var a = {kind:'adj', l:sp.l, tr:sp.t, type:sp.d, tags:sp.tg||[], spec:sp, cmp:sp.cmp||null};
+  a.decl = {};
+  if(sp.d==='12'||sp.d==='2t'){
+    var acc = readAccent(sp.l);
+    var stem = unacc(sp.l).replace(/ος$/,'');
+    var oxy = (acc.pos===1);
+    var mkg = function(dtype, adjFem){
+      var w = {kind:'noun', acc:{s:oxy?0:acc.s, m:acc.m}, q:{}, stem:stem,
+               type:dtype, gender:'m', spec:{d:dtype}, adjFem:!!adjFem};
+      if(acc.m==='C') w.q[acc.s-1]='L';
+      if(sp.q) for(var k in sp.q) w.q[k-0]=sp.q[k];
+      w.nomsg = null;
+      return w;
+    };
+    var wm = mkg('o'); wm.nomsg = sp.l;
+    a.decl.m = declineNoun(wm);
+    var wn = mkg('on'); wn.gender='n'; wn.nomsg = build(wn, stem, ENDINGS.on.nom_sg);
+    a.decl.n = declineNoun(wn);
+    if(sp.d==='12'){
+      var ft = femType(stem);
+      var wf = mkg(ft, true); wf.gender='f';
+      wf.nomsg = build(wf, stem, ENDINGS[ft].nom_sg);
+      a.decl.f = declineNoun(wf);
+    } else a.decl.f = a.decl.m;
+  }
+  else if(sp.d==='hand'){
+    a.decl = {m:T(sp.m), f:T(sp.f||sp.m), n:T(sp.n)};
+  }
+  else if(sp.d==='suf'){
+    a.decl = {m:SUF(sp.b,sp.m), f:SUF(sp.b,sp.f||sp.m), n:SUF(sp.b,sp.n)};
+  }
+  else if(sp.d==='hs3'){        /* ἀληθής, -ές */
+    a.decl = { m:SUF(sp.b,'ής ές ῆ οῦς εῖ | εῖς εῖς εῖς ῶν έσι'),
+               f:SUF(sp.b,'ής ές ῆ οῦς εῖ | εῖς εῖς εῖς ῶν έσι'),
+               n:SUF(sp.b,'ές ές ές οῦς εῖ | ῆ ῆ ῆ ῶν έσι') };
+    a.decl.f = a.decl.m;
+  }
+  else if(sp.d==='wn3'){        /* εὐδαίμων, -ον  /  comparatius μείζων, -ον */
+    var accw = readAccent(sp.l);
+    var stw = unacc(sp.l).replace(/ων$/,'ον');
+    var mkw = function(g){
+      return {kind:'noun', acc:{s:accw.s,m:accw.m}, q:{}, stem:stw, type:'n',
+              gender:g, spec:{d:'n'}, nomsg:null};
+    };
+    var m = mkw('m'); m.nomsg = sp.l; a.decl.m = declineNoun(m);
+    var n = mkw('n'); n.nomsg = sp.nn || putAccentRec(stw); a.decl.n = declineNoun(n);
+    a.decl.f = a.decl.m;
+    a.decl.m.voc_sg = sp.nn || putAccentRec(stw);
+    a.decl.n.voc_sg = a.decl.n.nom_sg = a.decl.n.ac_sg = a.decl.m.voc_sg;
+    if(sp.cmpAlt){
+      a.alt = { ac_sg: sp.b2+'ω', nom_pl: sp.b2+'ους', ac_pl: sp.b2+'ους',
+                nom_pl_n: sp.b2+'ω', ac_pl_n: sp.b2+'ω' };
+    }
+  }
+  else if(sp.d==='contr'){      /* χρυσοῦς, -ῆ, -οῦν */
+    var fem = sp.fa ? 'ᾶ ᾶ ᾶν ᾶς ᾷ | αῖ αῖ ᾶς ῶν αῖς'
+                    : 'ῆ ῆ ῆν ῆς ῇ | αῖ αῖ ᾶς ῶν αῖς';
+    a.decl = { m:SUF(sp.b,'οῦς οῦ οῦν οῦ ῷ | οῖ οῖ οῦς ῶν οῖς'),
+               f:SUF(sp.b,fem),
+               n:SUF(sp.b,'οῦν οῦν οῦν οῦ ῷ | ᾶ ᾶ ᾶ ῶν οῖς') };
+  }
+  return a;
+}
+function putAccentRec(w){
+  var ns=nSyl(w), uq=qOf(w,1), pq=qOf(w,2);
+  if(uq==='?')uq='S'; if(pq==='?')pq='S';
+  var r=recessive(ns,uq,pq); return putAccent(w,r.pos,r.mark);
+}
+
+/* ==== 20_verb.js ==== */
+/* ============================================================
+   20_verb.js — Morfologia verbal
+   ============================================================ */
+var PERS = ['1sg','2sg','3sg','1pl','2pl','3pl'];
+var PERS_CA = {'1sg':'1a sing.','2sg':'2a sing.','3sg':'3a sing.',
+               '1pl':'1a plur.','2pl':'2a plur.','3pl':'3a plur.'};
+var TENSE_CA = {pres:'present', impf:'imperfet', fut:'futur', aor:'aorist',
+                pf:'perfet', plpf:'plusquamperfet', futp:'futur'};
+var MOOD_CA  = {ind:'indicatiu', subj:'subjuntiu', opt:'optatiu', imper:'imperatiu',
+                inf:'infinitiu', ptc:'participi'};
+var VOICE_CA = {act:'activa', mid:'mitjana', pass:'passiva', mp:'mitjana-passiva'};
+
+/* quantitat sil·làbica automàtica d'una cadena; longV = vocals ambigües llargues */
+function autoQ(s, longV){
+  var ns = nuclei(letters(nfd(s))), out='';
+  for(var i=0;i<ns.length;i++){
+    var q = natQ(ns[i]);
+    if(q==='?') q = (longV && longV.indexOf(ns[i].txt)>=0) ? 'L':'S';
+    out += q;
+  }
+  return out;
+}
+/* Desinència: t=text, q=quantitats per síl·laba, a=regla d'accent */
+function D(t,q,a){ return {t:t,q:q,a:a||'rec'}; }
+
+/* munta una forma:  parts = [[text,quants],...]  */
+function vbuild(parts, rule){
+  var txt='', q='';
+  parts.forEach(function(p){ txt+=p[0]; q+=p[1]; });
+  var n = q.length;
+  if(!n) return txt;
+  var uq=q[n-1], pq=(n>1?q[n-2]:'S');
+  var r;
+  if(rule==='rec' || !rule) r = recessive(n, uq, pq);
+  else if(rule==='ult:C') r = {pos:1, mark:'C'};
+  else if(rule==='ult:A') r = {pos:1, mark:'A'};
+  else if(rule==='pen:A') r = {pos:2, mark:'A'};
+  else if(rule==='pen:C') r = {pos:2, mark:'C'};
+  else if(rule==='pen:auto') r = {pos:2, mark:(uq==='S'&&pq==='L')?'C':'A'};
+  else if(rule==='e1:C' || rule==='e1:A'){
+    var endN = parts[parts.length-1][1].length;
+    r = {pos: endN, mark: rule.slice(-1)};
+  }
+  else r = recessive(n, uq, pq);
+  return putAccent(txt, r.pos, r.mark);
+}
+
+/* ---------------- Taules de desinències ---------------- */
+var VE = {};
+VE.pres_ind_act = [D('ω','L'),D('εις','L'),D('ει','L'),D('ομεν','SS'),D('ετε','SS'),D('ουσι','LS')];
+VE.pres_ind_mp  = [D('ομαι','SS'),D('ῃ','L'),D('εται','SS'),D('ομεθα','SSS'),D('εσθε','SS'),D('ονται','SS')];
+VE.impf_act     = [D('ον','S'),D('ες','S'),D('ε','S'),D('ομεν','SS'),D('ετε','SS'),D('ον','S')];
+VE.impf_mp      = [D('ομην','SL'),D('ου','L'),D('ετο','SS'),D('ομεθα','SSS'),D('εσθε','SS'),D('οντο','SS')];
+VE.subj_act     = [D('ω','L'),D('ῃς','L'),D('ῃ','L'),D('ωμεν','LS'),D('ητε','LS'),D('ωσι','LS')];
+VE.subj_mp      = [D('ωμαι','LS'),D('ῃ','L'),D('ηται','LS'),D('ωμεθα','LSS'),D('ησθε','LS'),D('ωνται','LS')];
+VE.opt_act      = [D('οιμι','LS'),D('οις','L'),D('οι','L'),D('οιμεν','LS'),D('οιτε','LS'),D('οιεν','LS')];
+VE.opt_mp       = [D('οιμην','LL'),D('οιο','LS'),D('οιτο','LS'),D('οιμεθα','LSS'),D('οισθε','LS'),D('οιντο','LS')];
+VE.imper_act    = {'2sg':D('ε','S'),'3sg':D('ετω','SL'),'2pl':D('ετε','SS'),'3pl':D('οντων','SL')};
+VE.imper_mp     = {'2sg':D('ου','L'),'3sg':D('εσθω','SL'),'2pl':D('εσθε','SS'),'3pl':D('εσθων','SL')};
+VE.inf_act      = D('ειν','L');
+VE.inf_mp       = D('εσθαι','SS');
+
+VE.aor_ind_act  = [D('α','S'),D('ας','S'),D('ε','S'),D('αμεν','SS'),D('ατε','SS'),D('αν','S')];
+VE.aor_ind_mid  = [D('αμην','SL'),D('ω','L'),D('ατο','SS'),D('αμεθα','SSS'),D('ασθε','SS'),D('αντο','SS')];
+VE.aor_opt_act  = [D('αιμι','LS'),D('αις','L'),D('αι','L'),D('αιμεν','LS'),D('αιτε','LS'),D('αιεν','LS')];
+VE.aor_opt_act2 = [null,D('ειας','LS'),D('ειε','LS'),null,null,D('ειαν','LS')];
+VE.aor_opt_mid  = [D('αιμην','LL'),D('αιο','LS'),D('αιτο','LS'),D('αιμεθα','LSS'),D('αισθε','LS'),D('αιντο','LS')];
+VE.aor_imper_act= {'2sg':D('ον','S'),'3sg':D('ατω','SL'),'2pl':D('ατε','SS'),'3pl':D('αντων','SL')};
+VE.aor_imper_mid= {'2sg':D('αι','S'),'3sg':D('ασθω','SL'),'2pl':D('ασθε','SS'),'3pl':D('ασθων','SL')};
+VE.aor_inf_act  = D('αι','S','pen:auto');
+VE.aor_inf_mid  = D('ασθαι','SS');
+
+VE.pf_ind_act   = [D('α','S'),D('ας','S'),D('ε','S'),D('αμεν','SS'),D('ατε','SS'),D('ασι','SS')];
+VE.pf_inf_act   = D('εναι','SS','pen:A');
+VE.pf_ind_mp    = [D('μαι','S'),D('σαι','S'),D('ται','S'),D('μεθα','SS'),D('σθε','S'),D('νται','S')];
+VE.pf_inf_mp    = D('σθαι','S','pen:A');
+VE.plpf_act     = [D('η','L'),D('ης','L'),D('ει','L'),D('εμεν','SS'),D('ετε','SS'),D('εσαν','SS')];
+VE.plpf_mp      = [D('μην','L'),D('σο','S'),D('το','S'),D('μεθα','SS'),D('σθε','S'),D('ντο','S')];
+
+VE.ap_ind       = [D('ην','L'),D('ης','L'),D('η','L'),D('ημεν','LS'),D('ητε','LS'),D('ησαν','LS')];
+VE.ap_subj      = [D('ω','L','e1:C'),D('ῃς','L','e1:C'),D('ῃ','L','e1:C'),
+                   D('ωμεν','LS','e1:C'),D('ητε','LS','e1:C'),D('ωσι','LS','e1:C')];
+VE.ap_opt       = [D('ειην','LL','e1:A'),D('ειης','LL','e1:A'),D('ειη','LL','e1:A'),
+                   D('ειμεν','LS','e1:C'),D('ειτε','LS','e1:C'),D('ειεν','LS','e1:C')];
+VE.ap_imper     = {'2sg':D('ητι','LS'),'3sg':D('ητω','LL'),'2pl':D('ητε','LS'),'3pl':D('εντων','SL','e1:A')};
+VE.ap_inf       = D('ηναι','LS','e1:C');
+
+VE.th_inf_act   = D('ειν','L','ult:C');
+VE.th_inf_mid   = D('εσθαι','SS','e1:A');
+VE.th_imper_act = {'2sg':D('ε','S'),'3sg':D('ετω','SL'),'2pl':D('ετε','SS'),'3pl':D('οντων','SL')};
+VE.th_imper_mid = {'2sg':D('ου','L','ult:C'),'3sg':D('εσθω','SL'),'2pl':D('εσθε','SS'),'3pl':D('εσθων','SL')};
+
+/* ---------------- Participis ---------------- */
+/* Construeix les tres declinacions d'un participi */
+function mkPtcDecl(stemM, nomM, stemF, nomF, nomN, femType_, mType, qsM, qsF){
+  function nw(st, nom, ty, g, qs){
+    var a = readAccent(nom);
+    var w = {kind:'noun', acc:{s:a.s,m:a.m}, q:{}, stem:st, type:ty, gender:g,
+             spec:{d:ty}, nomsg:nom, qs:qs};
+    if(a.m==='C') w.q[a.s-1]='L';
+    return w;
+  }
+  mType = mType||'nt';
+  var m = declineNoun(nw(stemM, nomM, mType, 'm', qsM));
+  var n = declineNoun(nw(stemM, nomN, mType, 'n', qsM));
+  var f = declineNoun(nw(stemF, nomF, femType_||'a_impura', 'f', qsF));
+  n.nom_sg = n.voc_sg = n.ac_sg = nomN;
+  m.voc_sg = nomM;
+  return {m:m, f:f, n:n};
+}
+/* participi mitjà/passiu: adjectiu regular de 1a-2a */
+function mkPtcMP(nomM){ return mkAdj({l:nomM, d:'12', t:''}).decl; }
+
+function recV(b, suf, lv){
+  var q = autoQ(b,lv)+autoQ(suf,'');
+  var t = b+suf, n = q.length;
+  if(suf==='ουσα') q = autoQ(b,lv)+'LS';
+  if(suf==='ασα')  q = autoQ(b,lv)+'SS';
+  if(suf==='ας')   q = autoQ(b,lv)+'L';
+  n = q.length;
+  var r = recessive(n, q[n-1], n>1?q[n-2]:'S');
+  return putAccent(t, r.pos, r.mark);
+}
+/* participi actiu d'accent recessiu: el masculí fixa la síl·laba accentuada */
+function recPtc(b, lv, sufMst, sufN, sufFst, sufF, sufM, femQ){
+  var qb = autoQ(b, lv);
+  var qsM = qb + 'S', qsF = qb + femQ;
+  var nm = putAccentQ(b+sufM, qb+'L');
+  var a  = readAccent(nm);
+  var qN = qb + 'S';
+  var nn = accAt(b+sufN, qN, a);
+  var qF = qb + femQ + 'S';
+  var nf = accAt(b+sufF, qF, a);
+  return mkPtcDecl(b+sufMst, nm, b+sufFst, nf, nn, 'a_impura', 'nt', qsM, qsF);
+}
+function putAccentQ(t, q){
+  var n=q.length, r=recessive(n, q[n-1], n>1?q[n-2]:'S');
+  return putAccent(t, r.pos, r.mark);
+}
+function accAt(t, q, a){
+  var n=q.length, r=resolveAccent(n, a.s, a.m, q[n-1], n>1?q[n-2]:'S');
+  return putAccent(t, r.pos, r.mark);
+}
+var PTC_CLASS = {
+  rec_ont: function(b,lv){ return recPtc(b,lv,'οντ','ον','ουσ','ουσα','ων','L'); },
+  rec_ant: function(b,lv){ return recPtc(b,lv,'αντ','αν','ασ','ασα','ας','S'); },
+  oxy_ont: function(b){ /* aorist temàtic actiu */
+    return mkPtcDecl(b+'οντ', nfc(b+'ών'), b+'ουσ', nfc(b+'οῦσα'), nfc(b+'όν')); },
+  eis:     function(b){ return mkPtcDecl(b+'εντ', nfc(b+'είς'), b+'εισ', nfc(b+'εῖσα'), nfc(b+'έν')); },
+  ous:     function(b){ return mkPtcDecl(b+'οντ', nfc(b+'ούς'), b+'ουσ', nfc(b+'οῦσα'), nfc(b+'όν')); },
+  as:      function(b){ var d = mkPtcDecl(b+'αντ', nfc(b+'άς'), b+'ασ', nfc(b+'ᾶσα'), nfc(b+'άν'),
+              'a_impura','nt', autoQ(b,'')+'S', autoQ(b,'')+'L');
+            var dp = accAt(b+'ασι', autoQ(b,'')+'LS', readAccent(nfc(b+'άς')));
+            d.m.dat_pl = d.n.dat_pl = dp; return d; },
+  us:      function(b){ var d = mkPtcDecl(b+'υντ', nfc(b+'ύς'), b+'υσ', nfc(b+'ῦσα'), nfc(b+'ύν'),
+              'a_impura','nt', autoQ(b,'')+'S', autoQ(b,'')+'L');
+            var dp = accAt(b+'υσι', autoQ(b,'')+'LS', readAccent(nfc(b+'ύς')));
+            d.m.dat_pl = d.n.dat_pl = dp; return d; },
+  kos:     function(b){ return mkPtcDecl(b+'οτ', nfc(b+'ώς'), b+'υι', nfc(b+'υῖα'), nfc(b+'ός'), 'a_pura', 'dent'); },
+  ctr_a:   function(b){ return mkPtcDecl(b+'ωντ', nfc(b+'ῶν'), b+'ωσ', nfc(b+'ῶσα'), nfc(b+'ῶν')); },
+  ctr_eo:  function(b){ return mkPtcDecl(b+'ουντ', nfc(b+'ῶν'), b+'ουσ', nfc(b+'οῦσα'), nfc(b+'οῦν')); },
+  wn:      function(b){ return mkPtcDecl(b+'οντ', nfc(b+'ών'), b+'ουσ', nfc(b+'οῦσα'), nfc(b+'όν')); }
+};
+
+/* ==== 21_conj.js ==== */
+/* ============================================================
+   21_conj.js — Contracció i conjugació
+   ============================================================ */
+var CONTR = {
+  α:{'ω':'ω','ου':'ω','ο':'ω','ε':'α','ει':'ᾳ','ῃ':'ᾳ','η':'α','οι':'ῳ','ῳ':'ῳ','ῆ':'ᾶ'},
+  ε:{'ω':'ω','ου':'ου','ο':'ου','ε':'ει','ει':'ει','η':'η','ῃ':'ῃ','οι':'οι','ᾳ':'ᾳ'},
+  ο:{'ω':'ω','ου':'ου','ο':'ου','ε':'ου','ει':'οι','η':'ω','ῃ':'οι','οι':'οι','ῳ':'ῳ'}
+};
+/* text cru d'un nucli (amb els seus diacrítics) */
+function nucText(L,n){ var s=''; for(var i=n.a;i<=n.b;i++) s+=L[i]; return nfc(s); }
+
+/* Contreu base+V+ending. rule: 'rec' o regla fixa aplicada a la forma SENSE contraure */
+function contractForm(base, V, endT, endQ, rule, baseQ){
+  var un = base + V + endT;
+  var L  = letters(nfd(un));
+  var ns = nuclei(L);
+  var q  = (baseQ!=null?baseQ:autoQ(base,'')) + 'S' + endQ;
+  var nb = nuclei(letters(nfd(base))).length;      /* índex 0-based de la vocal temàtica */
+  if(ns.length !== q.length) q = autoQ(un,'');
+  var n1 = ns[nb], n2 = ns[nb+1];
+  if(!n2) return {txt:nfc(un), ai:null};
+  var t2 = nucText(L,n2);
+  var res = CONTR[V][t2];
+  if(res===undefined) return {txt:nfc(un), ai:null};
+  /* accent sobre la forma sense contraure */
+  var r;
+  var nn=ns.length, uq=q[nn-1], pq=nn>1?q[nn-2]:'S';
+  if(rule==='rec'||!rule) r = recessive(nn, uq, pq);
+  else if(rule==='ult:C') r={pos:1,mark:'C'};
+  else if(rule==='pen:A') r={pos:2,mark:'A'};
+  else r = recessive(nn, uq, pq);
+  var ai = nn - r.pos;                              /* índex 0-based del nucli accentuat */
+  /* munta la forma contreta */
+  var pre = L.slice(0, n1.a).join('');
+  var post= L.slice(n2.b+1).join('');
+  var out = nfd(pre + res + post);
+  var newN = nuclei(letters(out)).length;
+  var newAi, mark;
+  if(ai < nb){ newAi = ai; mark = r.mark; }
+  else if(ai === nb){ newAi = nb; mark = 'C'; }
+  else if(ai === nb+1){ newAi = nb; mark = 'A'; }
+  else { newAi = ai-1; mark = r.mark; }
+  return {txt: putAccent(nfc(out), newN-newAi, mark)};
+}
+
+/* ---------------- Construcció del verb ---------------- */
+function unaug(s, ex){
+  if(ex) return ex;
+  if(s==null) return null;
+  var d = nfd(s);
+  if(/^ἐ/.test(nfc(d))){
+    var rest = nfc(letters(d).slice(1).join(''));
+    if(rest && VOW.indexOf(bare(rest[0]))<0) return rest;
+  }
+  return null;
+}
+function augPf(st){
+  var c = bare(nfc(st)[0]);
+  return (VOW.indexOf(c)>=0) ? st : 'ἐ'+st;
+}
+function mkVerb(sp){
+  var v = {kind:'verb', l:sp.l, tr:sp.t, tags:sp.tg||[], spec:sp,
+           lv:sp.lv||'', pp:sp.pp, cls:sp.cls||'th'};
+  var pp = sp.pp || {};
+  var S = {};
+  if(sp.full){ v.S=S; return v; }
+  /* present */
+  if(v.cls==='ctr_a'){ S.presBase = unacc(pp.pres).replace(/αω$/,''); S.V='α'; }
+  else if(v.cls==='ctr_e'){ S.presBase = unacc(pp.pres).replace(/εω$/,''); S.V='ε'; }
+  else if(v.cls==='ctr_o'){ S.presBase = unacc(pp.pres).replace(/οω$/,''); S.V='ο'; }
+  else if(/ομαι$/.test(unacc(pp.pres))){ S.pres = unacc(pp.pres).replace(/ομαι$/,''); S.presDep=true; }
+  else S.pres = unacc(pp.pres).replace(/ω$/,'');
+  S.presAug = sp.aug ? sp.aug : ('ἐ' + (v.cls.indexOf('ctr')===0?S.presBase:S.pres));
+  if(sp.impfAug) S.presAug = sp.impfAug;
+  /* futur */
+  if(pp.fut){
+    var f = unacc(pp.fut);
+    if(/οῦμαι$/.test(nfc(pp.fut))){ S.futBase = f.replace(/ουμαι$/,''); S.futCtr='ε'; S.futDep=true; }
+    else if(/ῶ$/.test(nfc(pp.fut))){ S.futBase = f.replace(/ω$/,''); S.futCtr='ε'; }
+    else if(/ομαι$/.test(f)){ S.fut = f.replace(/ομαι$/,''); S.futDep=true; }
+    else S.fut = f.replace(/ω$/,'');
+  }
+  /* aorist */
+  if(pp.aor){
+    var a = unacc(pp.aor);
+    if(/α$/.test(a) && !/ον$/.test(a)){ S.aorType='sig'; S.aorAug=a.replace(/α$/,''); }
+    else if(/ον$/.test(a)){ S.aorType='th2'; S.aorAug=a.replace(/ον$/,''); }
+    else if(/ομην$/.test(a)){ S.aorType='th2mid'; S.aorAug=a.replace(/ομην$/,''); }
+    else if(/αμην$/.test(a)){ S.aorType='sigmid'; S.aorAug=a.replace(/αμην$/,''); }
+    if(S.aorAug!=null) S.aor = sp.aorStem || unaug(S.aorAug) || S.aorAug;
+  }
+  if(pp.pf)   S.pf   = unacc(pp.pf).replace(/α$/,'');
+  if(pp.pfmp) S.pfmp = unacc(pp.pfmp).replace(/μαι$/,'');
+  if(pp.aorp){
+    S.aorpAug = unacc(pp.aorp).replace(/ην$/,'');
+    S.aorp = sp.aorpStem || unaug(S.aorpAug) || S.aorpAug;
+  }
+  if(sp.stems) for(var k in sp.stems) S[k]=sp.stems[k];
+  v.S = S;
+  return v;
+}
+
+/* ---------------- Conjugació ---------------- */
+function fin(stem, tbl, lv, rule){
+  var out={}, q0=autoQ(stem,lv);
+  PERS.forEach(function(p,i){
+    var e = tbl[i]; if(!e) return;
+    out[p] = vbuild([[stem,q0],[e.t,e.q]], rule||e.a);
+  });
+  return out;
+}
+function finC(base,V,tbl,lv){
+  var out={}, bq=autoQ(base,lv);
+  PERS.forEach(function(p,i){
+    var e=tbl[i]; if(!e) return;
+    out[p] = contractForm(base,V,e.t,e.q,e.a,bq).txt;
+  });
+  return out;
+}
+function one(stem, e, lv){ return vbuild([[stem,autoQ(stem,lv)],[e.t,e.q]], e.a); }
+function imper(stem, tbl, lv){
+  var o={}; ['2sg','3sg','2pl','3pl'].forEach(function(k){
+    if(tbl[k]) o[k]=vbuild([[stem,autoQ(stem,lv)],[tbl[k].t,tbl[k].q]], tbl[k].a); });
+  return o;
+}
+function imperC(base,V,tbl,lv){
+  var o={}, bq=autoQ(base,lv);
+  ['2sg','3sg','2pl','3pl'].forEach(function(k){
+    if(tbl[k]) o[k]=contractForm(base,V,tbl[k].t,tbl[k].q,tbl[k].a,bq).txt; });
+  return o;
+}
+
+/* Infinitius i participis dels contractes (taules fixes) */
+var CTR_EXTRA = {
+  α:{inf_act:'ᾶν', inf_mp:'ᾶσθαι', ptc_act:'ctr_a', ptc_mp:'ώμενος',
+     opt_act:['ῴην','ῴης','ῴη','ῷμεν','ῷτε','ῷεν'],
+     opt_mp:['ῴμην','ῷο','ῷτο','ῴμεθα','ῷσθε','ῷντο']},
+  ε:{inf_act:'εῖν', inf_mp:'εῖσθαι', ptc_act:'ctr_eo', ptc_mp:'ούμενος',
+     opt_act:['οίην','οίης','οίη','οῖμεν','οῖτε','οῖεν'],
+     opt_mp:['οίμην','οῖο','οῖτο','οίμεθα','οῖσθε','οῖντο']},
+  ο:{inf_act:'οῦν', inf_mp:'οῦσθαι', ptc_act:'ctr_eo', ptc_mp:'ούμενος',
+     opt_act:['οίην','οίης','οίη','οῖμεν','οῖτε','οῖεν'],
+     opt_mp:['οίμην','οῖο','οῖτο','οίμεθα','οῖσθε','οῖντο']}
+};
+function ctrList(base, arr){ var o={}; PERS.forEach(function(p,i){ o[p]=nfc(base+arr[i]); }); return o; }
+
+function conjugate(v){
+  if(v.spec.full){ var FF=MIV[v.spec.full](); FF.__alt=FF.__alt||{}; return FF; }
+  var S=v.S, lv=v.lv, F={}, ctr=(v.cls.indexOf('ctr')===0);
+  var ALT={};
+  function put(k,val){ if(val!=null && val!=='') F[k]=val; }
+  function putSet(k,obj){ if(obj) for(var p in obj) put(k+'.'+p, obj[p]); }
+  function putAlt(k,obj){ if(obj) for(var p in obj){ var kk=k+'.'+p;
+    if(obj[p]&&obj[p]!==F[kk]){ (ALT[kk]=ALT[kk]||[]).push(obj[p]); } } }
+
+  /* ---- PRESENT / IMPERFET ---- */
+  if(ctr){
+    var b=S.presBase, V=S.V, X=CTR_EXTRA[V];
+    putSet('pres.ind.act', finC(b,V,VE.pres_ind_act,lv));
+    putSet('pres.ind.mp',  finC(b,V,VE.pres_ind_mp,lv));
+    putSet('pres.subj.act',finC(b,V,VE.subj_act,lv));
+    putSet('pres.subj.mp', finC(b,V,VE.subj_mp,lv));
+    putSet('pres.opt.act', ctrList(b,X.opt_act));
+    putSet('pres.opt.mp',  ctrList(b,X.opt_mp));
+    putSet('pres.imper.act',imperC(b,V,VE.imper_act,lv));
+    putSet('pres.imper.mp', imperC(b,V,VE.imper_mp,lv));
+    put('pres.inf.act', nfc(b+X.inf_act));
+    put('pres.inf.mp',  nfc(b+X.inf_mp));
+    F['pres.ptc.act'] = PTC_CLASS[X.ptc_act](b);
+    F['pres.ptc.mp']  = mkPtcMP(nfc(b+X.ptc_mp));
+    var ab = S.presAug;
+    putSet('impf.ind.act', finC(ab,V,VE.impf_act,lv));
+    putSet('impf.ind.mp',  finC(ab,V,VE.impf_mp,lv));
+  } else if(S.pres){
+    var p=S.pres;
+    putSet('pres.ind.act', fin(p,VE.pres_ind_act,lv));
+    putSet('pres.ind.mp',  fin(p,VE.pres_ind_mp,lv));
+    putSet('pres.subj.act',fin(p,VE.subj_act,lv));
+    putSet('pres.subj.mp', fin(p,VE.subj_mp,lv));
+    putSet('pres.opt.act', fin(p,VE.opt_act,lv));
+    putSet('pres.opt.mp',  fin(p,VE.opt_mp,lv));
+    putSet('pres.imper.act',imper(p,VE.imper_act,lv));
+    putSet('pres.imper.mp', imper(p,VE.imper_mp,lv));
+    put('pres.inf.act', one(p,VE.inf_act,lv));
+    put('pres.inf.mp',  one(p,VE.inf_mp,lv));
+    if(!S.presDep) F['pres.ptc.act'] = PTC_CLASS.rec_ont(p,lv);
+    F['pres.ptc.mp']  = mkPtcMP(recV(p,'ομενος',lv));
+    putSet('impf.ind.act', fin(S.presAug,VE.impf_act,lv));
+    putSet('impf.ind.mp',  fin(S.presAug,VE.impf_mp,lv));
+  }
+
+  /* ---- FUTUR ---- */
+  if(S.fut || S.futBase){
+    if(S.futCtr){
+      var fb=S.futBase, XF=CTR_EXTRA['ε'];
+      if(!S.futDep){
+        putSet('fut.ind.act', finC(fb,'ε',VE.pres_ind_act,lv));
+        putSet('fut.opt.act', ctrList(fb,XF.opt_act));
+        put('fut.inf.act', nfc(fb+XF.inf_act));
+        F['fut.ptc.act'] = PTC_CLASS.ctr_eo(fb);
+      }
+      putSet('fut.ind.mid', finC(fb,'ε',VE.pres_ind_mp,lv));
+      putSet('fut.opt.mid', ctrList(fb,XF.opt_mp));
+      put('fut.inf.mid', nfc(fb+XF.inf_mp));
+      F['fut.ptc.mid'] = mkPtcMP(nfc(fb+XF.ptc_mp));
+    } else {
+      var f=S.fut;
+      if(!S.futDep){
+        putSet('fut.ind.act', fin(f,VE.pres_ind_act,lv));
+        putSet('fut.opt.act', fin(f,VE.opt_act,lv));
+        put('fut.inf.act', one(f,VE.inf_act,lv));
+        F['fut.ptc.act'] = PTC_CLASS.rec_ont(f,lv);
+      }
+      putSet('fut.ind.mid', fin(f,VE.pres_ind_mp,lv));
+      putSet('fut.opt.mid', fin(f,VE.opt_mp,lv));
+      put('fut.inf.mid', one(f,VE.inf_mp,lv));
+      F['fut.ptc.mid'] = mkPtcMP(recV(f,'ομενος',lv));
+    }
+  }
+
+  /* ---- AORIST ---- */
+  if(S.aorType==='sig'||S.aorType==='sigmid'){
+    var A=S.aor, AA=S.aorAug;
+    if(S.aorType==='sig'){
+      putSet('aor.ind.act', fin(AA,VE.aor_ind_act,lv));
+      putSet('aor.subj.act',fin(A,VE.subj_act,lv));
+      putSet('aor.opt.act', fin(A,VE.aor_opt_act,lv));
+      putAlt('aor.opt.act', fin(A,VE.aor_opt_act2,lv));
+      putSet('aor.imper.act',imper(A,VE.aor_imper_act,lv));
+      put('aor.inf.act', one(A,VE.aor_inf_act,lv));
+      F['aor.ptc.act'] = PTC_CLASS.rec_ant(A,lv);
+    }
+    putSet('aor.ind.mid', fin(AA,VE.aor_ind_mid,lv));
+    putSet('aor.subj.mid',fin(A,VE.subj_mp,lv));
+    putSet('aor.opt.mid', fin(A,VE.aor_opt_mid,lv));
+    putSet('aor.imper.mid',imper(A,VE.aor_imper_mid,lv));
+    put('aor.inf.mid', one(A,VE.aor_inf_mid,lv));
+    F['aor.ptc.mid'] = mkPtcMP(recV(A,'αμενος',lv));
+  } else if(S.aorType==='th2'||S.aorType==='th2mid'){
+    var B=S.aor, BA=S.aorAug;
+    if(S.aorType==='th2'){
+      putSet('aor.ind.act', fin(BA,VE.impf_act,lv));
+      putSet('aor.subj.act',fin(B,VE.subj_act,lv));
+      putSet('aor.opt.act', fin(B,VE.opt_act,lv));
+      putSet('aor.imper.act',imper(B,VE.th_imper_act,lv));
+      put('aor.inf.act', one(B,VE.th_inf_act,lv));
+      F['aor.ptc.act'] = PTC_CLASS.oxy_ont(B);
+    }
+    putSet('aor.ind.mid', fin(BA,VE.impf_mp,lv));
+    putSet('aor.subj.mid',fin(B,VE.subj_mp,lv));
+    putSet('aor.opt.mid', fin(B,VE.opt_mp,lv));
+    putSet('aor.imper.mid',imper(B,VE.th_imper_mid,lv));
+    put('aor.inf.mid', one(B,VE.th_inf_mid,lv));
+    F['aor.ptc.mid'] = mkPtcMP(nfc(B+'όμενος'));
+  }
+
+  /* ---- AORIST I FUTUR PASSIUS ---- */
+  if(S.aorp){
+    var P=S.aorp, PA=S.aorpAug;
+    putSet('aor.ind.pass', fin(PA,VE.ap_ind,lv));
+    putSet('aor.subj.pass',fin(P,VE.ap_subj,lv));
+    putSet('aor.opt.pass', fin(P,VE.ap_opt,lv));
+    putSet('aor.imper.pass',imper(P,VE.ap_imper,lv));
+    put('aor.inf.pass', one(P,VE.ap_inf,lv));
+    F['aor.ptc.pass'] = PTC_CLASS.eis(P);
+    var FP = P+'ησ';
+    putSet('fut.ind.pass', fin(FP,VE.pres_ind_mp,lv));
+    putSet('fut.opt.pass', fin(FP,VE.opt_mp,lv));
+    put('fut.inf.pass', one(FP,VE.inf_mp,lv));
+    F['fut.ptc.pass'] = mkPtcMP(recV(FP,'ομενος',lv));
+  }
+
+  /* ---- PERFET I PLUSQUAMPERFET ---- */
+  if(S.pf){
+    putSet('pf.ind.act', fin(S.pf,VE.pf_ind_act,lv));
+    put('pf.inf.act', one(S.pf,VE.pf_inf_act,lv));
+    F['pf.ptc.act'] = PTC_CLASS.kos(S.pf);
+    putSet('plpf.ind.act', fin(v.spec.plpf||augPf(S.pf), VE.plpf_act, lv));
+  }
+  if(S.pfmp){
+    putSet('pf.ind.mp', fin(S.pfmp,VE.pf_ind_mp,lv));
+    put('pf.inf.mp', one(S.pfmp,VE.pf_inf_mp,lv));
+    F['pf.ptc.mp'] = mkPtcMP(nfc(putAccent(S.pfmp+'μενος',2,'A')));
+    putSet('plpf.ind.mp', fin(v.spec.plpfmp||augPf(S.pfmp), VE.plpf_mp, lv));
+  }
+  if(v.spec.ex) for(var k in v.spec.ex) F[k]=v.spec.ex[k];
+  if(v.spec.alt) for(var ka in v.spec.alt) (ALT[ka]=ALT[ka]||[]).push(v.spec.alt[ka]);
+  F.__alt = ALT;
+  if(v.spec.del) v.spec.del.forEach(function(k){
+    Object.keys(F).forEach(function(kk){ if(kk.indexOf(k)===0) delete F[kk]; }); });
+  return F;
+}
+
+/* ==== 30_pron.js ==== */
+/* ============================================================
+   30_pron.js — Pronoms, article i numerals (taules)
+   ============================================================ */
+var PRON = {};
+PRON.art = {id:'art',tg:['p0'], l:'ὁ, ἡ, τό', t:"l'article", decl:ARTICLE, cat:'article'};
+
+PRON.ego = {id:'ego',tg:['p1'], l:'ἐγώ', t:'jo / nosaltres', cat:'personal', single:true,
+  decl:{m:T('ἐγώ - ἐμέ ἐμοῦ ἐμοί | ἡμεῖς - ἡμᾶς ἡμῶν ἡμῖν')},
+  alt:{ac_sg:'με', gen_sg:'μου', dat_sg:'μοι'}};
+PRON.su  = {id:'su',tg:['p1'], l:'σύ', t:'tu / vosaltres', cat:'personal', single:true,
+  decl:{m:T('σύ - σέ σοῦ σοί | ὑμεῖς - ὑμᾶς ὑμῶν ὑμῖν')},
+  alt:{ac_sg:'σε', gen_sg:'σου', dat_sg:'σοι'}};
+PRON.autos = {id:'autos',tg:['p1'], l:'αὐτός, -ή, -ό', t:'ell/ella/això; mateix', cat:'personal',
+  decl:{ m:T('αὐτός - αὐτόν αὐτοῦ αὐτῷ | αὐτοί - αὐτούς αὐτῶν αὐτοῖς'),
+         f:T('αὐτή - αὐτήν αὐτῆς αὐτῇ | αὐταί - αὐτάς αὐτῶν αὐταῖς'),
+         n:T('αὐτό - αὐτό αὐτοῦ αὐτῷ | αὐτά - αὐτά αὐτῶν αὐτοῖς')}};
+PRON.houtos = {id:'houtos',tg:['p2'], l:'οὗτος, αὕτη, τοῦτο', t:'aquest', cat:'demostratiu',
+  decl:{ m:T('οὗτος - τοῦτον τούτου τούτῳ | οὗτοι - τούτους τούτων τούτοις'),
+         f:T('αὕτη - ταύτην ταύτης ταύτῃ | αὗται - ταύτας τούτων ταύταις'),
+         n:T('τοῦτο - τοῦτο τούτου τούτῳ | ταῦτα - ταῦτα τούτων τούτοις')}};
+PRON.hode = {id:'hode',tg:['p2'], l:'ὅδε, ἥδε, τόδε', t:'aquest (d\'ací)', cat:'demostratiu',
+  decl:{ m:T('ὅδε - τόνδε τοῦδε τῷδε | οἵδε - τούσδε τῶνδε τοῖσδε'),
+         f:T('ἥδε - τήνδε τῆσδε τῇδε | αἵδε - τάσδε τῶνδε ταῖσδε'),
+         n:T('τόδε - τόδε τοῦδε τῷδε | τάδε - τάδε τῶνδε τοῖσδε')}};
+PRON.ekeinos = {id:'ekeinos',tg:['p2'], l:'ἐκεῖνος, -η, -ο', t:'aquell', cat:'demostratiu',
+  decl:{ m:T('ἐκεῖνος - ἐκεῖνον ἐκείνου ἐκείνῳ | ἐκεῖνοι - ἐκείνους ἐκείνων ἐκείνοις'),
+         f:T('ἐκείνη - ἐκείνην ἐκείνης ἐκείνῃ | ἐκεῖναι - ἐκείνας ἐκείνων ἐκείναις'),
+         n:T('ἐκεῖνο - ἐκεῖνο ἐκείνου ἐκείνῳ | ἐκεῖνα - ἐκεῖνα ἐκείνων ἐκείνοις')}};
+PRON.tis_int = {id:'tis_int',tg:['p3'], l:'τίς, τί', t:'qui?, què?', cat:'interrogatiu',
+  decl:{ m:T('τίς - τίνα τίνος τίνι | τίνες - τίνας τίνων τίσι'),
+         f:T('τίς - τίνα τίνος τίνι | τίνες - τίνας τίνων τίσι'),
+         n:T('τί - τί τίνος τίνι | τίνα - τίνα τίνων τίσι')},
+  alt:{gen_sg:'τοῦ', dat_sg:'τῷ'}};
+PRON.tis_ind = {id:'tis_ind',tg:['p3'], l:'τις, τι', t:'algú, alguna cosa', cat:'indefinit',
+  decl:{ m:T('τις - τινά τινός τινί | τινές - τινάς τινῶν τισί'),
+         f:T('τις - τινά τινός τινί | τινές - τινάς τινῶν τισί'),
+         n:T('τι - τι τινός τινί | τινά - τινά τινῶν τισί')},
+  alt:{nom_pl_n:'ἄττα'}};
+PRON.hos = {id:'hos',tg:['p4'], l:'ὅς, ἥ, ὅ', t:'el qual, que', cat:'relatiu',
+  decl:{ m:T('ὅς - ὅν οὗ ᾧ | οἵ - οὕς ὧν οἷς'),
+         f:T('ἥ - ἥν ἧς ᾗ | αἵ - ἅς ὧν αἷς'),
+         n:T('ὅ - ὅ οὗ ᾧ | ἅ - ἅ ὧν οἷς')}};
+PRON.hostis = {id:'hostis',tg:['p4'], l:'ὅστις, ἥτις, ὅ τι', t:'qualsevol que', cat:'relatiu',
+  decl:{ m:T('ὅστις - ὅντινα οὗτινος ᾧτινι | οἵτινες - οὕστινας ὧντινων οἷστισι'),
+         f:T('ἥτις - ἥντινα ἧστινος ᾗτινι | αἵτινες - ἅστινας ὧντινων αἷστισι'),
+         n:T('ὅ τι - ὅ τι οὗτινος ᾧτινι | ἅτινα - ἅτινα ὧντινων οἷστισι')},
+  alt:{gen_sg:'ὅτου', dat_sg:'ὅτῳ'}};
+PRON.emautou = {id:'emautou',tg:['p5'], l:'ἐμαυτοῦ, -ῆς', t:'de mi mateix', cat:'reflexiu', noNom:true,
+  decl:{ m:T('- - ἐμαυτόν ἐμαυτοῦ ἐμαυτῷ | - - ἡμᾶς αὐτούς ἡμῶν αὐτῶν ἡμῖν αὐτοῖς'),
+         f:T('- - ἐμαυτήν ἐμαυτῆς ἐμαυτῇ | - - ἡμᾶς αὐτάς ἡμῶν αὐτῶν ἡμῖν αὐταῖς')}};
+PRON.seautou = {id:'seautou',tg:['p5'], l:'σεαυτοῦ, -ῆς', t:'de tu mateix', cat:'reflexiu', noNom:true,
+  decl:{ m:T('- - σεαυτόν σεαυτοῦ σεαυτῷ | - - ὑμᾶς αὐτούς ὑμῶν αὐτῶν ὑμῖν αὐτοῖς'),
+         f:T('- - σεαυτήν σεαυτῆς σεαυτῇ | - - ὑμᾶς αὐτάς ὑμῶν αὐτῶν ὑμῖν αὐταῖς')}};
+PRON.heautou = {id:'heautou',tg:['p5'], l:'ἑαυτοῦ, -ῆς, -οῦ', t:'de si mateix', cat:'reflexiu', noNom:true,
+  decl:{ m:T('- - ἑαυτόν ἑαυτοῦ ἑαυτῷ | - - ἑαυτούς ἑαυτῶν ἑαυτοῖς'),
+         f:T('- - ἑαυτήν ἑαυτῆς ἑαυτῇ | - - ἑαυτάς ἑαυτῶν ἑαυταῖς'),
+         n:T('- - ἑαυτό ἑαυτοῦ ἑαυτῷ | - - ἑαυτά ἑαυτῶν ἑαυτοῖς')}};
+PRON.allelon = {id:'allelon',tg:['p6'], l:'ἀλλήλων', t:"l'un a l'altre", cat:'recíproc', noNom:true, plOnly:true,
+  decl:{ m:T('- - - - - | - - ἀλλήλους ἀλλήλων ἀλλήλοις'),
+         f:T('- - - - - | - - ἀλλήλας ἀλλήλων ἀλλήλαις'),
+         n:T('- - - - - | - - ἄλληλα ἀλλήλων ἀλλήλοις')}};
+
+var NUM = {};
+NUM.heis = {id:'heis',tg:['p8'], l:'εἷς, μία, ἕν', t:'un', cat:'numeral', sgOnly:true,
+  decl:{ m:T('εἷς - ἕνα ἑνός ἑνί'), f:T('μία - μίαν μιᾶς μιᾷ'), n:T('ἕν - ἕν ἑνός ἑνί')}};
+NUM.oudeis = {id:'oudeis',tg:['p8'], l:'οὐδείς, οὐδεμία, οὐδέν', t:'ningú, cap', cat:'numeral', sgOnly:true,
+  decl:{ m:T('οὐδείς - οὐδένα οὐδενός οὐδενί'), f:T('οὐδεμία - οὐδεμίαν οὐδεμιᾶς οὐδεμιᾷ'),
+         n:T('οὐδέν - οὐδέν οὐδενός οὐδενί')}};
+NUM.duo = {id:'duo',tg:['p8'], l:'δύο', t:'dos', cat:'numeral', plOnly:true,
+  decl:{ m:T('- - - - - | δύο - δύο δυοῖν δυοῖν')}};
+NUM.treis = {id:'treis',tg:['p8'], l:'τρεῖς, τρία', t:'tres', cat:'numeral', plOnly:true,
+  decl:{ m:T('- - - - - | τρεῖς - τρεῖς τριῶν τρισί'),
+         f:T('- - - - - | τρεῖς - τρεῖς τριῶν τρισί'),
+         n:T('- - - - - | τρία - τρία τριῶν τρισί')}};
+NUM.tettares = {id:'tettares',tg:['p8'], l:'τέτταρες, τέτταρα', t:'quatre', cat:'numeral', plOnly:true,
+  decl:{ m:T('- - - - - | τέτταρες - τέτταρας τεττάρων τέτταρσι'),
+         f:T('- - - - - | τέτταρες - τέτταρας τεττάρων τέτταρσι'),
+         n:T('- - - - - | τέτταρα - τέτταρα τεττάρων τέτταρσι')}};
+
+/* ==== 31_mi.js ==== */
+/* ============================================================
+   31_mi.js — Verbs atemàtics i irregulars (taules completes)
+   ============================================================ */
+function P6(F, key, str){
+  var a = str.trim().split(/\s+/);
+  PERS.forEach(function(p,i){ if(a[i] && a[i]!=='-') F[key+'.'+p]=nfc(a[i]); });
+  return F;
+}
+function SP(o){ /* {clau:'a b c d e f'} o {clau:'forma'} */
+  var F={};
+  for(var k in o){
+    var v=o[k];
+    if(typeof v==='string' && v.indexOf(' ')>=0 && /\.(ind|subj|opt|imper)\./.test(k)) P6(F,k,v);
+    else if(typeof v==='string' && /\.(ind|subj|opt)\./.test(k)) P6(F,k,v);
+    else F[k]= (typeof v==='string'? nfc(v) : v);
+  }
+  return F;
+}
+function IMP(F, key, str){
+  var a=str.trim().split(/\s+/), ks=['2sg','3sg','2pl','3pl'];
+  a.forEach(function(x,i){ if(x!=='-') F[key+'.'+ks[i]]=nfc(x); });
+  return F;
+}
+
+var MIV = {};
+
+MIV.eimi = function(){
+  var F = SP({
+   'pres.ind.act':'εἰμί εἶ ἐστί ἐσμέν ἐστέ εἰσί',
+   'impf.ind.act':'ἦν ἦσθα ἦν ἦμεν ἦτε ἦσαν',
+   'fut.ind.mid':'ἔσομαι ἔσῃ ἔσται ἐσόμεθα ἔσεσθε ἔσονται',
+   'pres.subj.act':'ὦ ᾖς ᾖ ὦμεν ἦτε ὦσι',
+   'pres.opt.act':'εἴην εἴης εἴη εἶμεν εἶτε εἶεν',
+   'pres.inf.act':'εἶναι','fut.inf.mid':'ἔσεσθαι'});
+  IMP(F,'pres.imper.act','ἴσθι ἔστω ἔστε ἔστων');
+  F['pres.ptc.act'] = mkPtcDecl('ὀντ','ὤν','οὐσ','οὖσα','ὄν');
+  F['fut.ptc.mid']  = mkPtcMP('ἐσόμενος');
+  F.__alt = {'pres.opt.act.1pl':['εἴημεν'],'pres.opt.act.2pl':['εἴητε'],
+             'pres.opt.act.3pl':['εἴησαν'],'impf.ind.act.1sg':['ἦ'],'fut.ind.mid.2sg':['ἔσει']};
+  return F;
+};
+MIV.eimi_ire = function(){
+  var F = SP({
+   'pres.ind.act':'εἶμι εἶ εἶσι ἴμεν ἴτε ἴασι',
+   'impf.ind.act':'ᾖα ᾔεισθα ᾔει ᾖμεν ᾖτε ᾖσαν',
+   'pres.subj.act':'ἴω ἴῃς ἴῃ ἴωμεν ἴητε ἴωσι',
+   'pres.opt.act':'ἴοιμι ἴοις ἴοι ἴοιμεν ἴοιτε ἴοιεν',
+   'pres.inf.act':'ἰέναι'});
+  IMP(F,'pres.imper.act','ἴθι ἴτω ἴτε ἰόντων');
+  F['pres.ptc.act'] = PTC_CLASS.oxy_ont('ἰ');
+  F.__alt = {'pres.opt.act.1sg':['ἰοίην'],'impf.ind.act.1sg':['ᾔειν']};
+  return F;
+};
+MIV.phemi = function(){
+  var F = SP({
+   'pres.ind.act':'φημί φῄς φησί φαμέν φατέ φασί',
+   'impf.ind.act':'ἔφην ἔφησθα ἔφη ἔφαμεν ἔφατε ἔφασαν',
+   'pres.inf.act':'φάναι'});
+  F['pres.ptc.act'] = PTC_CLASS.as('φ');
+  F.__alt = {'impf.ind.act.2sg':['ἔφης']};
+  return F;
+};
+MIV.didomi = function(){
+  var F = SP({
+   'pres.ind.act':'δίδωμι δίδως δίδωσι δίδομεν δίδοτε διδόασι',
+   'pres.ind.mp':'δίδομαι δίδοσαι δίδοται διδόμεθα δίδοσθε δίδονται',
+   'impf.ind.act':'ἐδίδουν ἐδίδους ἐδίδου ἐδίδομεν ἐδίδοτε ἐδίδοσαν',
+   'impf.ind.mp':'ἐδιδόμην ἐδίδοσο ἐδίδοτο ἐδιδόμεθα ἐδίδοσθε ἐδίδοντο',
+   'pres.subj.act':'διδῶ διδῷς διδῷ διδῶμεν διδῶτε διδῶσι',
+   'pres.opt.act':'διδοίην διδοίης διδοίη διδοῖμεν διδοῖτε διδοῖεν',
+   'pres.inf.act':'διδόναι','pres.inf.mp':'δίδοσθαι',
+   'fut.ind.act':'δώσω δώσεις δώσει δώσομεν δώσετε δώσουσι',
+   'fut.inf.act':'δώσειν',
+   'aor.ind.act':'ἔδωκα ἔδωκας ἔδωκε ἔδομεν ἔδοτε ἔδοσαν',
+   'aor.subj.act':'δῶ δῷς δῷ δῶμεν δῶτε δῶσι',
+   'aor.opt.act':'δοίην δοίης δοίη δοῖμεν δοῖτε δοῖεν',
+   'aor.inf.act':'δοῦναι',
+   'aor.ind.mid':'ἐδόμην ἔδου ἔδοτο ἐδόμεθα ἔδοσθε ἔδοντο',
+   'aor.subj.mid':'δῶμαι δῷ δῶται δώμεθα δῶσθε δῶνται',
+   'aor.inf.mid':'δόσθαι',
+   'aor.ind.pass':'ἐδόθην ἐδόθης ἐδόθη ἐδόθημεν ἐδόθητε ἐδόθησαν',
+   'aor.subj.pass':'δοθῶ δοθῇς δοθῇ δοθῶμεν δοθῆτε δοθῶσι',
+   'aor.inf.pass':'δοθῆναι',
+   'pf.ind.act':'δέδωκα δέδωκας δέδωκε δεδώκαμεν δεδώκατε δεδώκασι',
+   'pf.inf.act':'δεδωκέναι'});
+  IMP(F,'pres.imper.act','δίδου διδότω δίδοτε διδόντων');
+  IMP(F,'pres.imper.mp','δίδοσο διδόσθω δίδοσθε διδόσθων');
+  IMP(F,'aor.imper.act','δός δότω δότε δόντων');
+  IMP(F,'aor.imper.mid','δοῦ δόσθω δόσθε δόσθων');
+  IMP(F,'aor.imper.pass','δόθητι δοθήτω δόθητε δοθέντων');
+  F['pres.ptc.act']=PTC_CLASS.ous('διδ');  F['pres.ptc.mp']=mkPtcMP('διδόμενος');
+  F['aor.ptc.act']=PTC_CLASS.ous('δ');     F['aor.ptc.mid']=mkPtcMP('δόμενος');
+  F['aor.ptc.pass']=PTC_CLASS.eis('δοθ');  F['fut.ptc.act']=PTC_CLASS.rec_ont('δωσ');
+  F['pf.ptc.act']=PTC_CLASS.kos('δεδωκ');
+  return F;
+};
+MIV.tithemi = function(){
+  var F = SP({
+   'pres.ind.act':'τίθημι τίθης τίθησι τίθεμεν τίθετε τιθέασι',
+   'pres.ind.mp':'τίθεμαι τίθεσαι τίθεται τιθέμεθα τίθεσθε τίθενται',
+   'impf.ind.act':'ἐτίθην ἐτίθεις ἐτίθει ἐτίθεμεν ἐτίθετε ἐτίθεσαν',
+   'impf.ind.mp':'ἐτιθέμην ἐτίθεσο ἐτίθετο ἐτιθέμεθα ἐτίθεσθε ἐτίθεντο',
+   'pres.subj.act':'τιθῶ τιθῇς τιθῇ τιθῶμεν τιθῆτε τιθῶσι',
+   'pres.opt.act':'τιθείην τιθείης τιθείη τιθεῖμεν τιθεῖτε τιθεῖεν',
+   'pres.inf.act':'τιθέναι','pres.inf.mp':'τίθεσθαι',
+   'fut.ind.act':'θήσω θήσεις θήσει θήσομεν θήσετε θήσουσι','fut.inf.act':'θήσειν',
+   'aor.ind.act':'ἔθηκα ἔθηκας ἔθηκε ἔθεμεν ἔθετε ἔθεσαν',
+   'aor.subj.act':'θῶ θῇς θῇ θῶμεν θῆτε θῶσι',
+   'aor.opt.act':'θείην θείης θείη θεῖμεν θεῖτε θεῖεν',
+   'aor.inf.act':'θεῖναι',
+   'aor.ind.mid':'ἐθέμην ἔθου ἔθετο ἐθέμεθα ἔθεσθε ἔθεντο',
+   'aor.subj.mid':'θῶμαι θῇ θῆται θώμεθα θῆσθε θῶνται',
+   'aor.inf.mid':'θέσθαι',
+   'aor.ind.pass':'ἐτέθην ἐτέθης ἐτέθη ἐτέθημεν ἐτέθητε ἐτέθησαν',
+   'aor.inf.pass':'τεθῆναι',
+   'pf.ind.act':'τέθηκα τέθηκας τέθηκε τεθήκαμεν τεθήκατε τεθήκασι','pf.inf.act':'τεθηκέναι'});
+  IMP(F,'pres.imper.act','τίθει τιθέτω τίθετε τιθέντων');
+  IMP(F,'pres.imper.mp','τίθεσο τιθέσθω τίθεσθε τιθέσθων');
+  IMP(F,'aor.imper.act','θές θέτω θέτε θέντων');
+  IMP(F,'aor.imper.mid','θοῦ θέσθω θέσθε θέσθων');
+  F['pres.ptc.act']=PTC_CLASS.eis('τιθ');  F['pres.ptc.mp']=mkPtcMP('τιθέμενος');
+  F['aor.ptc.act']=PTC_CLASS.eis('θ');     F['aor.ptc.mid']=mkPtcMP('θέμενος');
+  F['aor.ptc.pass']=PTC_CLASS.eis('τεθ');  F['fut.ptc.act']=PTC_CLASS.rec_ont('θησ');
+  F['pf.ptc.act']=PTC_CLASS.kos('τεθηκ');
+  return F;
+};
+MIV.histemi = function(){
+  var F = SP({
+   'pres.ind.act':'ἵστημι ἵστης ἵστησι ἵσταμεν ἵστατε ἱστᾶσι',
+   'pres.ind.mp':'ἵσταμαι ἵστασαι ἵσταται ἱστάμεθα ἵστασθε ἵστανται',
+   'impf.ind.act':'ἵστην ἵστης ἵστη ἵσταμεν ἵστατε ἵστασαν',
+   'impf.ind.mp':'ἱστάμην ἵστασο ἵστατο ἱστάμεθα ἵστασθε ἵσταντο',
+   'pres.subj.act':'ἱστῶ ἱστῇς ἱστῇ ἱστῶμεν ἱστῆτε ἱστῶσι',
+   'pres.opt.act':'ἱσταίην ἱσταίης ἱσταίη ἱσταῖμεν ἱσταῖτε ἱσταῖεν',
+   'pres.inf.act':'ἱστάναι','pres.inf.mp':'ἵστασθαι',
+   'fut.ind.act':'στήσω στήσεις στήσει στήσομεν στήσετε στήσουσι','fut.inf.act':'στήσειν',
+   'aor.ind.act':'ἔστην ἔστης ἔστη ἔστημεν ἔστητε ἔστησαν',
+   'aor.subj.act':'στῶ στῇς στῇ στῶμεν στῆτε στῶσι',
+   'aor.opt.act':'σταίην σταίης σταίη σταῖμεν σταῖτε σταῖεν',
+   'aor.inf.act':'στῆναι',
+   'aor.ind.pass':'ἐστάθην ἐστάθης ἐστάθη ἐστάθημεν ἐστάθητε ἐστάθησαν',
+   'aor.inf.pass':'σταθῆναι',
+   'pf.ind.act':'ἕστηκα ἕστηκας ἕστηκε ἕσταμεν ἕστατε ἑστᾶσι','pf.inf.act':'ἑστάναι'});
+  IMP(F,'pres.imper.act','ἵστη ἱστάτω ἵστατε ἱστάντων');
+  IMP(F,'aor.imper.act','στῆθι στήτω στῆτε στάντων');
+  F['pres.ptc.act']=PTC_CLASS.as('ἱστ');  F['pres.ptc.mp']=mkPtcMP('ἱστάμενος');
+  F['aor.ptc.act']=PTC_CLASS.as('στ');    F['aor.ptc.pass']=PTC_CLASS.eis('σταθ');
+  F['fut.ptc.act']=PTC_CLASS.rec_ont('στησ');
+  return F;
+};
+MIV.deiknumi = function(){
+  var F = SP({
+   'pres.ind.act':'δείκνυμι δείκνυς δείκνυσι δείκνυμεν δείκνυτε δεικνύασι',
+   'pres.ind.mp':'δείκνυμαι δείκνυσαι δείκνυται δεικνύμεθα δείκνυσθε δείκνυνται',
+   'impf.ind.act':'ἐδείκνυν ἐδείκνυς ἐδείκνυ ἐδείκνυμεν ἐδείκνυτε ἐδείκνυσαν',
+   'impf.ind.mp':'ἐδεικνύμην ἐδείκνυσο ἐδείκνυτο ἐδεικνύμεθα ἐδείκνυσθε ἐδείκνυντο',
+   'pres.inf.act':'δεικνύναι','pres.inf.mp':'δείκνυσθαι',
+   'fut.ind.act':'δείξω δείξεις δείξει δείξομεν δείξετε δείξουσι','fut.inf.act':'δείξειν',
+   'aor.ind.act':'ἔδειξα ἔδειξας ἔδειξε ἐδείξαμεν ἐδείξατε ἔδειξαν',
+   'aor.subj.act':'δείξω δείξῃς δείξῃ δείξωμεν δείξητε δείξωσι',
+   'aor.inf.act':'δεῖξαι',
+   'aor.ind.pass':'ἐδείχθην ἐδείχθης ἐδείχθη ἐδείχθημεν ἐδείχθητε ἐδείχθησαν',
+   'aor.inf.pass':'δειχθῆναι'});
+  IMP(F,'pres.imper.act','δείκνυ δεικνύτω δείκνυτε δεικνύντων');
+  F['pres.ptc.act']=PTC_CLASS.us('δεικν'); F['pres.ptc.mp']=mkPtcMP('δεικνύμενος');
+  F['aor.ptc.act']=PTC_CLASS.rec_ant('δειξ'); F['aor.ptc.pass']=PTC_CLASS.eis('δειχθ');
+  F['fut.ptc.act']=PTC_CLASS.rec_ont('δειξ');
+  return F;
+};
+MIV.oida = function(){
+  var F = SP({
+   'pf.ind.act':'οἶδα οἶσθα οἶδε ἴσμεν ἴστε ἴσασι',
+   'plpf.ind.act':'ᾔδη ᾔδησθα ᾔδει ᾖσμεν ᾖστε ᾖσαν',
+   'pf.subj.act':'εἰδῶ εἰδῇς εἰδῇ εἰδῶμεν εἰδῆτε εἰδῶσι',
+   'pf.opt.act':'εἰδείην εἰδείης εἰδείη εἰδεῖμεν εἰδεῖτε εἰδεῖεν',
+   'pf.inf.act':'εἰδέναι',
+   'fut.ind.mid':'εἴσομαι εἴσῃ εἴσεται εἰσόμεθα εἴσεσθε εἴσονται','fut.inf.mid':'εἴσεσθαι'});
+  IMP(F,'pf.imper.act','ἴσθι ἴστω ἴστε ἴστων');
+  F['pf.ptc.act']=PTC_CLASS.kos('εἰδ');
+  return F;
+};
+/* aorists radicals atemàtics afegits a verbs temàtics */
+function aorAthem(F, tbl){
+  P6(F,'aor.ind.act',tbl.ind); P6(F,'aor.subj.act',tbl.subj); P6(F,'aor.opt.act',tbl.opt);
+  IMP(F,'aor.imper.act',tbl.imper); F['aor.inf.act']=nfc(tbl.inf);
+  F['aor.ptc.act']=tbl.ptc; return F;
+}
+
+/* ==== 40_lex_nom.js ==== */
+/* ============================================================
+   40_lex_nom.js — Lèxic: substantius i adjectius
+   tg = etiquetes de l'apartat de morfologia
+   ============================================================ */
+var NOUNS = [
+/* ---- 1a declinació: α pura ---- */
+{l:'ἡμέρα',g:'ἡμέρας',a:'ἡ',d:'a_pura',t:'dia',tg:['n1a']},
+{l:'χώρα',g:'χώρας',a:'ἡ',d:'a_pura',t:'terra, país',tg:['n1a']},
+{l:'οἰκία',g:'οἰκίας',a:'ἡ',d:'a_pura',t:'casa',tg:['n1a']},
+{l:'σοφία',g:'σοφίας',a:'ἡ',d:'a_pura',t:'saviesa',tg:['n1a']},
+{l:'ἀλήθεια',g:'ἀληθείας',a:'ἡ',d:'a_pura',t:'veritat',tg:['n1a']},
+{l:'ἐλευθερία',g:'ἐλευθερίας',a:'ἡ',d:'a_pura',t:'llibertat',tg:['n1a']},
+{l:'αἰτία',g:'αἰτίας',a:'ἡ',d:'a_pura',t:'causa, culpa',tg:['n1a']},
+{l:'θύρα',g:'θύρας',a:'ἡ',d:'a_pura',t:'porta',tg:['n1a']},
+{l:'μοῖρα',g:'μοίρας',a:'ἡ',d:'a_pura',t:'destí, part',tg:['n1a']},
+{l:'πέτρα',g:'πέτρας',a:'ἡ',d:'a_pura',t:'roca',tg:['n1a']},
+{l:'στρατιά',g:'στρατιᾶς',a:'ἡ',d:'a_pura',t:'exèrcit',tg:['n1a']},
+{l:'ἀγορά',g:'ἀγορᾶς',a:'ἡ',d:'a_pura',t:'plaça, mercat',tg:['n1a']},
+{l:'συμφορά',g:'συμφορᾶς',a:'ἡ',d:'a_pura',t:'desgràcia',tg:['n1a']},
+/* ---- 1a: α impura ---- */
+{l:'θάλαττα',g:'θαλάττης',a:'ἡ',d:'a_impura',t:'mar',tg:['n1b']},
+{l:'δόξα',g:'δόξης',a:'ἡ',d:'a_impura',t:'opinió, fama',tg:['n1b']},
+{l:'γλῶττα',g:'γλώττης',a:'ἡ',d:'a_impura',t:'llengua',tg:['n1b']},
+{l:'μοῦσα',g:'μούσης',a:'ἡ',d:'a_impura',t:'musa',tg:['n1b']},
+{l:'τράπεζα',g:'τραπέζης',a:'ἡ',d:'a_impura',t:'taula',tg:['n1b']},
+{l:'ῥίζα',g:'ῥίζης',a:'ἡ',d:'a_impura',t:'arrel',tg:['n1b']},
+/* ---- 1a: -η ---- */
+{l:'δίκη',g:'δίκης',a:'ἡ',d:'eta',t:'justícia, judici',tg:['n1c']},
+{l:'τιμή',g:'τιμῆς',a:'ἡ',d:'eta',t:'honor',tg:['n1c']},
+{l:'ψυχή',g:'ψυχῆς',a:'ἡ',d:'eta',t:'ànima',tg:['n1c']},
+{l:'ἀρχή',g:'ἀρχῆς',a:'ἡ',d:'eta',t:'principi, poder',tg:['n1c']},
+{l:'μάχη',g:'μάχης',a:'ἡ',d:'eta',t:'batalla',tg:['n1c']},
+{l:'τύχη',g:'τύχης',a:'ἡ',d:'eta',t:'sort, atzar',tg:['n1c']},
+{l:'κεφαλή',g:'κεφαλῆς',a:'ἡ',d:'eta',t:'cap',tg:['n1c']},
+{l:'φωνή',g:'φωνῆς',a:'ἡ',d:'eta',t:'veu',tg:['n1c']},
+{l:'γνώμη',g:'γνώμης',a:'ἡ',d:'eta',t:'parer, opinió',tg:['n1c']},
+{l:'τέχνη',g:'τέχνης',a:'ἡ',d:'eta',t:'art, ofici',tg:['n1c']},
+{l:'νίκη',g:'νίκης',a:'ἡ',d:'eta',t:'victòria',q:{0:'L'},tg:['n1c']},
+{l:'βουλή',g:'βουλῆς',a:'ἡ',d:'eta',t:'consell, decisió',tg:['n1c']},
+{l:'ἐπιστολή',g:'ἐπιστολῆς',a:'ἡ',d:'eta',t:'carta',tg:['n1c']},
+{l:'φυγή',g:'φυγῆς',a:'ἡ',d:'eta',t:'fugida, exili',tg:['n1c']},
+{l:'ὀργή',g:'ὀργῆς',a:'ἡ',d:'eta',t:'ira',tg:['n1c']},
+{l:'ἀνάγκη',g:'ἀνάγκης',a:'ἡ',d:'eta',t:'necessitat',tg:['n1c']},
+/* ---- 1a: masculins ---- */
+{l:'πολίτης',g:'πολίτου',a:'ὁ',d:'hs',t:'ciutadà',q:{1:'L'},tg:['n1d']},
+{l:'ναύτης',g:'ναύτου',a:'ὁ',d:'hs',t:'mariner',tg:['n1d']},
+{l:'στρατιώτης',g:'στρατιώτου',a:'ὁ',d:'hs',t:'soldat',tg:['n1d']},
+{l:'δεσπότης',g:'δεσπότου',a:'ὁ',d:'hs',t:'amo, senyor',ex:{voc_sg:'δέσποτα'},tg:['n1d']},
+{l:'ποιητής',g:'ποιητοῦ',a:'ὁ',d:'hs',t:'poeta',tg:['n1d']},
+{l:'κριτής',g:'κριτοῦ',a:'ὁ',d:'hs',t:'jutge',tg:['n1d']},
+{l:'δικαστής',g:'δικαστοῦ',a:'ὁ',d:'hs',t:'jutge',tg:['n1d']},
+{l:'μαθητής',g:'μαθητοῦ',a:'ὁ',d:'hs',t:'deixeble',tg:['n1d']},
+{l:'οἰκέτης',g:'οἰκέτου',a:'ὁ',d:'hs',t:'criat',tg:['n1d']},
+{l:'Πέρσης',g:'Πέρσου',a:'ὁ',d:'hs',t:'persa',tg:['n1d']},
+{l:'νεανίας',g:'νεανίου',a:'ὁ',d:'as',t:'jove',tg:['n1d']},
+{l:'ταμίας',g:'ταμίου',a:'ὁ',d:'as',t:'administrador',tg:['n1d']},
+/* ---- 2a declinació: masculins/femenins ---- */
+{l:'λόγος',g:'λόγου',a:'ὁ',d:'o',t:'paraula, raó',tg:['n2a']},
+{l:'ἄνθρωπος',g:'ἀνθρώπου',a:'ὁ',d:'o',t:'home, ésser humà',tg:['n2a']},
+{l:'θεός',g:'θεοῦ',a:'ὁ',d:'o',t:'déu',ex:{voc_sg:'θεός'},tg:['n2a']},
+{l:'ἵππος',g:'ἵππου',a:'ὁ',d:'o',t:'cavall',tg:['n2a']},
+{l:'νόμος',g:'νόμου',a:'ὁ',d:'o',t:'llei, costum',tg:['n2a']},
+{l:'χρόνος',g:'χρόνου',a:'ὁ',d:'o',t:'temps',tg:['n2a']},
+{l:'πόλεμος',g:'πολέμου',a:'ὁ',d:'o',t:'guerra',tg:['n2a']},
+{l:'φίλος',g:'φίλου',a:'ὁ',d:'o',t:'amic',tg:['n2a']},
+{l:'δοῦλος',g:'δούλου',a:'ὁ',d:'o',t:'esclau',tg:['n2a']},
+{l:'κίνδυνος',g:'κινδύνου',a:'ὁ',d:'o',t:'perill',tg:['n2a']},
+{l:'ἀδελφός',g:'ἀδελφοῦ',a:'ὁ',d:'o',t:'germà',ex:{voc_sg:'ἄδελφε'},tg:['n2a']},
+{l:'ποταμός',g:'ποταμοῦ',a:'ὁ',d:'o',t:'riu',tg:['n2a']},
+{l:'στρατηγός',g:'στρατηγοῦ',a:'ὁ',d:'o',t:'general',tg:['n2a']},
+{l:'ἀγρός',g:'ἀγροῦ',a:'ὁ',d:'o',t:'camp',tg:['n2a']},
+{l:'δῆμος',g:'δήμου',a:'ὁ',d:'o',t:'poble',tg:['n2a']},
+{l:'οἶκος',g:'οἴκου',a:'ὁ',d:'o',t:'casa',tg:['n2a']},
+{l:'θάνατος',g:'θανάτου',a:'ὁ',d:'o',t:'mort',tg:['n2a']},
+{l:'ἥλιος',g:'ἡλίου',a:'ὁ',d:'o',t:'sol',tg:['n2a']},
+{l:'τόπος',g:'τόπου',a:'ὁ',d:'o',t:'lloc',tg:['n2a']},
+{l:'τρόπος',g:'τρόπου',a:'ὁ',d:'o',t:'manera, caràcter',tg:['n2a']},
+{l:'ξένος',g:'ξένου',a:'ὁ',d:'o',t:'estranger, hoste',tg:['n2a']},
+{l:'βίος',g:'βίου',a:'ὁ',d:'o',t:'vida',tg:['n2a']},
+{l:'μῦθος',g:'μύθου',a:'ὁ',d:'o',t:'relat, mite',tg:['n2a']},
+{l:'πλοῦτος',g:'πλούτου',a:'ὁ',d:'o',t:'riquesa',tg:['n2a']},
+{l:'φόβος',g:'φόβου',a:'ὁ',d:'o',t:'por',tg:['n2a']},
+{l:'χρυσός',g:'χρυσοῦ',a:'ὁ',d:'o',t:'or',tg:['n2a']},
+{l:'ὄχλος',g:'ὄχλου',a:'ὁ',d:'o',t:'multitud',tg:['n2a']},
+{l:'σύμμαχος',g:'συμμάχου',a:'ὁ',d:'o',t:'aliat',tg:['n2a']},
+{l:'ἄγγελος',g:'ἀγγέλου',a:'ὁ',d:'o',t:'missatger',tg:['n2a']},
+{l:'νῆσος',g:'νήσου',a:'ἡ',d:'o',t:'illa',tg:['n2a']},
+{l:'ὁδός',g:'ὁδοῦ',a:'ἡ',d:'o',t:'camí',tg:['n2a']},
+{l:'νόσος',g:'νόσου',a:'ἡ',d:'o',t:'malaltia',tg:['n2a']},
+{l:'παρθένος',g:'παρθένου',a:'ἡ',d:'o',t:'donzella',tg:['n2a']},
+{l:'ἤπειρος',g:'ἠπείρου',a:'ἡ',d:'o',t:'continent',tg:['n2a']},
+/* ---- 2a: neutres ---- */
+{l:'δῶρον',g:'δώρου',a:'τό',d:'on',t:'regal',tg:['n2b']},
+{l:'ἔργον',g:'ἔργου',a:'τό',d:'on',t:'obra, treball',tg:['n2b']},
+{l:'τέκνον',g:'τέκνου',a:'τό',d:'on',t:'fill',tg:['n2b']},
+{l:'ζῷον',g:'ζῴου',a:'τό',d:'on',t:'animal',tg:['n2b']},
+{l:'ὅπλον',g:'ὅπλου',a:'τό',d:'on',t:'arma',tg:['n2b']},
+{l:'βιβλίον',g:'βιβλίου',a:'τό',d:'on',t:'llibre',tg:['n2b']},
+{l:'παιδίον',g:'παιδίου',a:'τό',d:'on',t:'criatura',tg:['n2b']},
+{l:'ἱερόν',g:'ἱεροῦ',a:'τό',d:'on',t:'temple, santuari',tg:['n2b']},
+{l:'δεῖπνον',g:'δείπνου',a:'τό',d:'on',t:'sopar',tg:['n2b']},
+{l:'στρατόπεδον',g:'στρατοπέδου',a:'τό',d:'on',t:'campament',tg:['n2b']},
+{l:'πεδίον',g:'πεδίου',a:'τό',d:'on',t:'plana',tg:['n2b']},
+{l:'μέτρον',g:'μέτρου',a:'τό',d:'on',t:'mesura',tg:['n2b']},
+{l:'πρόσωπον',g:'προσώπου',a:'τό',d:'on',t:'rostre',tg:['n2b']},
+/* ---- 2a: contractes ---- */
+{l:'νοῦς',g:'νοῦ',a:'ὁ',d:'o',t:'ment, enteniment',tg:['n2c'],
+ forms:T('νοῦς νοῦ νοῦν νοῦ νῷ | νοῖ νοῖ νοῦς νῶν νοῖς')},
+{l:'πλοῦς',g:'πλοῦ',a:'ὁ',d:'o',t:'navegació',tg:['n2c'],
+ forms:T('πλοῦς πλοῦ πλοῦν πλοῦ πλῷ | πλοῖ πλοῖ πλοῦς πλῶν πλοῖς')},
+{l:'ὀστοῦν',g:'ὀστοῦ',a:'τό',d:'on',t:'os',tg:['n2c'],
+ forms:T('ὀστοῦν ὀστοῦν ὀστοῦν ὀστοῦ ὀστῷ | ὀστᾶ ὀστᾶ ὀστᾶ ὀστῶν ὀστοῖς')},
+/* ---- 3a: temes en gutural ---- */
+{l:'φύλαξ',g:'φύλακος',a:'ὁ',d:'vel',t:'guardià',tg:['n3a']},
+{l:'κῆρυξ',g:'κήρυκος',a:'ὁ',d:'vel',t:'herald',tg:['n3a']},
+{l:'σάλπιγξ',g:'σάλπιγγος',a:'ἡ',d:'vel',t:'trompeta',tg:['n3a']},
+{l:'θώραξ',g:'θώρακος',a:'ὁ',d:'vel',t:'cuirassa',tg:['n3a']},
+{l:'φάλαγξ',g:'φάλαγγος',a:'ἡ',d:'vel',t:'falange',tg:['n3a']},
+{l:'αἴξ',g:'αἰγός',a:'ὁ, ἡ',d:'vel',t:'cabra',mono:true,tg:['n3a']},
+{l:'γυνή',g:'γυναικός',a:'ἡ',d:'vel',t:'dona',mono:true,v:'γύναι',tg:['n3a','n3i']},
+/* ---- 3a: temes en labial ---- */
+{l:'Κύκλωψ',g:'Κύκλωπος',a:'ὁ',d:'lab',t:'Ciclop',tg:['n3a']},
+{l:'φλέψ',g:'φλεβός',a:'ἡ',d:'lab',t:'vena',mono:true,tg:['n3a']},
+{l:'γύψ',g:'γυπός',a:'ὁ',d:'lab',t:'voltor',mono:true,tg:['n3a']},
+/* ---- 3a: temes en dental ---- */
+{l:'ἐλπίς',g:'ἐλπίδος',a:'ἡ',d:'dent',t:'esperança',v:'ἐλπί',tg:['n3b']},
+{l:'πατρίς',g:'πατρίδος',a:'ἡ',d:'dent',t:'pàtria',v:'πατρί',tg:['n3b']},
+{l:'ἀσπίς',g:'ἀσπίδος',a:'ἡ',d:'dent',t:'escut',v:'ἀσπί',tg:['n3b']},
+{l:'ἔρις',g:'ἔριδος',a:'ἡ',d:'dent',t:'discòrdia',tg:['n3b']},
+{l:'ὄρνις',g:'ὄρνιθος',a:'ὁ, ἡ',d:'dent',t:'ocell',ex:{ac_sg:'ὄρνιν'},tg:['n3b']},
+{l:'χάρις',g:'χάριτος',a:'ἡ',d:'dent',t:'gràcia, favor',ex:{ac_sg:'χάριν'},tg:['n3b']},
+{l:'παῖς',g:'παιδός',a:'ὁ, ἡ',d:'dent',t:'xiquet, fill',mono:true,v:'παῖ',
+ ex:{gen_pl:'παίδων'},tg:['n3b']},
+{l:'πούς',g:'ποδός',a:'ὁ',d:'dent',t:'peu',mono:true,tg:['n3b']},
+{l:'νύξ',g:'νυκτός',a:'ἡ',d:'dent',t:'nit',mono:true,ex:{dat_pl:'νυξί'},tg:['n3b']},
+/* ---- 3a: neutres en -ματ ---- */
+{l:'ὄνομα',g:'ὀνόματος',a:'τό',d:'dentN',t:'nom',tg:['n3c']},
+{l:'σῶμα',g:'σώματος',a:'τό',d:'dentN',t:'cos',tg:['n3c']},
+{l:'πρᾶγμα',g:'πράγματος',a:'τό',d:'dentN',t:'afer, cosa',tg:['n3c']},
+{l:'χρῆμα',g:'χρήματος',a:'τό',d:'dentN',t:'cosa; (pl.) diners',tg:['n3c']},
+{l:'αἷμα',g:'αἵματος',a:'τό',d:'dentN',t:'sang',tg:['n3c']},
+{l:'στόμα',g:'στόματος',a:'τό',d:'dentN',t:'boca',tg:['n3c']},
+{l:'γράμμα',g:'γράμματος',a:'τό',d:'dentN',t:'lletra, escrit',tg:['n3c']},
+{l:'πνεῦμα',g:'πνεύματος',a:'τό',d:'dentN',t:'alè, esperit',tg:['n3c']},
+{l:'ἅρμα',g:'ἅρματος',a:'τό',d:'dentN',t:'carro',tg:['n3c']},
+{l:'στράτευμα',g:'στρατεύματος',a:'τό',d:'dentN',t:'exèrcit',tg:['n3c']},
+/* ---- 3a: temes en -ντ- ---- */
+{l:'γίγας',g:'γίγαντος',a:'ὁ',d:'nt',t:'gegant',v:'γίγαν',tg:['n3d']},
+{l:'ἄρχων',g:'ἄρχοντος',a:'ὁ',d:'nt',t:'arcont, cap',v:'ἄρχον',tg:['n3d']},
+{l:'λέων',g:'λέοντος',a:'ὁ',d:'nt',t:'lleó',v:'λέον',tg:['n3d']},
+{l:'γέρων',g:'γέροντος',a:'ὁ',d:'nt',t:'ancià',v:'γέρον',tg:['n3d']},
+{l:'ὀδούς',g:'ὀδόντος',a:'ὁ',d:'nt',t:'dent',tg:['n3d']},
+{l:'δράκων',g:'δράκοντος',a:'ὁ',d:'nt',t:'drac, serp',v:'δράκον',tg:['n3d']},
+/* ---- 3a: temes en nasal ---- */
+{l:'δαίμων',g:'δαίμονος',a:'ὁ',d:'n',t:'divinitat, geni',v:'δαῖμον',tg:['n3e']},
+{l:'Ἕλλην',g:'Ἕλληνος',a:'ὁ',d:'n',t:'grec',tg:['n3e']},
+{l:'ἀγών',g:'ἀγῶνος',a:'ὁ',d:'n',t:'certamen, lluita',tg:['n3e']},
+{l:'χειμών',g:'χειμῶνος',a:'ὁ',d:'n',t:'hivern, tempesta',tg:['n3e']},
+{l:'λιμήν',g:'λιμένος',a:'ὁ',d:'n',t:'port',tg:['n3e']},
+{l:'ποιμήν',g:'ποιμένος',a:'ὁ',d:'n',t:'pastor',tg:['n3e']},
+{l:'ἡγεμών',g:'ἡγεμόνος',a:'ὁ',d:'n',t:'guia, cabdill',tg:['n3e']},
+{l:'γείτων',g:'γείτονος',a:'ὁ',d:'n',t:'veí',v:'γεῖτον',tg:['n3e']},
+{l:'χιτών',g:'χιτῶνος',a:'ὁ',d:'n',t:'túnica',tg:['n3e']},
+{l:'φρήν',g:'φρενός',a:'ἡ',d:'n',t:'ment, cor',mono:true,tg:['n3e']},
+/* ---- 3a: temes en líquida ---- */
+{l:'ῥήτωρ',g:'ῥήτορος',a:'ὁ',d:'r',t:'orador',v:'ῥῆτορ',tg:['n3f']},
+{l:'σωτήρ',g:'σωτῆρος',a:'ὁ',d:'r',t:'salvador',v:'σῶτερ',tg:['n3f']},
+{l:'κρατήρ',g:'κρατῆρος',a:'ὁ',d:'r',t:'crater, gerra',tg:['n3f']},
+{l:'ἀήρ',g:'ἀέρος',a:'ὁ',d:'r',t:'aire',tg:['n3f']},
+{l:'θήρ',g:'θηρός',a:'ὁ',d:'r',t:'fera',mono:true,tg:['n3f']},
+{l:'χείρ',g:'χειρός',a:'ἡ',d:'r',t:'mà',mono:true,ex:{dat_pl:'χερσί'},tg:['n3f']},
+/* ---- 3a: noms de parentiu ---- */
+{l:'πατήρ',g:'πατρός',a:'ὁ',d:'r',t:'pare',tg:['n3g'],
+ forms:T('πατήρ πάτερ πατέρα πατρός πατρί | πατέρες πατέρες πατέρας πατέρων πατράσι')},
+{l:'μήτηρ',g:'μητρός',a:'ἡ',d:'r',t:'mare',tg:['n3g'],
+ forms:T('μήτηρ μῆτερ μητέρα μητρός μητρί | μητέρες μητέρες μητέρας μητέρων μητράσι')},
+{l:'θυγάτηρ',g:'θυγατρός',a:'ἡ',d:'r',t:'filla',tg:['n3g'],
+ forms:T('θυγάτηρ θύγατερ θυγατέρα θυγατρός θυγατρί | θυγατέρες θυγατέρες θυγατέρας θυγατέρων θυγατράσι')},
+{l:'ἀνήρ',g:'ἀνδρός',a:'ὁ',d:'r',t:'home, marit',tg:['n3g'],
+ forms:T('ἀνήρ ἄνερ ἄνδρα ἀνδρός ἀνδρί | ἄνδρες ἄνδρες ἄνδρας ἀνδρῶν ἀνδράσι')},
+/* ---- 3a: temes en sigma ---- */
+{l:'γένος',g:'γένους',a:'τό',d:'sN',t:'llinatge, gènere',tg:['n3h']},
+{l:'τεῖχος',g:'τείχους',a:'τό',d:'sN',t:'muralla',tg:['n3h']},
+{l:'ἔθνος',g:'ἔθνους',a:'τό',d:'sN',t:'poble, nació',tg:['n3h']},
+{l:'ὄρος',g:'ὄρους',a:'τό',d:'sN',t:'muntanya',tg:['n3h']},
+{l:'πλῆθος',g:'πλήθους',a:'τό',d:'sN',t:'multitud',tg:['n3h']},
+{l:'μέρος',g:'μέρους',a:'τό',d:'sN',t:'part',tg:['n3h']},
+{l:'ἔτος',g:'ἔτους',a:'τό',d:'sN',t:'any',tg:['n3h']},
+{l:'ξίφος',g:'ξίφους',a:'τό',d:'sN',t:'espasa',tg:['n3h']},
+{l:'βέλος',g:'βέλους',a:'τό',d:'sN',t:'projectil, dard',tg:['n3h']},
+{l:'ἄνθος',g:'ἄνθους',a:'τό',d:'sN',t:'flor',tg:['n3h']},
+{l:'Σωκράτης',g:'Σωκράτους',a:'ὁ',d:'sM',t:'Sòcrates',ex:{voc_sg:'Σώκρατες'},tg:['n3h']},
+{l:'Δημοσθένης',g:'Δημοσθένους',a:'ὁ',d:'sM',t:'Demòstenes',ex:{voc_sg:'Δημόσθενες'},tg:['n3h']},
+/* ---- 3a: temes en -ι-, -υ- ---- */
+{l:'πόλις',g:'πόλεως',a:'ἡ',d:'i',t:'ciutat',tg:['n3i']},
+{l:'δύναμις',g:'δυνάμεως',a:'ἡ',d:'i',t:'força, poder',tg:['n3i']},
+{l:'φύσις',g:'φύσεως',a:'ἡ',d:'i',t:'natura',tg:['n3i']},
+{l:'τάξις',g:'τάξεως',a:'ἡ',d:'i',t:'ordre, formació',tg:['n3i']},
+{l:'πρᾶξις',g:'πράξεως',a:'ἡ',d:'i',t:'acció',tg:['n3i']},
+{l:'κρίσις',g:'κρίσεως',a:'ἡ',d:'i',t:'judici, decisió',tg:['n3i']},
+{l:'ὕβρις',g:'ὕβρεως',a:'ἡ',d:'i',t:'desmesura, ultratge',tg:['n3i']},
+{l:'πίστις',g:'πίστεως',a:'ἡ',d:'i',t:'confiança, fe',tg:['n3i']},
+{l:'αἴσθησις',g:'αἰσθήσεως',a:'ἡ',d:'i',t:'percepció',tg:['n3i']},
+{l:'πῆχυς',g:'πήχεως',a:'ὁ',d:'u',t:'colze, colzada',tg:['n3i']},
+{l:'ἄστυ',g:'ἄστεως',a:'τό',d:'uN',t:'ciutat',tg:['n3i']},
+{l:'ἰχθύς',g:'ἰχθύος',a:'ὁ',d:'us',t:'peix',v:'ἰχθύ',tg:['n3i']},
+{l:'ἰσχύς',g:'ἰσχύος',a:'ἡ',d:'us',t:'força',v:'ἰσχύ',tg:['n3i']},
+/* ---- 3a: temes en diftong ---- */
+{l:'βασιλεύς',g:'βασιλέως',a:'ὁ',d:'eus',t:'rei',tg:['n3j']},
+{l:'ἱερεύς',g:'ἱερέως',a:'ὁ',d:'eus',t:'sacerdot',tg:['n3j']},
+{l:'ἱππεύς',g:'ἱππέως',a:'ὁ',d:'eus',t:'genet',tg:['n3j']},
+{l:'γονεύς',g:'γονέως',a:'ὁ',d:'eus',t:'progenitor',tg:['n3j']},
+{l:'φονεύς',g:'φονέως',a:'ὁ',d:'eus',t:'assassí',tg:['n3j']},
+{l:'ναῦς',g:'νεώς',a:'ἡ',d:'irr',t:'nau',tg:['n3j'],
+ forms:T('ναῦς ναῦ ναῦν νεώς νηΐ | νῆες νῆες ναῦς νεῶν ναυσί')},
+{l:'βοῦς',g:'βοός',a:'ὁ, ἡ',d:'irr',t:'bou, vaca',tg:['n3j'],
+ forms:T('βοῦς βοῦ βοῦν βοός βοΐ | βόες βόες βοῦς βοῶν βουσί')},
+{l:'Ζεύς',g:'Διός',a:'ὁ',d:'irr',t:'Zeus',tg:['n3j'],
+ forms:T('Ζεύς Ζεῦ Δία Διός Διί')},
+{l:'ὕδωρ',g:'ὕδατος',a:'τό',d:'dentN',t:'aigua',tg:['n3c'],
+ forms:T('ὕδωρ ὕδωρ ὕδωρ ὕδατος ὕδατι | ὕδατα ὕδατα ὕδατα ὑδάτων ὕδασι')},
+{l:'κύων',g:'κυνός',a:'ὁ, ἡ',d:'irr',t:'gos',tg:['n3j'],
+ forms:T('κύων κύον κύνα κυνός κυνί | κύνες κύνες κύνας κυνῶν κυσί')}
+];
+
+/* ==== 41_lex_adj.js ==== */
+/* ============================================================
+   41_lex_adj.js — Lèxic: adjectius
+   ============================================================ */
+var ADJS = [
+/* 1a-2a, tres terminacions */
+{l:'ἀγαθός',d:'12',t:'bo, valent',tg:['a1'],cmp:['ἀμείνων','ἄριστος']},
+{l:'κακός',d:'12',t:'dolent',tg:['a1'],cmp:['κακίων','κάκιστος']},
+{l:'καλός',d:'12',t:'bell, honrós',tg:['a1'],cmp:['καλλίων','κάλλιστος']},
+{l:'δίκαιος',d:'12',t:'just',tg:['a1']},
+{l:'ἄξιος',d:'12',t:'digne',tg:['a1']},
+{l:'μικρός',d:'12',t:'menut, xicotet',tg:['a1']},
+{l:'δεινός',d:'12',t:'terrible, hàbil',tg:['a1']},
+{l:'νέος',d:'12',t:'nou, jove',tg:['a1']},
+{l:'παλαιός',d:'12',t:'antic',tg:['a1']},
+{l:'σοφός',d:'12',t:'savi',tg:['a1']},
+{l:'ἴσος',d:'12',t:'igual',tg:['a1']},
+{l:'ὀλίγος',d:'12',t:'poc',tg:['a1']},
+{l:'μόνος',d:'12',t:'sol, únic',tg:['a1']},
+{l:'πρῶτος',d:'12',t:'primer',tg:['a1']},
+{l:'λοιπός',d:'12',t:'restant',tg:['a1']},
+{l:'ἕτερος',d:'12',t:"l'altre (de dos)",tg:['a1']},
+{l:'ἐλεύθερος',d:'12',t:'lliure',tg:['a1']},
+{l:'χαλεπός',d:'12',t:'difícil, dur',tg:['a1']},
+{l:'ῥᾴδιος',d:'12',t:'fàcil',tg:['a1'],cmp:['ῥᾴων','ῥᾷστος']},
+{l:'ἀναγκαῖος',d:'12',t:'necessari',tg:['a1']},
+{l:'φοβερός',d:'12',t:'temible',tg:['a1']},
+{l:'ἀνδρεῖος',d:'12',t:'valent',tg:['a1']},
+/* 1a-2a, dues terminacions */
+{l:'ἄδικος',d:'2t',t:'injust',tg:['a2']},
+{l:'ἀθάνατος',d:'2t',t:'immortal',tg:['a2']},
+{l:'βάρβαρος',d:'2t',t:'bàrbar',tg:['a2']},
+{l:'ἔνδοξος',d:'2t',t:'famós',tg:['a2']},
+{l:'φρόνιμος',d:'2t',t:'assenyat',tg:['a2']},
+{l:'ἄπειρος',d:'2t',t:'inexpert',tg:['a2']},
+{l:'ἄδηλος',d:'2t',t:'poc clar',tg:['a2']},
+{l:'ἄτοπος',d:'2t',t:'estrany, absurd',tg:['a2']},
+/* contractes */
+{l:'χρυσοῦς',d:'contr',b:'χρυσ',t:"d'or",tg:['a5']},
+{l:'ἁπλοῦς',d:'contr',b:'ἁπλ',t:'simple',tg:['a5']},
+{l:'ἀργυροῦς',d:'contr',b:'ἀργυρ',fa:true,t:"d'argent",tg:['a5']},
+/* 1a-3a */
+{l:'πᾶς, πᾶσα, πᾶν',d:'hand',t:'tot, cada',tg:['a3'],
+ m:'πᾶς πᾶς πάντα παντός παντί | πάντες πάντες πάντας πάντων πᾶσι',
+ f:'πᾶσα πᾶσα πᾶσαν πάσης πάσῃ | πᾶσαι πᾶσαι πάσας πασῶν πάσαις',
+ n:'πᾶν πᾶν πᾶν παντός παντί | πάντα πάντα πάντα πάντων πᾶσι'},
+{l:'μέλας, μέλαινα, μέλαν',d:'hand',t:'negre',tg:['a3'],
+ m:'μέλας μέλαν μέλανα μέλανος μέλανι | μέλανες μέλανες μέλανας μελάνων μέλασι',
+ f:'μέλαινα μέλαινα μέλαιναν μελαίνης μελαίνῃ | μέλαιναι μέλαιναι μελαίνας μελαινῶν μελαίναις',
+ n:'μέλαν μέλαν μέλαν μέλανος μέλανι | μέλανα μέλανα μέλανα μελάνων μέλασι'},
+{l:'χαρίεις, χαρίεσσα, χαρίεν',d:'hand',t:'graciós',tg:['a3'],
+ m:'χαρίεις χαρίεν χαρίεντα χαρίεντος χαρίεντι | χαρίεντες χαρίεντες χαρίεντας χαριέντων χαρίεσι',
+ f:'χαρίεσσα χαρίεσσα χαρίεσσαν χαριέσσης χαριέσσῃ | χαρίεσσαι χαρίεσσαι χαριέσσας χαριεσσῶν χαριέσσαις',
+ n:'χαρίεν χαρίεν χαρίεν χαρίεντος χαρίεντι | χαρίεντα χαρίεντα χαρίεντα χαριέντων χαρίεσι'},
+{l:'ἑκών, ἑκοῦσα, ἑκόν',d:'hand',t:'voluntari, de bon grat',tg:['a3'],
+ m:'ἑκών ἑκών ἑκόντα ἑκόντος ἑκόντι | ἑκόντες ἑκόντες ἑκόντας ἑκόντων ἑκοῦσι',
+ f:'ἑκοῦσα ἑκοῦσα ἑκοῦσαν ἑκούσης ἑκούσῃ | ἑκοῦσαι ἑκοῦσαι ἑκούσας ἑκουσῶν ἑκούσαις',
+ n:'ἑκόν ἑκόν ἑκόν ἑκόντος ἑκόντι | ἑκόντα ἑκόντα ἑκόντα ἑκόντων ἑκοῦσι'},
+{l:'πολύς, πολλή, πολύ',d:'hand',t:'molt',tg:['a3'],cmp:['πλείων','πλεῖστος'],
+ m:'πολύς πολύ πολύν πολλοῦ πολλῷ | πολλοί πολλοί πολλούς πολλῶν πολλοῖς',
+ f:'πολλή πολλή πολλήν πολλῆς πολλῇ | πολλαί πολλαί πολλάς πολλῶν πολλαῖς',
+ n:'πολύ πολύ πολύ πολλοῦ πολλῷ | πολλά πολλά πολλά πολλῶν πολλοῖς'},
+{l:'μέγας, μεγάλη, μέγα',d:'hand',t:'gran',tg:['a3'],cmp:['μείζων','μέγιστος'],
+ m:'μέγας μέγα μέγαν μεγάλου μεγάλῳ | μεγάλοι μεγάλοι μεγάλους μεγάλων μεγάλοις',
+ f:'μεγάλη μεγάλη μεγάλην μεγάλης μεγάλῃ | μεγάλαι μεγάλαι μεγάλας μεγάλων μεγάλαις',
+ n:'μέγα μέγα μέγα μεγάλου μεγάλῳ | μεγάλα μεγάλα μεγάλα μεγάλων μεγάλοις'},
+/* adjectius en -υς */
+{l:'ἡδύς, ἡδεῖα, ἡδύ',d:'hand',t:'dolç, agradable',tg:['a3'],cmp:['ἡδίων','ἥδιστος'],
+ m:'ἡδύς ἡδύ ἡδύν ἡδέος ἡδεῖ | ἡδεῖς ἡδεῖς ἡδεῖς ἡδέων ἡδέσι',
+ f:'ἡδεῖα ἡδεῖα ἡδεῖαν ἡδείας ἡδείᾳ | ἡδεῖαι ἡδεῖαι ἡδείας ἡδειῶν ἡδείαις',
+ n:'ἡδύ ἡδύ ἡδύ ἡδέος ἡδεῖ | ἡδέα ἡδέα ἡδέα ἡδέων ἡδέσι'},
+{l:'ταχύς, ταχεῖα, ταχύ',d:'hand',t:'ràpid',tg:['a3'],cmp:['θάττων','τάχιστος'],
+ m:'ταχύς ταχύ ταχύν ταχέος ταχεῖ | ταχεῖς ταχεῖς ταχεῖς ταχέων ταχέσι',
+ f:'ταχεῖα ταχεῖα ταχεῖαν ταχείας ταχείᾳ | ταχεῖαι ταχεῖαι ταχείας ταχειῶν ταχείαις',
+ n:'ταχύ ταχύ ταχύ ταχέος ταχεῖ | ταχέα ταχέα ταχέα ταχέων ταχέσι'},
+{l:'βαρύς, βαρεῖα, βαρύ',d:'hand',t:'pesat, greu',tg:['a3'],
+ m:'βαρύς βαρύ βαρύν βαρέος βαρεῖ | βαρεῖς βαρεῖς βαρεῖς βαρέων βαρέσι',
+ f:'βαρεῖα βαρεῖα βαρεῖαν βαρείας βαρείᾳ | βαρεῖαι βαρεῖαι βαρείας βαρειῶν βαρείαις',
+ n:'βαρύ βαρύ βαρύ βαρέος βαρεῖ | βαρέα βαρέα βαρέα βαρέων βαρέσι'},
+{l:'γλυκύς, γλυκεῖα, γλυκύ',d:'hand',t:'dolç',tg:['a3'],
+ m:'γλυκύς γλυκύ γλυκύν γλυκέος γλυκεῖ | γλυκεῖς γλυκεῖς γλυκεῖς γλυκέων γλυκέσι',
+ f:'γλυκεῖα γλυκεῖα γλυκεῖαν γλυκείας γλυκείᾳ | γλυκεῖαι γλυκεῖαι γλυκείας γλυκειῶν γλυκείαις',
+ n:'γλυκύ γλυκύ γλυκύ γλυκέος γλυκεῖ | γλυκέα γλυκέα γλυκέα γλυκέων γλυκέσι'},
+{l:'ὀξύς, ὀξεῖα, ὀξύ',d:'hand',t:'agut, esmolat',tg:['a3'],
+ m:'ὀξύς ὀξύ ὀξύν ὀξέος ὀξεῖ | ὀξεῖς ὀξεῖς ὀξεῖς ὀξέων ὀξέσι',
+ f:'ὀξεῖα ὀξεῖα ὀξεῖαν ὀξείας ὀξείᾳ | ὀξεῖαι ὀξεῖαι ὀξείας ὀξειῶν ὀξείαις',
+ n:'ὀξύ ὀξύ ὀξύ ὀξέος ὀξεῖ | ὀξέα ὀξέα ὀξέα ὀξέων ὀξέσι'},
+/* 3a, dues terminacions: -ης, -ες */
+{l:'ἀληθής, -ές',d:'hs3',b:'ἀληθ',t:'vertader',tg:['a4']},
+{l:'σαφής, -ές',d:'hs3',b:'σαφ',t:'clar, evident',tg:['a4']},
+{l:'ἀσφαλής, -ές',d:'hs3',b:'ἀσφαλ',t:'segur',tg:['a4']},
+{l:'εὐγενής, -ές',d:'hs3',b:'εὐγεν',t:'noble',tg:['a4']},
+{l:'ψευδής, -ές',d:'hs3',b:'ψευδ',t:'fals',tg:['a4']},
+{l:'δυστυχής, -ές',d:'hs3',b:'δυστυχ',t:'dissortat',tg:['a4']},
+/* 3a, dues terminacions: -ων, -ον */
+{l:'εὐδαίμων, -ον',d:'wn3',t:'feliç, afortunat',tg:['a4']},
+{l:'σώφρων, -ον',d:'wn3',t:'assenyat, moderat',tg:['a4']},
+/* comparatius */
+{l:'μείζων, -ον',d:'wn3',t:'més gran',tg:['a6'],b2:'μείζ',cmpAlt:true},
+{l:'ἐλάττων, -ον',d:'wn3',t:'més menut, menys',tg:['a6'],b2:'ἐλάττ',cmpAlt:true},
+{l:'κρείττων, -ον',d:'wn3',t:'més fort, millor',tg:['a6'],b2:'κρείττ',cmpAlt:true},
+{l:'βελτίων, -ον',d:'wn3',t:'millor',tg:['a6'],b2:'βελτί',cmpAlt:true},
+{l:'χείρων, -ον',d:'wn3',t:'pitjor',tg:['a6'],b2:'χείρ',cmpAlt:true},
+{l:'πλείων, -ον',d:'wn3',t:'més, més nombrós',tg:['a6'],b2:'πλεί',cmpAlt:true},
+{l:'ἡδίων, -ον',d:'wn3',t:'més dolç',tg:['a6'],b2:'ἡδί',cmpAlt:true},
+/* superlatius */
+{l:'μέγιστος',d:'12',t:'el més gran',tg:['a6']},
+{l:'ἄριστος',d:'12',t:'el millor',tg:['a6']},
+{l:'κάλλιστος',d:'12',t:'el més bell',tg:['a6']},
+{l:'ἥδιστος',d:'12',t:'el més dolç',tg:['a6']},
+{l:'πλεῖστος',d:'12',t:'el més nombrós',tg:['a6']},
+{l:'σοφώτατος',d:'12',t:'el més savi',tg:['a6']},
+{l:'δικαιότατος',d:'12',t:'el més just',tg:['a6']},
+{l:'ταχύτατος',d:'12',t:'el més ràpid',tg:['a6']},
+/* possessius */
+{l:'ἐμός',d:'12',t:'meu',tg:['p7']},
+{l:'σός',d:'12',t:'teu',tg:['p7']},
+{l:'ἡμέτερος',d:'12',t:'nostre',tg:['p7']},
+{l:'ὑμέτερος',d:'12',t:'vostre',tg:['p7']}
+];
+
+/* ==== 42_lex_verb.js ==== */
+/* ============================================================
+   42_lex_verb.js — Lèxic: verbs
+   ============================================================ */
+var VERBS = [
+/* ---- temàtics regulars (paradigma general) ---- */
+{l:'λύω',t:'deslligar, alliberar',lv:'υ',tg:['v1','v6','v8'],
+ pp:{pres:'λύω',fut:'λύσω',aor:'ἔλυσα',pf:'λέλυκα',pfmp:'λέλυμαι',aorp:'ἐλύθην'},
+ plpf:'ἐλελυκ',plpfmp:'ἐλελυ'},
+{l:'παιδεύω',t:'educar',tg:['v1','v6','v8'],
+ pp:{pres:'παιδεύω',fut:'παιδεύσω',aor:'ἐπαίδευσα',pf:'πεπαίδευκα',pfmp:'πεπαίδευμαι',aorp:'ἐπαιδεύθην'},
+ plpf:'ἐπεπαιδευκ',plpfmp:'ἐπεπαιδευ'},
+{l:'πιστεύω',t:'confiar, creure',tg:['v1','v6'],
+ pp:{pres:'πιστεύω',fut:'πιστεύσω',aor:'ἐπίστευσα',pf:'πεπίστευκα',aorp:'ἐπιστεύθην'},plpf:'ἐπεπιστευκ'},
+{l:'κελεύω',t:'ordenar',tg:['v1','v6'],
+ pp:{pres:'κελεύω',fut:'κελεύσω',aor:'ἐκέλευσα',pf:'κεκέλευκα',pfmp:'κεκέλευσμαι',aorp:'ἐκελεύσθην'}},
+{l:'βουλεύω',t:'deliberar, decidir',tg:['v1','v6'],
+ pp:{pres:'βουλεύω',fut:'βουλεύσω',aor:'ἐβούλευσα',pf:'βεβούλευκα',pfmp:'βεβούλευμαι',aorp:'ἐβουλεύθην'}},
+{l:'θύω',t:'sacrificar',lv:'υ',tg:['v1','v6'],
+ pp:{pres:'θύω',fut:'θύσω',aor:'ἔθυσα',pf:'τέθυκα',pfmp:'τέθυμαι',aorp:'ἐτύθην'},aorpStem:'τυθ'},
+{l:'γράφω',t:'escriure',tg:['v1','v6','v8'],
+ pp:{pres:'γράφω',fut:'γράψω',aor:'ἔγραψα',pf:'γέγραφα',pfmp:'γέγραμμαι',aorp:'ἐγράφην'},
+ plpf:'ἐγεγραφ',plpfmp:'ἐγεγραμ'},
+{l:'πέμπω',t:'enviar',tg:['v1','v6','v8'],
+ pp:{pres:'πέμπω',fut:'πέμψω',aor:'ἔπεμψα',pf:'πέπομφα',pfmp:'πέπεμμαι',aorp:'ἐπέμφθην'}},
+{l:'ἄρχω',t:'manar, començar',tg:['v1','v6'],impfAug:'ἠρχ',
+ pp:{pres:'ἄρχω',fut:'ἄρξω',aor:'ἦρξα',pfmp:'ἦργμαι',aorp:'ἤρχθην'},aorStem:'ἀρξ',aorpStem:'ἀρχθ'},
+{l:'πράττω',t:'fer, actuar',lv:'α',tg:['v1','v6','v8'],
+ pp:{pres:'πράττω',fut:'πράξω',aor:'ἔπραξα',pf:'πέπραχα',pfmp:'πέπραγμαι',aorp:'ἐπράχθην'}},
+{l:'διώκω',t:'perseguir, acusar',tg:['v1','v6'],
+ pp:{pres:'διώκω',fut:'διώξω',aor:'ἐδίωξα',pf:'δεδίωχα',aorp:'ἐδιώχθην'}},
+{l:'φυλάττω',t:'guardar, vigilar',tg:['v1','v6'],
+ pp:{pres:'φυλάττω',fut:'φυλάξω',aor:'ἐφύλαξα',pf:'πεφύλαχα',pfmp:'πεφύλαγμαι',aorp:'ἐφυλάχθην'}},
+{l:'κωλύω',t:'impedir',lv:'υ',tg:['v1','v6'],
+ pp:{pres:'κωλύω',fut:'κωλύσω',aor:'ἐκώλυσα',pf:'κεκώλυκα',aorp:'ἐκωλύθην'}},
+{l:'πείθω',t:'persuadir',tg:['v1','v6','v8'],
+ pp:{pres:'πείθω',fut:'πείσω',aor:'ἔπεισα',pf:'πέπεικα',pfmp:'πέπεισμαι',aorp:'ἐπείσθην'}},
+{l:'νομίζω',t:'considerar, creure',tg:['v1','v6'],
+ pp:{pres:'νομίζω',fut:'νομιῶ',aor:'ἐνόμισα',pf:'νενόμικα',pfmp:'νενόμισμαι',aorp:'ἐνομίσθην'}},
+{l:'σῴζω',t:'salvar',tg:['v1','v6'],
+ pp:{pres:'σῴζω',fut:'σώσω',aor:'ἔσωσα',pf:'σέσωκα',pfmp:'σέσωσμαι',aorp:'ἐσώθην'}},
+{l:'διδάσκω',t:'ensenyar',tg:['v1','v6'],
+ pp:{pres:'διδάσκω',fut:'διδάξω',aor:'ἐδίδαξα',pf:'δεδίδαχα',pfmp:'δεδίδαγμαι',aorp:'ἐδιδάχθην'}},
+{l:'θαυμάζω',t:'admirar-se',tg:['v1','v6'],
+ pp:{pres:'θαυμάζω',fut:'θαυμάσομαι',aor:'ἐθαύμασα',pf:'τεθαύμακα',aorp:'ἐθαυμάσθην'}},
+{l:'ἀκούω',t:'sentir, escoltar',tg:['v1','v6'],impfAug:'ἠκου',
+ pp:{pres:'ἀκούω',fut:'ἀκούσομαι',aor:'ἤκουσα',pf:'ἀκήκοα',aorp:'ἠκούσθην'},
+ aorStem:'ἀκουσ',aorpStem:'ἀκουσθ'},
+{l:'βασιλεύω',t:'ser rei, regnar',tg:['v1'],
+ pp:{pres:'βασιλεύω',fut:'βασιλεύσω',aor:'ἐβασίλευσα',pf:'βεβασίλευκα'}},
+{l:'κρύπτω',t:'amagar',tg:['v1','v6'],
+ pp:{pres:'κρύπτω',fut:'κρύψω',aor:'ἔκρυψα',pfmp:'κέκρυμμαι',aorp:'ἐκρύφθην'}},
+/* ---- futur contracte (verbs líquids) i aorist sigmàtic sense σ ---- */
+{l:'μένω',t:'romandre, esperar',tg:['v1','v2'],
+ pp:{pres:'μένω',fut:'μενῶ',aor:'ἔμεινα',pf:'μεμένηκα'}},
+{l:'ἀγγέλλω',t:'anunciar',tg:['v1','v2','v6'],impfAug:'ἠγγελλ',
+ pp:{pres:'ἀγγέλλω',fut:'ἀγγελῶ',aor:'ἤγγειλα',pf:'ἤγγελκα',pfmp:'ἤγγελμαι',aorp:'ἠγγέλθην'},
+ aorStem:'ἀγγειλ',aorpStem:'ἀγγελθ'},
+{l:'κρίνω',t:'jutjar, decidir',lv:'ι',tg:['v1','v2','v6'],
+ pp:{pres:'κρίνω',fut:'κρινῶ',aor:'ἔκρινα',pf:'κέκρικα',pfmp:'κέκριμαι',aorp:'ἐκρίθην'}},
+{l:'ἀποκτείνω',t:'matar',tg:['v1','v2'],impfAug:'ἀπεκτειν',
+ pp:{pres:'ἀποκτείνω',fut:'ἀποκτενῶ',aor:'ἀπέκτεινα'},aorStem:'ἀποκτειν'},
+/* ---- aorists temàtics (2n) ---- */
+{l:'λαμβάνω',t:'agafar, rebre',tg:['v1','v3','v6'],
+ pp:{pres:'λαμβάνω',fut:'λήψομαι',aor:'ἔλαβον',pf:'εἴληφα',aorp:'ἐλήφθην'},aorpStem:'ληφθ'},
+{l:'λείπω',t:'deixar, abandonar',tg:['v1','v3','v6','v8'],
+ pp:{pres:'λείπω',fut:'λείψω',aor:'ἔλιπον',pf:'λέλοιπα',pfmp:'λέλειμμαι',aorp:'ἐλείφθην'}},
+{l:'φεύγω',t:'fugir, ser acusat',tg:['v1','v3'],
+ pp:{pres:'φεύγω',fut:'φεύξομαι',aor:'ἔφυγον',pf:'πέφευγα'}},
+{l:'μανθάνω',t:'aprendre, comprendre',tg:['v1','v3'],
+ pp:{pres:'μανθάνω',fut:'μαθήσομαι',aor:'ἔμαθον',pf:'μεμάθηκα'}},
+{l:'πάσχω',t:'patir, experimentar',tg:['v1','v3'],
+ pp:{pres:'πάσχω',fut:'πείσομαι',aor:'ἔπαθον',pf:'πέπονθα'}},
+{l:'λανθάνω',t:'passar desapercebut',tg:['v1','v3'],
+ pp:{pres:'λανθάνω',fut:'λήσω',aor:'ἔλαθον',pf:'λέληθα'}},
+{l:'βάλλω',t:'llançar, colpejar',tg:['v1','v3','v6'],
+ pp:{pres:'βάλλω',fut:'βαλῶ',aor:'ἔβαλον',pf:'βέβληκα',pfmp:'βέβλημαι',aorp:'ἐβλήθην'},aorpStem:'βληθ'},
+{l:'εὑρίσκω',t:'trobar',tg:['v1','v3','v6'],impfAug:'ηὑρισκ',
+ pp:{pres:'εὑρίσκω',fut:'εὑρήσω',aor:'ηὗρον',pf:'ηὕρηκα',aorp:'ηὑρέθην'},
+ aorStem:'εὑρ',aorpStem:'εὑρεθ'},
+{l:'ἄγω',t:'conduir, portar',tg:['v1','v3','v6'],impfAug:'ἠγ',
+ pp:{pres:'ἄγω',fut:'ἄξω',aor:'ἤγαγον',pf:'ἦχα',pfmp:'ἦγμαι',aorp:'ἤχθην'},
+ aorStem:'ἀγαγ',aorpStem:'ἀχθ'},
+{l:'ἔχω',t:'tindre',tg:['v1','v3'],impfAug:'εἰχ',
+ pp:{pres:'ἔχω',fut:'ἕξω',aor:'ἔσχον',pf:'ἔσχηκα'},aorStem:'σχ',
+ ex:{'aor.imper.act.2sg':'σχές'}},
+{l:'φέρω',t:'portar, suportar',tg:['v1','v3','v6'],impfAug:'ἐφερ',
+ pp:{pres:'φέρω',fut:'οἴσω',aor:'ἤνεγκον',pf:'ἐνήνοχα',aorp:'ἠνέχθην'},
+ aorStem:'ἐνεγκ',aorpStem:'ἐνεχθ'},
+{l:'λέγω',t:'dir',tg:['v1','v3','v6'],
+ pp:{pres:'λέγω',fut:'λέξω',aor:'εἶπον',pf:'εἴρηκα',pfmp:'εἴρημαι',aorp:'ἐρρήθην'},
+ aorStem:'εἰπ',aorpStem:'ῥηθ',ex:{'aor.imper.act.2sg':'εἰπέ'}},
+{l:'γίγνομαι',t:'esdevindre, nàixer',tg:['v1','v3'],impfAug:'ἐγιγν',
+ pp:{pres:'γίγνομαι',fut:'γενήσομαι',aor:'ἐγενόμην',pf:'γέγονα'},aorStem:'γεν',
+ del:['pres.ind.act','pres.subj.act','pres.opt.act','pres.imper.act','pres.inf.act','pres.ptc.act','impf.ind.act']},
+{l:'ἔρχομαι',t:'anar, vindre',tg:['v1','v3'],impfAug:'ἠρχ',
+ pp:{pres:'ἔρχομαι',fut:'ἐλεύσομαι',aor:'ἦλθον'},aorStem:'ἐλθ',
+ ex:{'aor.imper.act.2sg':'ἐλθέ'},
+ del:['pres.ind.act','pres.subj.act','pres.opt.act','pres.imper.act','pres.inf.act','pres.ptc.act','impf.ind.act']},
+/* ---- contractes ---- */
+{l:'τιμάω',t:'honrar',cls:'ctr_a',tg:['v4','v6'],
+ pp:{pres:'τιμάω',fut:'τιμήσω',aor:'ἐτίμησα',pf:'τετίμηκα',pfmp:'τετίμημαι',aorp:'ἐτιμήθην'}},
+{l:'νικάω',t:'véncer',cls:'ctr_a',tg:['v4','v6'],
+ pp:{pres:'νικάω',fut:'νικήσω',aor:'ἐνίκησα',pf:'νενίκηκα',pfmp:'νενίκημαι',aorp:'ἐνικήθην'}},
+{l:'ἐρωτάω',t:'preguntar',cls:'ctr_a',tg:['v4'],impfAug:'ἠρωτ',
+ pp:{pres:'ἐρωτάω',fut:'ἐρωτήσω',aor:'ἠρώτησα'},aorStem:'ἐρωτησ'},
+{l:'τελευτάω',t:'acabar, morir',cls:'ctr_a',tg:['v4'],
+ pp:{pres:'τελευτάω',fut:'τελευτήσω',aor:'ἐτελεύτησα',pf:'τετελεύτηκα'}},
+{l:'ὁράω',t:'vore',cls:'ctr_a',tg:['v4','v3'],impfAug:'ἑωρ',
+ pp:{pres:'ὁράω',fut:'ὄψομαι',aor:'εἶδον',pf:'ἑόρακα',aorp:'ὤφθην'},
+ aorStem:'ἰδ',aorpStem:'ὀφθ',ex:{'aor.imper.act.2sg':'ἰδέ'}},
+{l:'ποιέω',t:'fer, produir',cls:'ctr_e',tg:['v4','v6'],
+ pp:{pres:'ποιέω',fut:'ποιήσω',aor:'ἐποίησα',pf:'πεποίηκα',pfmp:'πεποίημαι',aorp:'ἐποιήθην'}},
+{l:'φιλέω',t:'estimar',cls:'ctr_e',tg:['v4','v6'],
+ pp:{pres:'φιλέω',fut:'φιλήσω',aor:'ἐφίλησα',pf:'πεφίληκα',pfmp:'πεφίλημαι',aorp:'ἐφιλήθην'}},
+{l:'ζητέω',t:'buscar',cls:'ctr_e',tg:['v4'],
+ pp:{pres:'ζητέω',fut:'ζητήσω',aor:'ἐζήτησα',pf:'ἐζήτηκα'}},
+{l:'οἰκέω',t:'habitar',cls:'ctr_e',tg:['v4'],impfAug:'ᾠκ',
+ pp:{pres:'οἰκέω',fut:'οἰκήσω',aor:'ᾤκησα',pf:'ᾤκηκα'},aorStem:'οἰκησ'},
+{l:'ἀδικέω',t:'cometre injustícia',cls:'ctr_e',tg:['v4','v6'],impfAug:'ἠδικ',
+ pp:{pres:'ἀδικέω',fut:'ἀδικήσω',aor:'ἠδίκησα',pf:'ἠδίκηκα',pfmp:'ἠδίκημαι',aorp:'ἠδικήθην'},
+ aorStem:'ἀδικησ',aorpStem:'ἀδικηθ'},
+{l:'πολεμέω',t:'fer la guerra',cls:'ctr_e',tg:['v4'],
+ pp:{pres:'πολεμέω',fut:'πολεμήσω',aor:'ἐπολέμησα',pf:'πεπολέμηκα'}},
+{l:'βοηθέω',t:'ajudar',cls:'ctr_e',tg:['v4'],
+ pp:{pres:'βοηθέω',fut:'βοηθήσω',aor:'ἐβοήθησα',pf:'βεβοήθηκα'}},
+{l:'ὁμολογέω',t:'estar d\'acord, confessar',cls:'ctr_e',tg:['v4'],impfAug:'ὡμολογ',
+ pp:{pres:'ὁμολογέω',fut:'ὁμολογήσω',aor:'ὡμολόγησα',pf:'ὡμολόγηκα'},aorStem:'ὁμολογησ'},
+{l:'δηλόω',t:'mostrar, aclarir',cls:'ctr_o',tg:['v4','v6'],
+ pp:{pres:'δηλόω',fut:'δηλώσω',aor:'ἐδήλωσα',pf:'δεδήλωκα',pfmp:'δεδήλωμαι',aorp:'ἐδηλώθην'}},
+{l:'ἐλευθερόω',t:'alliberar',cls:'ctr_o',tg:['v4','v6'],
+ pp:{pres:'ἐλευθερόω',fut:'ἐλευθερώσω',aor:'ἠλευθέρωσα',pf:'ἠλευθέρωκα',aorp:'ἠλευθερώθην'},
+ impfAug:'ἠλευθερ',aorStem:'ἐλευθερωσ',aorpStem:'ἐλευθερωθ'},
+{l:'δουλόω',t:'esclavitzar',cls:'ctr_o',tg:['v4'],
+ pp:{pres:'δουλόω',fut:'δουλώσω',aor:'ἐδούλωσα',pf:'δεδούλωκα',aorp:'ἐδουλώθην'}},
+{l:'ἀξιόω',t:'considerar digne, demanar',cls:'ctr_o',tg:['v4'],impfAug:'ἠξι',
+ pp:{pres:'ἀξιόω',fut:'ἀξιώσω',aor:'ἠξίωσα'},aorStem:'ἀξιωσ'},
+/* ---- aorists radicals atemàtics ---- */
+{l:'βαίνω',t:'caminar, anar',tg:['v1','v9'],athem:'bainw',
+ pp:{pres:'βαίνω',fut:'βήσομαι',aor:'ἔβην',pf:'βέβηκα'}},
+{l:'γιγνώσκω',t:'conéixer',tg:['v1','v9'],athem:'gignwskw',
+ pp:{pres:'γιγνώσκω',fut:'γνώσομαι',aor:'ἔγνων',pf:'ἔγνωκα',pfmp:'ἔγνωσμαι',aorp:'ἐγνώσθην'}},
+/* ---- verbs en -μι i irregulars ---- */
+{l:'εἰμί',t:'ser, estar, haver-hi',tg:['v5'],full:'eimi',en:'εἰμί, ἔσομαι, ἦν'},
+{l:'εἶμι',t:'anar (fut. d\'ἔρχομαι)',tg:['v10'],full:'eimi_ire',en:'εἶμι, ᾖα'},
+{l:'φημί',t:'dir, afirmar',tg:['v10'],full:'phemi',en:'φημί, ἔφην'},
+{l:'δίδωμι',t:'donar',tg:['v10'],full:'didomi',en:'δίδωμι, δώσω, ἔδωκα, δέδωκα, δέδομαι, ἐδόθην'},
+{l:'τίθημι',t:'posar, establir',tg:['v10'],full:'tithemi',en:'τίθημι, θήσω, ἔθηκα, τέθηκα, τέθειμαι, ἐτέθην'},
+{l:'ἵστημι',t:'posar dret; (intr.) alçar-se',tg:['v10'],full:'histemi',en:'ἵστημι, στήσω, ἔστησα / ἔστην, ἕστηκα, ἐστάθην'},
+{l:'δείκνυμι',t:'mostrar',tg:['v10'],full:'deiknumi',en:'δείκνυμι, δείξω, ἔδειξα, δέδειχα, δέδειγμαι, ἐδείχθην'},
+{l:'οἶδα',t:'saber',tg:['v10','v8'],full:'oida',en:'οἶδα, εἴσομαι, ᾔδη'}
+];
+
+/* aorists radicals atemàtics: taules */
+var ATHEM_AOR = {
+ bainw:{ind:'ἔβην ἔβης ἔβη ἔβημεν ἔβητε ἔβησαν', subj:'βῶ βῇς βῇ βῶμεν βῆτε βῶσι',
+   opt:'βαίην βαίης βαίη βαῖμεν βαῖτε βαῖεν', imper:'βῆθι βήτω βῆτε βάντων',
+   inf:'βῆναι', ptc:'as:β'},
+ gignwskw:{ind:'ἔγνων ἔγνως ἔγνω ἔγνωμεν ἔγνωτε ἔγνωσαν', subj:'γνῶ γνῷς γνῷ γνῶμεν γνῶτε γνῶσι',
+   opt:'γνοίην γνοίης γνοίη γνοῖμεν γνοῖτε γνοῖεν', imper:'γνῶθι γνώτω γνῶτε γνόντων',
+   inf:'γνῶναι', ptc:'ous:γν'}
+};
+
+/* ==== 50_build.js ==== */
+/* ============================================================
+   50_build.js — Construcció del corpus i índex invers
+   ============================================================ */
+var GEN_ORDER = ['m','f','n'];
+
+function buildAll(){
+  var items = [];
+  NOUNS.forEach(function(sp){
+    var w = mkNoun(sp);
+    w.cat='noun'; w.forms = declineNoun(w); w.tags = sp.tg||[];
+    w.enunciat = sp.l+', '+shortGen(sp)+' ('+sp.a+')';
+    items.push(w);
+  });
+  ADJS.forEach(function(sp){
+    var a = mkAdj(sp);
+    a.cat='adj'; a.tags = sp.tg||[]; a.enunciat = sp.l;
+    items.push(a);
+  });
+  Object.keys(PRON).forEach(function(k){
+    var p = PRON[k]; p.cat='pron'; p.tags=p.tg||[]; p.enunciat=p.l; items.push(p); });
+  Object.keys(NUM).forEach(function(k){
+    var p = NUM[k]; p.cat='pron'; p.tags=p.tg||[]; p.enunciat=p.l; items.push(p); });
+  VERBS.forEach(function(sp){
+    var v = mkVerb(sp);
+    v.cat='verb'; v.tags = sp.tg||[]; v.enunciat = enunciatVerb(sp);
+    v.F = conjugate(v);
+    if(sp.athem && ATHEM_AOR[sp.athem]) applyAthem(v.F, ATHEM_AOR[sp.athem]);
+    if(sp.ex) for(var k in sp.ex) v.F[k]=nfc(sp.ex[k]);
+    items.push(v);
+  });
+  return items;
+}
+var SHORT12 = {a_pura:1,a_impura:1,eta:1,hs:1,as:1,o:1,on:1};
+function shortGen(sp){
+  var g = nfc(sp.g||''); if(!g) return '';
+  if(SHORT12[sp.d] && !sp.forms) return '-'+g.slice(-2);
+  return g;
+}
+function enunciatVerb(sp){
+  if(sp.en) return sp.en;
+  if(sp.full) return sp.l;
+  var pp=sp.pp, a=[pp.pres];
+  ['fut','aor','pf','pfmp','aorp'].forEach(function(k){ if(pp[k]) a.push(pp[k]); });
+  return a.join(', ');
+}
+function applyAthem(F, tb){
+  Object.keys(F).forEach(function(k){ if(k.indexOf('aor.')===0 && k.indexOf('.act')>=0) delete F[k]; });
+  P6(F,'aor.ind.act',tb.ind); P6(F,'aor.subj.act',tb.subj); P6(F,'aor.opt.act',tb.opt);
+  IMP(F,'aor.imper.act',tb.imper); F['aor.inf.act']=nfc(tb.inf);
+  if(tb.ptc){ var p=tb.ptc.split(':'); F['aor.ptc.act']=PTC_CLASS[p[0]](p[1]); }
+}
+
+/* --------- enumeració de formes d'un ítem --------- */
+function enumForms(it){
+  var out=[];
+  function pushDecl(decl, prefix, extra){
+    GEN_ORDER.forEach(function(g){
+      if(!decl[g]) return;
+      CASES.forEach(function(c){ NUMS.forEach(function(n){
+        var f = decl[g][c+'_'+n];
+        if(!f) return;
+        var a = {cas:c, num:n, gen:g};
+        if(extra) for(var k in extra) a[k]=extra[k];
+        if(a.nogen){ delete a.nogen; delete a.gen; }
+        out.push({form:f, an:a, kind:prefix});
+      });});
+    });
+  }
+  if(it.cat==='noun'){
+    var gs = (it.gender==='mf') ? ['m','f'] : [it.gender];
+    CASES.forEach(function(c){ NUMS.forEach(function(n){
+      var f=it.forms[c+'_'+n]; if(!f) return;
+      gs.forEach(function(gg){ out.push({form:f, an:{cas:c,num:n,gen:gg}, kind:'noun'}); });
+    });});
+  } else if(it.cat==='adj'){ pushDecl(it.decl,'adj'); }
+  else if(it.cat==='pron'){ pushDecl(it.decl,'pron', it.single?{nogen:1}:null); }
+  else if(it.cat==='verb'){
+    Object.keys(it.F).forEach(function(k){
+      if(k==='__alt') return;
+      var v=it.F[k], p=k.split('.');
+      if(p[1]==='ptc'){
+        pushDecl(v,'ptc',{temps:p[0], veu:p[2], mode:'ptc'});
+      } else if(p[1]==='inf'){
+        out.push({form:v, an:{temps:p[0], veu:p[2], mode:'inf'}, kind:'inf'});
+      } else {
+        out.push({form:v, an:{temps:p[0], mode:p[1], veu:p[2], pers:p[3].slice(0,1),
+                              num:p[3].slice(1)}, kind:'fin'});
+      }
+    });
+    var alt = it.F.__alt||{};
+    Object.keys(alt).forEach(function(k){
+      var p=k.split('.');
+      alt[k].forEach(function(v){
+        out.push({form:v, an:{temps:p[0],mode:p[1],veu:p[2],pers:p[3].slice(0,1),
+                  num:p[3].slice(1)}, kind:'fin', alt:true});
+      });
+    });
+  }
+  out.forEach(function(o,i){ o.item=it; o.tags=it.tags;
+    o.id = (it.l||it.id)+'#'+(o.kind)+'#'+JSON.stringify(o.an); });
+  return out;
+}
+
+/* ==== 55_sections.js ==== */
+/* ============================================================
+   55_sections.js — Arbre de continguts i filtres
+   ============================================================ */
+function vcls(it){
+  var sp=it.spec||{};
+  if(sp.full) return (['didomi','tithemi','histemi','deiknumi'].indexOf(sp.full)>=0)?'mi':'irr';
+  if((sp.cls||'').indexOf('ctr')===0) return 'ctr';
+  return 'th';
+}
+function hasTag(r,t){ return (r.tags||[]).indexOf(t)>=0; }
+function nomTag(t){ return function(r){ return r.item.cat!=='verb' && hasTag(r,t); }; }
+var FIN = {ind:1,subj:1,opt:1,imper:1};
+
+var SECTIONS = [
+/* ---------------- MORFOLOGIA NOMINAL ---------------- */
+{g:'Morfologia nominal', id:'p0', n:"L'article", ex:'ὁ, ἡ, τό', t:nomTag('p0')},
+{g:'Morfologia nominal', id:'n1a', n:'1a decl. · femenins en -ᾱ (α pura)', ex:'ἡμέρα, χώρα, σοφία', t:nomTag('n1a')},
+{g:'Morfologia nominal', id:'n1b', n:'1a decl. · femenins en -ᾰ (α impura)', ex:'θάλαττα, δόξα, μοῦσα', t:nomTag('n1b')},
+{g:'Morfologia nominal', id:'n1c', n:'1a decl. · femenins en -η', ex:'δίκη, τιμή, ψυχή', t:nomTag('n1c')},
+{g:'Morfologia nominal', id:'n1d', n:'1a decl. · masculins (-ης, -ας)', ex:'πολίτης, νεανίας', t:nomTag('n1d')},
+{g:'Morfologia nominal', id:'n2a', n:'2a decl. · masculins i femenins (-ος)', ex:'λόγος, ὁδός, νῆσος', t:nomTag('n2a')},
+{g:'Morfologia nominal', id:'n2b', n:'2a decl. · neutres (-ον)', ex:'δῶρον, ἔργον, ἱερόν', t:nomTag('n2b')},
+{g:'Morfologia nominal', id:'n2c', n:'2a decl. · contractes', ex:'νοῦς, ὀστοῦν', t:nomTag('n2c')},
+{g:'Morfologia nominal', id:'n3a', n:'3a decl. · temes en oclusiva gutural i labial', ex:'φύλαξ, Κύκλωψ', t:nomTag('n3a')},
+{g:'Morfologia nominal', id:'n3b', n:'3a decl. · temes en oclusiva dental', ex:'ἐλπίς, παῖς, νύξ', t:nomTag('n3b')},
+{g:'Morfologia nominal', id:'n3c', n:'3a decl. · neutres en -μα, -ματος', ex:'σῶμα, ὄνομα, πρᾶγμα', t:nomTag('n3c')},
+{g:'Morfologia nominal', id:'n3d', n:'3a decl. · temes en -ντ-', ex:'γίγας, ἄρχων, λέων', t:nomTag('n3d')},
+{g:'Morfologia nominal', id:'n3e', n:'3a decl. · temes en nasal', ex:'δαίμων, Ἕλλην, ἀγών', t:nomTag('n3e')},
+{g:'Morfologia nominal', id:'n3f', n:'3a decl. · temes en líquida', ex:'ῥήτωρ, σωτήρ, χείρ', t:nomTag('n3f')},
+{g:'Morfologia nominal', id:'n3g', n:'3a decl. · noms de parentiu', ex:'πατήρ, μήτηρ, ἀνήρ', t:nomTag('n3g')},
+{g:'Morfologia nominal', id:'n3h', n:'3a decl. · temes en sigma', ex:'γένος, τεῖχος, Σωκράτης', t:nomTag('n3h')},
+{g:'Morfologia nominal', id:'n3i', n:'3a decl. · temes en -ι-, -υ-', ex:'πόλις, πῆχυς, ἄστυ', t:nomTag('n3i')},
+{g:'Morfologia nominal', id:'n3j', n:'3a decl. · temes en diftong i irregulars', ex:'βασιλεύς, ναῦς, Ζεύς', t:nomTag('n3j')},
+/* ---------------- ADJECTIUS ---------------- */
+{g:'Adjectius', id:'a1', n:'Tres terminacions (1a-2a decl.)', ex:'ἀγαθός, -ή, -όν', t:nomTag('a1')},
+{g:'Adjectius', id:'a2', n:'Dues terminacions (2a decl.)', ex:'ἄδικος, -ον', t:nomTag('a2')},
+{g:'Adjectius', id:'a3', n:'1a-3a declinació', ex:'πᾶς, ἡδύς, μέλας, πολύς', t:nomTag('a3')},
+{g:'Adjectius', id:'a4', n:'3a decl., dues terminacions', ex:'ἀληθής, εὐδαίμων', t:nomTag('a4')},
+{g:'Adjectius', id:'a5', n:'Contractes', ex:'χρυσοῦς, -ῆ, -οῦν', t:nomTag('a5')},
+{g:'Adjectius', id:'a6', n:'Comparatius i superlatius (declinació)', ex:'μείζων, ἄριστος', t:nomTag('a6')},
+/* ---------------- PRONOMS ---------------- */
+{g:'Pronoms', id:'p1', n:'Personals i αὐτός', ex:'ἐγώ, σύ, αὐτός', t:nomTag('p1')},
+{g:'Pronoms', id:'p2', n:'Demostratius', ex:'οὗτος, ὅδε, ἐκεῖνος', t:nomTag('p2')},
+{g:'Pronoms', id:'p3', n:'Interrogatiu i indefinit', ex:'τίς, τις', t:nomTag('p3')},
+{g:'Pronoms', id:'p4', n:'Relatius', ex:'ὅς, ὅστις', t:nomTag('p4')},
+{g:'Pronoms', id:'p5', n:'Reflexius', ex:'ἐμαυτοῦ, ἑαυτοῦ', t:nomTag('p5')},
+{g:'Pronoms', id:'p6', n:'Recíproc', ex:'ἀλλήλων', t:nomTag('p6')},
+{g:'Pronoms', id:'p7', n:'Possessius', ex:'ἐμός, ἡμέτερος', t:nomTag('p7')},
+{g:'Pronoms', id:'p8', n:'Numerals', ex:'εἷς, δύο, τρεῖς', t:nomTag('p8')},
+/* ---------------- VERBS: formes personals ---------------- */
+{g:'Verbs · formes personals', id:'v_pres', n:'Tema de present: present i imperfet', ex:'λύω, ἔλυον',
+ t:function(r){ return r.item.cat==='verb' && vcls(r.item)==='th' && FIN[r.an.mode] &&
+   (r.an.temps==='pres'||r.an.temps==='impf'); }},
+{g:'Verbs · formes personals', id:'v_ctr', n:'Verbs contractes: present i imperfet', ex:'τιμῶ, ποιῶ, δηλῶ',
+ t:function(r){ return r.item.cat==='verb' && vcls(r.item)==='ctr' && FIN[r.an.mode] &&
+   (r.an.temps==='pres'||r.an.temps==='impf'); }},
+{g:'Verbs · formes personals', id:'v_fut', n:'Futur actiu i mitjà', ex:'λύσω, λύσομαι, μενῶ',
+ t:function(r){ return r.item.cat==='verb' && FIN[r.an.mode] && r.an.temps==='fut' && r.an.veu!=='pass'; }},
+{g:'Verbs · formes personals', id:'v_aor1', n:'Aorist sigmàtic (actiu i mitjà)', ex:'ἔλυσα, ἐλυσάμην',
+ t:function(r){ return r.item.cat==='verb' && FIN[r.an.mode] && r.an.temps==='aor' && r.an.veu!=='pass' &&
+   (r.item.S||{}).aorType && (r.item.S.aorType.indexOf('sig')===0); }},
+{g:'Verbs · formes personals', id:'v_aor2', n:'Aorist temàtic (2n)', ex:'ἔλαβον, εἶπον, ἦλθον',
+ t:function(r){ return r.item.cat==='verb' && FIN[r.an.mode] && r.an.temps==='aor' && r.an.veu!=='pass' &&
+   (r.item.S||{}).aorType && (r.item.S.aorType.indexOf('th2')===0); }},
+{g:'Verbs · formes personals', id:'v_aor3', n:'Aorists radicals atemàtics', ex:'ἔβην, ἔγνων, ἔστην',
+ t:function(r){ return r.item.cat==='verb' && FIN[r.an.mode] && r.an.temps==='aor' && r.an.veu!=='pass' &&
+   ((r.item.spec||{}).athem || (r.item.spec||{}).full==='histemi'); }},
+{g:'Verbs · formes personals', id:'v_pass', n:'Veu passiva: aorist i futur passius', ex:'ἐλύθην, λυθήσομαι',
+ t:function(r){ return r.item.cat==='verb' && FIN[r.an.mode] && r.an.veu==='pass'; }},
+{g:'Verbs · formes personals', id:'v_pf', n:'Perfet i plusquamperfet', ex:'λέλυκα, ἐλελύκη',
+ t:function(r){ return r.item.cat==='verb' && FIN[r.an.mode] && (r.an.temps==='pf'||r.an.temps==='plpf'); }},
+{g:'Verbs · formes personals', id:'v_mi', n:'Verbs en -μι (atemàtics)', ex:'δίδωμι, τίθημι, ἵστημι, δείκνυμι',
+ t:function(r){ return r.item.cat==='verb' && vcls(r.item)==='mi' && FIN[r.an.mode]; }},
+{g:'Verbs · formes personals', id:'v_eimi', n:'εἰμί i altres irregulars', ex:'εἰμί, εἶμι, φημί, οἶδα',
+ t:function(r){ return r.item.cat==='verb' && vcls(r.item)==='irr' && FIN[r.an.mode]; }},
+/* ---------------- VERBS: formes no personals ---------------- */
+{g:'Verbs · formes no personals', id:'v_inf', n:'Infinitius (tots els temes)', ex:'λύειν, λῦσαι, λυθῆναι',
+ t:function(r){ return r.item.cat==='verb' && r.an.mode==='inf'; }},
+{g:'Verbs · formes no personals', id:'v_ptc', n:'Participis i la seua declinació', ex:'λύων, λύσας, λυθείς',
+ t:function(r){ return r.item.cat==='verb' && r.an.mode==='ptc'; }}
+];
+
+var GROUPS = [];
+SECTIONS.forEach(function(s){ if(GROUPS.indexOf(s.g)<0) GROUPS.push(s.g); });
+var SECBYID = {}; SECTIONS.forEach(function(s){ SECBYID[s.id]=s; });
+
+/* ==== 70_app.js ==== */
+/* ============================================================
+   70_app.js — Interfície
+   ============================================================ */
+var LBL = {
+  cas:{nom:'Nominatiu',voc:'Vocatiu',ac:'Acusatiu',gen:'Genitiu',dat:'Datiu'},
+  num:{sg:'Singular',pl:'Plural'},
+  gen:{m:'Masculí',f:'Femení',n:'Neutre'},
+  pers:{'1':'1a persona','2':'2a persona','3':'3a persona'},
+  temps:{pres:'Present',impf:'Imperfet',fut:'Futur',aor:'Aorist',pf:'Perfet',plpf:'Plusquamperfet'},
+  mode:{ind:'Indicatiu',subj:'Subjuntiu',opt:'Optatiu',imper:'Imperatiu',inf:'Infinitiu',ptc:'Participi'},
+  veu:{act:'Activa',mid:'Mitjana',pass:'Passiva'}
+};
+var LBLS = {
+  cas:{nom:'nominatiu',voc:'vocatiu',ac:'acusatiu',gen:'genitiu',dat:'datiu'},
+  num:{sg:'singular',pl:'plural'},
+  gen:{m:'masculí',f:'femení',n:'neutre'},
+  pers:{'1':'1a pers.','2':'2a pers.','3':'3a pers.'},
+  temps:{pres:'present',impf:'imperfet',fut:'futur',aor:'aorist',pf:'perfet',plpf:'plusquamperfet'},
+  mode:{ind:'indicatiu',subj:'subjuntiu',opt:'optatiu',imper:'imperatiu',inf:'infinitiu',ptc:'participi'},
+  veu:{act:'activa',mid:'mitjana',pass:'passiva',mp:'mitjana-passiva'}
+};
+var ROWS = {
+  cas:['nom','voc','ac','gen','dat'], num:['sg','pl'], gen:['m','f','n'],
+  pers:['1','2','3'], temps:['pres','impf','fut','aor','pf','plpf'],
+  mode:['ind','subj','opt','imper','inf','ptc'], veu:['act','mid','pass']
+};
+
+var S = {
+  sel:{}, exmode:'mix',
+  fmode:{ind:1,subj:1,opt:1,imper:1,inf:1,ptc:1},
+  fveu:{act:1,mid:1,pass:1},
+  stats:{}, wrong:{}, streak:0, best:0, ok:0, ko:0, done:0,
+  pool:null, cur:null, ans:{}, answered:false, lastQ:null
+};
+var ITEMS=null, ALLF=null, BYFORM=null, BYID=null;
+
+/* ---------- emmagatzematge ---------- */
+function save(){
+  try{ localStorage.setItem('grec2morf', JSON.stringify(
+    {sel:S.sel, exmode:S.exmode, fmode:S.fmode, fveu:S.fveu, stats:S.stats,
+     wrong:S.wrong, best:S.best})); }catch(e){}
+}
+function load(){
+  try{ var d=JSON.parse(localStorage.getItem('grec2morf')||'{}');
+    if(d.sel) S.sel=d.sel; if(d.exmode) S.exmode=d.exmode;
+    if(d.fmode) S.fmode=d.fmode; if(d.fveu) S.fveu=d.fveu;
+    if(d.stats) S.stats=d.stats; if(d.wrong) S.wrong=d.wrong;
+    if(d.best) S.best=d.best;
+  }catch(e){}
+}
+
+/* ---------- construcció ---------- */
+function init(){
+  ITEMS = buildAll();
+  ALLF = [];
+  ITEMS.forEach(function(it){ ALLF = ALLF.concat(enumForms(it)); });
+  BYID = {};
+  ALLF.forEach(function(r){ BYID[r.id]=r; });
+  BYFORM = {};
+  ALLF.forEach(function(r){ (BYFORM[nfc(r.form)] = BYFORM[nfc(r.form)]||[]).push(r); });
+  SECTIONS.forEach(function(s){
+    s.recs = ALLF.filter(s.t);
+    s.byWord = {};
+    s.recs.forEach(function(r){ (s.byWord[r.item.l||r.item.id] = s.byWord[r.item.l||r.item.id]||[]).push(r); });
+    s.words = Object.keys(s.byWord);
+  });
+  load();
+  if(!Object.keys(S.sel).length){ ['n1a','n1c','n2a','n2b','v_pres'].forEach(function(k){S.sel[k]=1;}); }
+  renderHome();
+}
+
+function qType(r){
+  if(r.kind==='fin') return 'fin';
+  if(r.kind==='inf') return 'inf';
+  if(r.kind==='ptc') return 'ptc';
+  return 'nom';
+}
+function passesFilter(r){
+  var a=r.an;
+  if(a.mode && !S.fmode[a.mode]) return false;
+  if(a.veu){ var v=a.veu;
+    if(v==='mp'){ if(!S.fveu.mid && !S.fveu.pass) return false; }
+    else if(!S.fveu[v]) return false; }
+  return true;
+}
+function buildPool(){
+  var secs = SECTIONS.filter(function(s){ return S.sel[s.id]; });
+  var pool = [];
+  secs.forEach(function(s){
+    var ws = s.words.map(function(w){
+      var rs = s.byWord[w].filter(passesFilter);
+      return rs.length? {w:w, rs:rs} : null;
+    }).filter(Boolean);
+    if(ws.length) pool.push({sec:s, ws:ws});
+  });
+  S.pool = pool;
+  return pool;
+}
+function poolCount(){
+  if(!S.pool) return 0;
+  var n=0; S.pool.forEach(function(p){ p.ws.forEach(function(w){ n+=w.rs.length; }); });
+  return n;
+}
+function rnd(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+/* evita formes trivials en mode escriptura */
+function trivial(r){
+  if(r.item.cat==='noun' && r.an.cas==='nom' && r.an.num==='sg') return true;
+  if(r.item.cat==='verb' && r.an.mode==='ind' && r.an.temps==='pres' &&
+     r.an.pers==='1' && r.an.num==='sg' && r.an.veu!=='pass') return true;
+  if((r.item.cat==='adj'||r.item.cat==='pron') && r.an.cas==='nom' &&
+      r.an.num==='sg' && r.an.gen==='m') return true;
+  return false;
+}
+function pick(mode){
+  var wrongIds = Object.keys(S.wrong);
+  if(wrongIds.length && Math.random()<0.32){
+    var id = rnd(wrongIds);
+    var cand = BYID[id];
+    if(cand && inPool(cand) && !(mode==='write'&&trivial(cand))) return cand;
+  }
+  for(var i=0;i<40;i++){
+    var p = rnd(S.pool); if(!p) return null;
+    var w = rnd(p.ws);
+    var r = rnd(w.rs);
+    if(r.alt) continue;
+    if(mode==='write' && trivial(r)) continue;
+    if(S.lastQ && r.id===S.lastQ) continue;
+    return r;
+  }
+  return S.pool.length? rnd(rnd(S.pool).ws).rs[0] : null;
+}
+function inPool(r){
+  var ok=false;
+  S.pool.forEach(function(p){ if(p.sec.t(r) && passesFilter(r)) ok=true; });
+  return ok;
+}
+function secOf(r){
+  for(var i=0;i<SECTIONS.length;i++) if(S.sel[SECTIONS[i].id] && SECTIONS[i].t(r)) return SECTIONS[i].id;
+  return null;
+}
+
+/* ---------- descripcions ---------- */
+function describe(an, cap){
+  var p=[];
+  if(an.mode==='inf'){ p.push('infinitiu '+DE(LBLS.temps[an.temps])); p.push(veuTxt(an.veu)); }
+  else if(an.mode==='ptc'){
+    p.push('participi '+DE(LBLS.temps[an.temps])+' '+veuTxt(an.veu));
+    p.push(LBLS.cas[an.cas]+' '+LBLS.num[an.num]+' '+LBLS.gen[an.gen]);
+  } else if(an.pers){
+    p.push(LBLS.pers[an.pers]+' '+LBLS.num[an.num]);
+    p.push(LBLS.temps[an.temps]+' '+DE(LBLS.mode[an.mode]));
+    p.push(veuTxt(an.veu));
+  } else {
+    p.push(LBLS.cas[an.cas]+' '+LBLS.num[an.num]);
+    if(an.gen) p.push(LBLS.gen[an.gen]);
+  }
+  var s=p.join(', ');
+  return cap? s.charAt(0).toUpperCase()+s.slice(1) : s;
+}
+function DE(w){ return (/^[aeiouàèéíòóúïüh]/i.test(nfc(w))) ? "d'"+w : 'de '+w; }
+function veuTxt(v){ return 'veu '+(LBLS.veu[v]||v); }
+
+/* ---------- HTML helpers ---------- */
+function el(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function show(id){ ['home','quiz','stats'].forEach(function(v){ el(v).style.display = (v===id?'block':'none'); }); }
+
+/* ---------- pantalla d'inici ---------- */
+function renderHome(){
+  var h = '';
+  GROUPS.forEach(function(g){
+    var secs = SECTIONS.filter(function(s){ return s.g===g; });
+    var nsel = secs.filter(function(s){ return S.sel[s.id]; }).length;
+    h += '<div class="grp"><div class="grp-h"><span>'+esc(g)+'</span>'+
+      '<span class="grp-b"><button class="mini" data-all="'+esc(g)+'">Tot</button>'+
+      '<button class="mini" data-none="'+esc(g)+'">Cap</button>'+
+      '<span class="cnt">'+nsel+'/'+secs.length+'</span></span></div><div class="secs">';
+    secs.forEach(function(s){
+      h += '<label class="sec'+(S.sel[s.id]?' on':'')+'" data-sec="'+s.id+'">'+
+        '<input type="checkbox" '+(S.sel[s.id]?'checked':'')+' data-cb="'+s.id+'">'+
+        '<span class="sn">'+esc(s.n)+'<em>'+esc(s.ex)+'</em></span></label>';
+    });
+    h += '</div></div>';
+  });
+  el('seclist').innerHTML = h;
+  el('seclist').querySelectorAll('[data-cb]').forEach(function(cb){
+    cb.onchange = function(){ var id=cb.getAttribute('data-cb');
+      if(cb.checked) S.sel[id]=1; else delete S.sel[id];
+      cb.closest('.sec').classList.toggle('on', cb.checked);
+      updCount(); save(); };
+  });
+  el('seclist').querySelectorAll('[data-all]').forEach(function(b){
+    b.onclick = function(){ SECTIONS.forEach(function(s){ if(s.g===b.getAttribute('data-all')) S.sel[s.id]=1; });
+      save(); renderHome(); }; });
+  el('seclist').querySelectorAll('[data-none]').forEach(function(b){
+    b.onclick = function(){ SECTIONS.forEach(function(s){ if(s.g===b.getAttribute('data-none')) delete S.sel[s.id]; });
+      save(); renderHome(); }; });
+  document.querySelectorAll('[data-exmode]').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-exmode')===S.exmode);
+    b.onclick = function(){ S.exmode=b.getAttribute('data-exmode'); save(); renderHome(); }; });
+  ['ind','subj','opt','imper','inf','ptc'].forEach(function(m){
+    var b=el('fm_'+m); if(!b) return;
+    b.classList.toggle('on', !!S.fmode[m]);
+    b.onclick=function(){ if(S.fmode[m]) delete S.fmode[m]; else S.fmode[m]=1;
+      b.classList.toggle('on', !!S.fmode[m]); updCount(); save(); }; });
+  ['act','mid','pass'].forEach(function(v){
+    var b=el('fv_'+v); if(!b) return;
+    b.classList.toggle('on', !!S.fveu[v]);
+    b.onclick=function(){ if(S.fveu[v]) delete S.fveu[v]; else S.fveu[v]=1;
+      b.classList.toggle('on', !!S.fveu[v]); updCount(); save(); }; });
+  updCount();
+  show('home');
+}
+function updCount(){
+  buildPool();
+  var n = poolCount();
+  el('count').textContent = n ? (n.toLocaleString('ca-ES')+' formes disponibles') : 'Cap forma seleccionada';
+  el('start').disabled = !n;
+}
+
+/* ---------- exercici ---------- */
+function startQuiz(){
+  buildPool();
+  if(!poolCount()) return;
+  S.ok=0; S.ko=0; S.streak=0; S.done=0;
+  show('quiz'); nextQ();
+}
+function nextQ(){
+  var mode = S.exmode==='mix' ? (Math.random()<0.5?'analyze':'write') : S.exmode;
+  var r = pick(mode);
+  if(!r){ show('home'); return; }
+  S.cur = r; S.curMode = mode; S.ans={}; S.answered=false; S.lastQ=r.id;
+  renderQ();
+}
+function renderQ(){
+  var r=S.cur, an=r.an, it=r.item;
+  el('bar').innerHTML = '<span class="ok">✓ '+S.ok+'</span><span class="ko">✗ '+S.ko+'</span>'+
+    '<span class="st">ratxa '+S.streak+'</span><span class="st">rècord '+S.best+'</span>';
+  var h='';
+  if(S.curMode==='analyze'){
+    h += '<div class="qlabel">Analitza aquesta forma</div>';
+    h += '<div class="gform">'+esc(r.form)+'</div>';
+    h += '<div id="rows"></div>';
+    h += '<div class="acts"><button id="chk" class="primary">Comprova</button>'+
+         '<button id="hint" class="ghost">Pista</button></div>';
+  } else {
+    h += '<div class="qlabel">Escriu la forma demanada</div>';
+    h += '<div class="lemma">'+esc(it.enunciat||it.l)+'<em>'+esc(it.tr||it.t||'')+'</em></div>';
+    h += '<div class="ask">'+esc(describe(an,true))+'</div>';
+    h += '<div class="inwrap"><input id="inp" type="text" autocomplete="off" autocapitalize="off" '+
+         'autocorrect="off" spellcheck="false" placeholder="escriu ací…" readonly>'+
+         '<button id="kbtoggle" class="kbt" title="teclat grec">⌨</button></div>';
+    h += '<div class="hint">No cal escriure accents ni esperits; sí les iotes subscrites.</div>';
+    h += '<div class="acts"><button id="chk" class="primary">Comprova</button>'+
+         '<button id="skip" class="ghost">No ho sé</button></div>';
+  }
+  h += '<div id="fb"></div>';
+  el('card').innerHTML = h;
+  if(S.curMode==='analyze'){ renderRows(); el('chk').onclick=checkAnalyze;
+    el('hint').onclick=function(){
+      el('fb').innerHTML='<div class="line note">Ve de <b class="gr">'+esc(it.enunciat||it.l)+
+        '</b> — '+esc(it.tr||it.t||'')+'</div>'; el('hint').disabled=true; }; }
+  else {
+    var inp=el('inp');
+    inp.addEventListener('focus', function(){ openKB(); });
+    inp.addEventListener('click', function(){ openKB(); });
+    inp.addEventListener('keydown', kbPhysical);
+    el('kbtoggle').onclick=function(){ el('kb').classList.contains('open')?closeKB():openKB(); };
+    el('chk').onclick=checkWrite;
+    el('skip').onclick=function(){ revealWrite(null); };
+    setTimeout(function(){ inp.removeAttribute('readonly'); inp.focus(); }, 60);
+  }
+}
+function neededRows(){
+  var r=S.cur, t=qType(r);
+  if(t==='nom') return (r.an.gen===undefined)?['cas','num']:['cas','num','gen'];
+  var base=['temps','mode','veu'];
+  var m=S.ans.mode;
+  if(m==='ptc') return base.concat(['cas','num','gen']);
+  if(m==='inf') return base;
+  if(m) return base.concat(['pers','num']);
+  return base;
+}
+function renderRows(){
+  var rows=neededRows(), h='';
+  var names={cas:'Cas',num:'Nombre',gen:'Gènere',pers:'Persona',temps:'Temps',mode:'Mode',veu:'Veu'};
+  rows.forEach(function(k){
+    h+='<div class="row"><div class="rn">'+names[k]+'</div><div class="rb">';
+    ROWS[k].forEach(function(v){
+      h+='<button class="opt'+(S.ans[k]===v?' on':'')+'" data-k="'+k+'" data-v="'+v+'">'+LBL[k][v]+'</button>';
+    });
+    h+='</div></div>';
+  });
+  el('rows').innerHTML=h;
+  el('rows').querySelectorAll('.opt').forEach(function(b){
+    b.onclick=function(){
+      if(S.answered) return;
+      var k=b.getAttribute('data-k'), v=b.getAttribute('data-v');
+      S.ans[k] = (S.ans[k]===v ? null : v);
+      if(k==='mode'){ delete S.ans.pers; if(v!=='ptc'){ delete S.ans.cas; delete S.ans.gen; } }
+      renderRows();
+    };
+  });
+}
+/* totes les anàlisis vàlides d'aquesta forma (mateix tipus de pregunta) */
+function validAnalyses(r){
+  var t=qType(r), f=nfc(r.form);
+  var list=(BYFORM[f]||[]).filter(function(x){ return qType(x)===t; });
+  var out=[], seen={};
+  list.forEach(function(x){
+    var a=x.an, key;
+    if(t==='nom') key=a.cas+a.num+a.gen;
+    else if(t==='inf') key='inf'+a.temps+a.veu;
+    else if(t==='ptc') key='ptc'+a.temps+a.veu+a.cas+a.num+a.gen;
+    else key=a.temps+a.mode+a.veu+a.pers+a.num;
+    if(!seen[key]){ seen[key]=1; out.push(x); }
+  });
+  return out;
+}
+function veuOK(given, real){
+  if(real==='mp') return given==='mid'||given==='pass';
+  return given===real;
+}
+function matchAn(ans, an, t){
+  if(t==='nom') return ans.cas===an.cas && ans.num===an.num &&
+                       ((an.gen===undefined) ? true : ans.gen===an.gen);
+  if(t==='inf') return ans.mode==='inf' && ans.temps===an.temps && veuOK(ans.veu,an.veu);
+  if(t==='ptc') return ans.mode==='ptc' && ans.temps===an.temps && veuOK(ans.veu,an.veu) &&
+                       ans.cas===an.cas && ans.num===an.num && ans.gen===an.gen;
+  return ans.mode===an.mode && ans.temps===an.temps && veuOK(ans.veu,an.veu) &&
+         ans.pers===an.pers && ans.num===an.num;
+}
+function checkAnalyze(){
+  if(S.answered) return;
+  var need = neededRows();
+  for(var i=0;i<need.length;i++) if(!S.ans[need[i]]){
+    el('fb').innerHTML='<div class="warn">Falta seleccionar: '+
+      {cas:'el cas',num:'el nombre',gen:'el gènere',pers:'la persona',temps:'el temps',
+       mode:'el mode',veu:'la veu'}[need[i]]+'.</div>'; return; }
+  var r=S.cur, t=qType(r), va=validAnalyses(r);
+  var good = va.some(function(x){ return matchAn(S.ans, x.an, qType(x)); });
+  finish(good, va);
+}
+function checkWrite(){
+  if(S.answered) return;
+  var v = el('inp').value.trim();
+  if(!v){ el('fb').innerHTML='<div class="warn">Escriu la forma o polsa «No ho sé».</div>'; return; }
+  revealWrite(v);
+}
+function targets(r){
+  var out=[nfc(r.form)], t=qType(r);
+  (ALLF||[]).forEach(function(x){
+    if(x.item!==r.item) return;
+    if(qType(x)!==t) return;
+    if(!matchAn2(x.an,r.an,t)) return;
+    if(out.indexOf(nfc(x.form))<0) out.push(nfc(x.form));
+  });
+  return out;
+}
+function matchAn2(a,b,t){
+  if(t==='nom') return a.cas===b.cas&&a.num===b.num&&a.gen===b.gen;
+  if(t==='inf') return a.temps===b.temps&&a.veu===b.veu;
+  if(t==='ptc') return a.temps===b.temps&&a.veu===b.veu&&a.cas===b.cas&&a.num===b.num&&a.gen===b.gen;
+  return a.temps===b.temps&&a.mode===b.mode&&a.veu===b.veu&&a.pers===b.pers&&a.num===b.num;
+}
+function revealWrite(v){
+  var tg = targets(S.cur);
+  var good = v!=null && tg.some(function(x){ return bare(x)===bare(v); });
+  finish(good, null, tg, v);
+}
+function finish(good, va, tg, typed){
+  S.answered=true; S.done++;
+  var sid = secOf(S.cur);
+  if(sid){ S.stats[sid]=S.stats[sid]||{ok:0,ko:0}; S.stats[sid][good?'ok':'ko']++; }
+  if(good){ S.ok++; S.streak++; if(S.streak>S.best) S.best=S.streak;
+    if(S.wrong[S.cur.id]){ S.wrong[S.cur.id]--; if(S.wrong[S.cur.id]<=0) delete S.wrong[S.cur.id]; }
+  } else { S.ko++; S.streak=0; S.wrong[S.cur.id]=(S.wrong[S.cur.id]||0)+2; }
+  save();
+  var it=S.cur.item, h='';
+  h += '<div class="fb '+(good?'good':'bad')+'">'+(good?'Correcte':'Incorrecte')+'</div>';
+  if(S.curMode==='write'){
+    if(typed) h+='<div class="line">Has escrit: <b class="gr">'+esc(typed)+'</b></div>';
+    h += '<div class="line">Forma correcta: <b class="gr">'+tg.map(esc).join('</b> / <b class="gr">')+'</b></div>';
+  } else {
+    var an=S.cur.an;
+    h += '<div class="line">'+esc(describe(an,true))+
+         (an.veu==='mp'?' <span class="note">(la mateixa forma per a la mitjana i la passiva)</span>':'')+'</div>';
+    var others = va.filter(function(x){ return x.an!==an; });
+    if(others.length){
+      h += '<div class="line note">Aquesta forma també pot ser: '+
+        others.map(function(x){ return esc(describe(x.an))+
+          (x.item!==it?' <i>('+esc(x.item.l)+')</i>':''); }).join(' · ')+'</div>';
+    }
+    h += '<div class="line">De <b class="gr">'+esc(it.enunciat||it.l)+'</b> — '+esc(it.tr||it.t||'')+'</div>';
+  }
+  h += '<div class="acts"><button id="next" class="primary">Següent</button>'+
+       '<button id="tbl" class="link">Vore la taula</button></div><div id="tblbox"></div>';
+  el('fb').innerHTML=h;
+  el('next').onclick=function(){ closeKB(); nextQ(); };
+  el('tbl').onclick=function(){
+    var box=el('tblbox');
+    if(box.innerHTML){ box.innerHTML=''; el('tbl').textContent='Vore la taula'; }
+    else { box.innerHTML=paradigmHTML(S.cur); el('tbl').textContent='Amagar la taula';
+           box.scrollIntoView({block:'nearest',behavior:'smooth'}); } };
+  var c=el('chk'); if(c) c.disabled=true;
+  var s=el('skip'); if(s) s.disabled=true;
+  el('bar').innerHTML = '<span class="ok">✓ '+S.ok+'</span><span class="ko">✗ '+S.ko+'</span>'+
+    '<span class="st">ratxa '+S.streak+'</span><span class="st">rècord '+S.best+'</span>';
+  document.addEventListener('keydown', enterNext);
+}
+function enterNext(e){
+  if(e.key==='Enter' && S.answered){
+    document.removeEventListener('keydown', enterNext);
+    closeKB(); nextQ();
+  }
+}
+
+/* ---------- teclat grec ---------- */
+var KBROWS = [
+ ['α','β','γ','δ','ε','ζ','η','θ'],
+ ['ι','κ','λ','μ','ν','ξ','ο','π'],
+ ['ρ','σ','ς','τ','υ','φ','χ','ψ'],
+ ['ω','ͅ','⌫','✕']
+];
+var BETA = {a:'α',b:'β',g:'γ',d:'δ',e:'ε',z:'ζ',h:'η',q:'θ',i:'ι',k:'κ',l:'λ',m:'μ',
+  n:'ν',c:'ξ',o:'ο',p:'π',r:'ρ',s:'σ',t:'τ',u:'υ',f:'φ',x:'χ',y:'ψ',w:'ω',j:'ς','|':'ͅ'};
+function buildKB(){
+  var h='';
+  KBROWS.forEach(function(row){
+    h+='<div class="kbr">';
+    row.forEach(function(k){
+      var cls='kbk', lab=k;
+      if(k==='⌫'){ cls+=' wide del'; }
+      else if(k==='✕'){ cls+=' wide close'; }
+      else if(k==='ͅ'){ cls+=' wide iota'; lab='ᾳ ῃ ῳ'; }
+      h+='<button class="'+cls+'" data-k="'+k+'">'+lab+'</button>';
+    });
+    h+='</div>';
+  });
+  el('kb').innerHTML=h;
+  el('kb').querySelectorAll('.kbk').forEach(function(b){
+    b.addEventListener('mousedown', function(e){ e.preventDefault(); });
+    b.onclick=function(){ kbPress(b.getAttribute('data-k')); };
+  });
+}
+function kbPress(k){
+  var inp=el('inp'); if(!inp) return;
+  if(k==='✕'){ closeKB(); return; }
+  var v=inp.value;
+  if(k==='⌫'){ inp.value = trimLast(v); inp.focus(); return; }
+  if(k==='ͅ'){ inp.value = addIota(v); inp.focus(); return; }
+  inp.value = fixSigma(v + k);
+  inp.focus();
+}
+function trimLast(v){
+  var L = letters(nfd(v));
+  L.pop();
+  return nfc(L.join(''));
+}
+function addIota(v){
+  var L = letters(nfd(v));
+  if(!L.length) return v;
+  var last = L[L.length-1], b = last[0].toLowerCase();
+  if('αηω'.indexOf(b)<0 || last.indexOf(IOTA)>=0) return v;
+  L[L.length-1] = last + IOTA;
+  return nfc(L.join(''));
+}
+function fixSigma(v){
+  v = v.replace(/ς/g,'σ');
+  return v.replace(/σ$/,'ς');
+}
+function kbPhysical(e){
+  if(e.key==='Enter'){ e.preventDefault(); if(S.answered){closeKB();nextQ();} else checkWrite(); return; }
+  if(e.key==='Backspace'){ e.preventDefault(); var i=el('inp'); i.value=trimLast(i.value); return; }
+  if(e.ctrlKey||e.metaKey||e.altKey) return;
+  var k=e.key;
+  if(k.length!==1) return;
+  var inp=el('inp');
+  if(BETA[k.toLowerCase()] && !/[Ͱ-Ͽἀ-῿]/.test(k)){
+    e.preventDefault();
+    var g=BETA[k.toLowerCase()];
+    if(g===IOTA) inp.value=addIota(inp.value);
+    else inp.value=fixSigma(inp.value+g);
+  } else if(/[Ͱ-Ͽἀ-῿]/.test(k)){
+    e.preventDefault();
+    inp.value=fixSigma(inp.value+k.toLowerCase());
+  }
+}
+function openKB(){ el('kb').classList.add('open'); document.body.classList.add('kbon'); }
+function closeKB(){ el('kb').classList.remove('open'); document.body.classList.remove('kbon'); }
+
+/* ---------- estadístiques ---------- */
+function renderStats(){
+  var h='', tot={ok:0,ko:0};
+  GROUPS.forEach(function(g){
+    var secs=SECTIONS.filter(function(s){ return s.g===g && S.stats[s.id]; });
+    if(!secs.length) return;
+    h+='<h3>'+esc(g)+'</h3><table class="stt">';
+    secs.forEach(function(s){
+      var st=S.stats[s.id], n=st.ok+st.ko, pc=n?Math.round(100*st.ok/n):0;
+      tot.ok+=st.ok; tot.ko+=st.ko;
+      h+='<tr><td class="sn2">'+esc(s.n)+'</td><td class="num">'+st.ok+'/'+n+'</td>'+
+         '<td class="barc"><span style="width:'+pc+'%" class="'+(pc>=80?'g':(pc>=50?'y':'r'))+'"></span></td>'+
+         '<td class="num">'+pc+'%</td></tr>';
+    });
+    h+='</table>';
+  });
+  var n=tot.ok+tot.ko;
+  el('statsbody').innerHTML = n ?
+    ('<p class="tot">Total acumulat: <b>'+tot.ok+' de '+n+'</b> ('+Math.round(100*tot.ok/n)+
+     '%) · rècord de ratxa: <b>'+S.best+'</b> · formes pendents de repàs: <b>'+
+     Object.keys(S.wrong).length+'</b></p>'+h)
+    : '<p class="tot">Encara no hi ha dades. Fes uns quants exercicis!</p>';
+  show('stats');
+}
+
+
+/* ---------- taula del paradigma ---------- */
+function paradigmHTML(r){
+  var it=r.item, an=r.an, t=qType(r), h='';
+  function cell(f, hi){ return '<td'+(hi?' class="hi"':'')+'>'+(f?esc(f):'—')+'</td>'; }
+  if(t==='nom'||t==='ptc'){
+    var decl;
+    if(it.cat==='noun') decl=it.forms;
+    else if(t==='ptc') decl=it.F[an.temps+'.ptc.'+an.veu][an.gen];
+    else decl=it.decl[an.gen]||it.decl.m;
+    if(!decl) return '';
+    h+='<div class="tblwrap"><table class="par"><tr><th></th><th>singular</th><th>plural</th></tr>';
+    CASES.forEach(function(c){
+      h+='<tr><th>'+CASE_CA[c]+'</th>'+
+         cell(decl[c+'_sg'], an.cas===c&&an.num==='sg')+
+         cell(decl[c+'_pl'], an.cas===c&&an.num==='pl')+'</tr>';
+    });
+    h+='</table></div>';
+    if(t==='ptc') h='<div class="note" style="margin-top:10px">'+
+      esc(LBLS.temps[an.temps]+' · veu '+LBLS.veu[an.veu]+' · '+LBLS.gen[an.gen])+'</div>'+h;
+  } else if(t==='fin'){
+    var k=an.temps+'.'+an.mode+'.'+an.veu;
+    h+='<div class="note" style="margin-top:10px">'+esc(LBLS.temps[an.temps]+' '+
+       DE(LBLS.mode[an.mode])+', veu '+LBLS.veu[an.veu])+'</div>';
+    h+='<div class="tblwrap"><table class="par"><tr><th></th><th>singular</th><th>plural</th></tr>';
+    ['1','2','3'].forEach(function(pn){
+      h+='<tr><th>'+LBLS.pers[pn]+'</th>'+
+         cell(it.F[k+'.'+pn+'sg'], an.pers===pn&&an.num==='sg')+
+         cell(it.F[k+'.'+pn+'pl'], an.pers===pn&&an.num==='pl')+'</tr>';
+    });
+    h+='</table></div>';
+  } else {
+    h+='<div class="tblwrap"><table class="par"><tr><th>infinitius</th><th>activa</th>'+
+       '<th>mitjana</th><th>passiva</th></tr>';
+    ['pres','fut','aor','pf'].forEach(function(tt){
+      var a=it.F[tt+'.inf.act'], m=it.F[tt+'.inf.mid']||it.F[tt+'.inf.mp'], pa=it.F[tt+'.inf.pass'];
+      if(!a&&!m&&!pa) return;
+      h+='<tr><th>'+LBLS.temps[tt]+'</th>'+
+         cell(a, an.temps===tt&&an.veu==='act')+
+         cell(m, an.temps===tt&&(an.veu==='mid'||an.veu==='mp'))+
+         cell(pa, an.temps===tt&&an.veu==='pass')+'</tr>';
+    });
+    h+='</table></div>';
+  }
+  return h;
+}
+
+
+/* ==== arrencada ==== */
+document.getElementById('navhome').onclick=function(){closeKB();renderHome();};
+document.getElementById('navstats').onclick=function(){closeKB();renderStats();};
+document.getElementById('start').onclick=function(){startQuiz();};
+document.getElementById('stop').onclick=function(){closeKB();renderHome();};
+document.getElementById('reset').onclick=function(){
+  if(confirm('Segur que vols esborrar totes les estadístiques i el repàs pendent?')){
+    S.stats={}; S.wrong={}; S.best=0; save(); renderStats(); }};
+buildKB();
+init();
+
+</script>
+
+</body>
+</html>
