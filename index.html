@@ -551,37 +551,73 @@ function topicPool(t){
   return out;
 }
 /* ============================================================
-   MOTOR DE SELECCIÓ (v2) — repartiment equitatiu
+   MOTOR DE SELECCIÓ (v3) — repartiment equitatiu
    ------------------------------------------------------------
    1. Cada apartat seleccionat rep el mateix nombre de preguntes.
-   2. Dins d'un apartat, tots els mots pesen igual (cada mot torna a
-      eixir només quan la resta ja ha eixit).
-   3. Dins d'un mot, TOTES les cel·les vàlides pesen igual: la tria
-      ja no és jeràrquica (cas -> nombre -> gènere), que era el que
-      inflava el vocatiu plural i els plurals en general.
-   4. Es descarten les cel·les que no ensenyen res:
-        · formes que ja apareixen a l'enunciat (mode «escriure»)
-        · vocatius idèntics al nominatiu del mateix nombre
-        · formes homògrafes del mateix mot (mode «analitzar»:
-          preguntar σοφίαι com a NP i com a VP és la mateixa pregunta)
-   5. Als verbs cada grup temps|mode|veu pesa igual, i cada temps
-      també: així un participi (24-30 caselles) no ofega un
-      indicatiu (6 caselles).
+   2. Dins d'un apartat, tots els mots pesen igual (un mot no torna a
+      eixir fins que la resta ha eixit).
+   3. Dins d'un mot, la tria NO és jeràrquica (cas -> nombre -> gènere),
+      que era el que inflava el vocatiu plural: totes les caselles
+      vàlides entren en una sola bossa ponderada.
+   4. Formes que l'enunciat ja dona (nominatiu singular, genitiu
+      singular, 1a persona del verb):
+        · mode «escriure»: si l'enunciat les dona senceres, fora
+          (escriure-les seria copiar-les); si només en dona la
+          terminació (-ατος), ixen poc.
+        · mode «analitzar»: ixen, però poc, perquè reconéixer-les
+          continua sent un exercici. Pesen segons quantes anàlisis
+          admeten: σῶμα (nominatiu, vocatiu i acusatiu) més que
+          σώματος (només genitiu), i sempre menys que la resta.
+   5. Fora el que no ensenya res: vocatius idèntics al nominatiu del
+      mateix nombre i, en mode «analitzar», formes homògrafes del
+      mateix mot (σοφίαι com a NP i com a VP és la mateixa pregunta).
+      El vocatiu distintiu (ὦ πάτερ) es manté a mig pes.
+   6. Suavitzat de casos i nombres: quan un cas es queda amb menys
+      caselles vives que un altre, es compensa a mitges, sense que cap
+      casella solta s'infle.
+   7. No isquen dues preguntes seguides del mateix cas i nombre.
+   8. Als verbs cada temps pesa igual i, dins d'un temps, cada mode;
+      l'infinitiu a pes reduït (només té una forma per veu) i el
+      participi repartit entre totes les seues caselles.
    ============================================================ */
-let POOLS = {}, WORDS = {}, TOPICBAG = [], WBAG = {}, CBAG = {}, LASTWORD = null;
+let POOLS = {}, WORDS = {}, TOPICBAG = [], WBAG = {}, CBAG = {}, LASTWORD = null, LASTLABEL = null;
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 const rnd = a => a[Math.floor(Math.random()*a.length)];
 const SEP = String.fromCharCode(1);
 
 /* --- filtres segons el mode --- */
+/* Formes que l'enunciat ja dona: paraules senceres (σοφία, γῆς, λύω) i
+   terminacions abreujades (-ας, -ατος, -ή, -όν), que només s'apliquen a la
+   casella que l'enunciat realment proporciona (genitiu singular dels
+   substantius; nominatiu singular dels adjectius i pronoms). */
 function lemmaKeys(item){
   if(item._lk) return item._lk;
-  item._lk = new Set(item.lemma.split(/[,\s()·;]+/).filter(Boolean).map(nkey));
+  const parts = item.lemma.split(/[,;·]+/).map(s=>s.trim()).filter(Boolean);
+  const words=new Set(), ends=[];
+  parts.forEach(p=>{
+    p.split(/[\s()\[\]]+/).filter(Boolean).forEach(w=>{
+      if(/^[-–—]/.test(w)) ends.push(nkey(w.replace(/^[-–—]+/,'')));
+      else words.add(nkey(w));
+    });
+  });
+  item._lk = {words, ends};
   return item._lk;
 }
-function isTrivial(c){
+const ENUN_CELL = { noun:['GS'], adj:['NSM','NSF','NSN'], pron:['NSM','NSF','NSN'],
+                    pron_pers:[] };
+function isGiven(c){
+  if (c._g!==undefined) return c._g;
   const item = c.it || c.v;
-  return allFormsOf(c).some(f=>lemmaKeys(item).has(nkey(f)));
+  const lk = lemmaKeys(item);
+  const forms = allFormsOf(c);
+  let r=false;
+  if (forms.some(f=>lk.words.has(nkey(f)))) r='word';          // l'enunciat la dona sencera
+  else if (c.k==='nom' && lk.ends.length){
+    const cells = ENUN_CELL[c.it.kind] || [];
+    if (cells.indexOf(c.c)>=0 &&
+        forms.some(f=>{ const k=nkey(f); return lk.ends.some(e=>e && k.endsWith(e)); })) r='end';
+  }
+  c._g=r; return r;                                            // 'end': només la terminació
 }
 /* formes d'una altra casella del mateix mot (nominal o participi) */
 function siblingForms(c, cell){
@@ -599,7 +635,7 @@ function vocRedundant(c){
 }
 function keepCand(c){
   if (vocRedundant(c)) return false;
-  if (S.mode==='es' && isTrivial(c)) return false;
+  if (S.mode==='es' && isGiven(c)==='word') return false;  // escriure-la seria copiar-la
   return true;
 }
 /* clau del mot i de la forma visible (per a deduplicar en mode «analitzar») */
@@ -636,12 +672,38 @@ function weightsFor(cands){
   const nT=Object.keys(tenses).length;
   const msum={};
   for(const t in moods) msum[t]=Object.keys(moods[t]).reduce((a,m)=>a+(MOODW[m]||1),0);
-  return cands.map(c=>{
+  let w = cands.map(c=>{
     const t=tenseOf(c), m=moodOf(c);
     const nV=Object.keys(voices[t+'|'+m]).length;
-    return (1/nT) * ((MOODW[m]||1)/msum[t]) * (1/nV) * (1/cells[groupOf(c)]);
+    return (1/nT) * ((MOODW[m]||1)/msum[t]) * (1/nV) * (1/cells[groupOf(c)]) * givenFactor(c);
   });
+  /* Suavitzat de casos i nombres: quan un cas es queda amb menys caselles que
+     un altre (perquè el singular ja el dona l'enunciat, o perquè coincidix amb
+     el nominatiu), rebria massa poques preguntes. Es corregix a mitges: els
+     casos i els nombres s'acosten entre ells sense que cap casella solta
+     s'infle, que era el defecte de repartir primer per casos. */
+  const ct={}, nt={};
+  cands.forEach((c,i)=>{ if(c.k==='v') return;
+    ct[c.c[0]]=(ct[c.c[0]]||0)+w[i]; nt[c.c[1]]=(nt[c.c[1]]||0)+w[i]; });
+  w = w.map((x,i)=>{ const c=cands[i];
+    if(c.k==='v') return x;
+    const s = x / Math.sqrt(ct[c.c[0]]||1) / Math.sqrt(nt[c.c[1]]||1);
+    return c.c[0]==='V' ? s*VOC_W : s;   // el vocatiu, cas marginal, a mig pes
+  });
+  return w;
 }
+/* Mode «analitzar»: les formes que ja estan a l'enunciat (nominatiu singular,
+   genitiu singular, 1a persona del verb) han d'eixir, però poc. Compten més
+   com més anàlisis admeten: σῶμα val per a nominatiu, vocatiu i acusatiu,
+   mentre que σώματος només és genitiu. Tot i així, sempre menys que la resta. */
+const GIVEN_W = [0, 0.18, 0.32, 0.5];
+const VOC_W = 0.5;
+function givenFactor(c){
+  const g = isGiven(c);
+  if (!g) return 1;
+  if (S.mode==='an') return GIVEN_W[Math.min(c._k||1, 3)];
+  return g==='end' ? 0.3 : 1;   // en «escriure», de l'enunciat només queda la
+}                               // terminació abreujada (-ατος), i ix poc
 
 /* --- mostreig ponderat sense repeticions agrupades (round-robin amb crèdits) ---
    Cada element acumula crèdit proporcional al seu pes; ix el de més crèdit i
@@ -656,21 +718,29 @@ function sampler(store, key, items, weights){
   }
   return b;
 }
-function draw(b, avoid){
+function draw(b, avoid, soft){
   let best=0, bv=-Infinity;
   for(let i=0;i<b.n;i++){
     b.cr[i] += b.w[i]*(0.7+0.6*Math.random());
     let v=b.cr[i];
     if(avoid && avoid(b.it[i])) v -= 1e6;
+    if(soft) v -= soft(b.it[i]);
     if(v>bv){ bv=v; best=i; }
   }
   b.cr[best] -= 1;
   return b.it[best];
 }
+/* etiqueta gramatical d'una pregunta (cas+nombre, o temps+mode) per a evitar
+   que isquen dues preguntes seguides de la mateixa classe */
+function labelOf(c){
+  if (c.k==='nom') return c.c.slice(0,2);
+  if (c.k==='p') return 'part'+c.c.slice(0,2);
+  const x=c.c.split('|'); return x[0]+x[1]+(x[3]||'');
+}
 
 /* --- construcció dels conjunts de preguntes --- */
 function buildPools(){
-  POOLS={}; WORDS={}; TOPICBAG=[]; WBAG={}; CBAG={}; LASTWORD=null; S.recent=[];
+  POOLS={}; WORDS={}; TOPICBAG=[]; WBAG={}; CBAG={}; LASTWORD=null; LASTLABEL=null; S.recent=[];
   S.sel.forEach(id=>{
     const t=TOPICS.find(x=>x.id===id); if(!t) return;
     let p=topicPool(t).filter(keepCand);
@@ -680,7 +750,11 @@ function buildPools(){
     if (S.mode==='an'){              // una pregunta per forma visible
       for(const w in byWord){
         const seen={}, keep=[];
-        byWord[w].forEach(c=>{ const k=formKey(c); if(seen[k]) return; seen[k]=1; keep.push(c); });
+        byWord[w].forEach(c=>{
+          const k=formKey(c);
+          if(seen[k]){ seen[k]._k++; if(isGiven(c)) seen[k]._g=isGiven(c); return; }
+          c._k=1; seen[k]=c; keep.push(c);           // _k: quantes anàlisis admet la forma
+        });
         byWord[w]=keep;
       }
     }
@@ -700,7 +774,11 @@ function pick(){
   const cands=POOLS[t][w];
   const cb=sampler(CBAG, t+SEP+w, cands, weightsFor(cands));
   const last=S.recent[S.recent.length-1];
-  const chosen=draw(cb, cands.length>1 ? (c=>(w+'|'+(c.pk||'')+c.c)===last) : null);
+  const prev=LASTLABEL;
+  const chosen=draw(cb,
+      cands.length>1 ? (c=>(w+'|'+(c.pk||'')+c.c)===last) : null,
+      cands.length>2 ? (c=>labelOf(c)===prev ? 0.55 : 0) : null);
+  LASTLABEL=labelOf(chosen);
   S.recent.push(w+'|'+(chosen.pk||'')+chosen.c);
   if(S.recent.length>12) S.recent.shift();
   LASTWORD=w;
